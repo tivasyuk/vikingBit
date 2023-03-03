@@ -1,0 +1,47 @@
+html {
+  background: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+::-webkit-scrollbar {
+  width: 17Px;
+}
+
+*:not(.selectable) {
+  box-sizing: border-box;
+
+  user-select: none;
+
+  &::selection {
+    color: #FFFFFF;
+    background-color: #000000;
+  }
+}
+
+.clearfix:after {
+  content:" ";
+  display:block;
+  clear:both;
+}
+
+button > p,
+button > span,
+button > img {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.debug-error {
+  background: black;
+  color: red;
+  padding: 50px;
+  height: 100vh;
+  font-size: 22px;
+}

@@ -1,0 +1,127 @@
+footer {
+  padding: 30px 0;
+  background: #FFFFFF;
+
+  .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+
+    .footer-main {
+      width: 205px;
+      margin-right: 85px;
+
+      .footer-logo {
+        width: 175px;
+        margin-bottom: 17px;
+
+        a, img {
+          display: block;
+        }
+      }
+
+      .copyright {
+        margin: 0;
+        color: #A3ABC4;
+      }
+    }
+
+    .footerMenu {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: space-between;
+
+      .footerMenuBlock {
+        margin-right: 25px;
+
+        a {
+          display: block;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 1.7;
+          color: #858DA6;
+        }
+      }
+    }
+  }
+
+  /*
+  .footer-menu {
+  width: calc(100% - 290px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: -15px;
+}
+
+.footer-menu li {
+  width: 20%;
+  padding-right: 10px;
+  margin-bottom: 15px;
+}
+
+.footer-menu li a {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #858DA6;
+}
+
+.footer-menu li a:hover {
+  text-decoration: underline;
+}
+
+.footer-menu li:nth-child(1), .footer-menu li:nth-child(5) {
+  width: 40%;
+}*/
+}
+
+@media (max-width: 767.98px) {
+  footer {
+    padding-bottom: 60px;
+  }
+  footer .container {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .footer-main {
+    width: 100%;
+    margin: 0 0 15px;
+  }
+  .footer-logo {
+    margin: 0 auto;
+  }
+  .copyright {
+    bottom: -42px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: 0;
+  }
+  .footer-menu {
+    width: 100%;
+  }
+}
+@media (max-width: 575.98px) {
+  .footer-menu li {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+  .footer-menu li a {
+    font-size: 12px;
+  }
+}

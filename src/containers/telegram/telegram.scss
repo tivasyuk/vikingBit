@@ -1,0 +1,122 @@
+.main-page-telegram-bot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 -15px;
+
+  .left {
+    width: 50%;
+    padding: 0 15px;
+
+    .left-content {
+      margin-bottom: 55px;
+
+      p {
+        margin: 0 0 20px;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .left-bottom {
+      a {
+        padding: 16px 30px 16px 50px;
+        position: relative;
+
+        &:before {
+          content: '';
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          display: block;
+          top: 21px;
+          left: 30px;
+          background: transparent url(../../img/telegram-icon.svg) center no-repeat;
+          background-size: contain;
+        }
+
+        &:hover {
+          &:before {
+            background: transparent url(../../img/telegram-icon-hover.svg) center no-repeat;
+          }
+        }
+
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .right {
+    width: 50%;
+    padding: 0 15px;
+
+    img {
+      display: block;
+    }
+  }
+}
+
+
+@media (max-width: 767.98px) {
+  .main-page-telegram-bot {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+
+    .title {
+      margin-bottom: 250px;
+    }
+  }
+  .main-page-telegram-bot .right {
+    width: 100%;
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+    position: unset;
+  }
+  .main-page-telegram-bot .right > img {
+    position: absolute;
+    top: 30px;
+    z-index: -1;
+    max-width: 290px;
+  }
+  .main-page-telegram-bot .left {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    width: 100%;
+  }
+  .main-page-telegram-bot .left .right-steps .item {
+    margin-bottom: 10px;
+  }
+  .main-page-telegram-bot .left-content {
+    margin-bottom: 15px;
+  }
+  .main-page-telegram-bot .left-bottom a {
+    width: 290px;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .main-page-telegram-bot .title {
+    margin-bottom: 255px;
+  }
+  .main-page-telegram-bot .right > img {
+    top: 57px;
+  }
+  .main-page-telegram-bot .left-content {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
