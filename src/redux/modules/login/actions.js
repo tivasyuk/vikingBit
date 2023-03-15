@@ -21,3 +21,13 @@ export const setForgotPasswordPopupState = value => {
         value
     };
 };
+
+export const SET_SIGN_IN_DATA = 'state/SET_SIGN_IN_DATA';
+export const setSignInData = (isLoggedIn, email, password) => {
+    return {
+        type: SET_SIGN_IN_DATA,
+        isLoggedIn,
+        email,
+        password
+    };
+};

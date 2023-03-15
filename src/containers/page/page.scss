@@ -7,6 +7,7 @@
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 img {
@@ -14,7 +15,7 @@ img {
   height: auto;
 }
 
-input {
+input, textarea {
   font-family: "Montserrat", sans-serif;
   color: #131B34;
 }
@@ -173,7 +174,9 @@ body.over-hid {
   overflow: hidden;
 }
 
-
+.text-center {
+  text-align: center;
+}
 
 
 /*.main-page-partners {
@@ -2996,7 +2999,6 @@ body.over-hid {
 
 @media (max-width: 767.98px) {
   body {
-    background: transparent url(../../img/mob-body-bg.jpg) top center repeat-y;
     background-size: cover;
   }
   .container {

@@ -14,3 +14,11 @@ export const selectForgotPasswordPopup = createSelector(
     selectLoginDomain,
     (loginDomain) => loginDomain.isForgotPasswordPopupVisible
 );
+export const selectIsLoggedIn = createSelector(
+    selectLoginDomain,
+    (loginDomain) => loginDomain.isLoggedIn
+);
+export const selectUserData = createSelector(
+    selectLoginDomain,
+    (loginDomain) => loginDomain.userData
+);

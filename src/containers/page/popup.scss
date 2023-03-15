@@ -51,6 +51,10 @@
   margin: 0 auto;
   text-align: left;
   z-index: 1045;
+
+  p {
+    text-align: center;
+  }
 }
 
 .mfp-inline-holder .mfp-content,
@@ -368,6 +372,28 @@ img.mfp-img {
 
 .mfp-gallery .mfp-image-holder .mfp-figure {
   cursor: pointer;
+}
+
+#liveRevModal {
+  label {
+    color: #858DA6;
+    display: block;
+    margin-bottom: 7px;
+  }
+  textarea {
+    background: #FFFFFF;
+    width: 100%;
+    border: 1px solid #D6DBE9;
+    -webkit-box-shadow: inset 0px 3px 0px rgb(0 0 0 / 3%);
+    box-shadow: inset 0px 3px 0px rgb(0 0 0 / 3%);
+    border-radius: 10px;
+    padding: 15px;
+    height: 120px;
+    display: block;
+  }
+  .form-bottom {
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 800px) and (orientation: landscape), screen and (max-height: 300px) {

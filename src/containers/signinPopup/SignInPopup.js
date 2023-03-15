@@ -4,9 +4,10 @@ import {connect} from 'react-redux';
 import '../page/popup.scss';
 import {
     setForgotPasswordPopupState,
-    setRegistrationPopupState,
+    setRegistrationPopupState, setSignInData,
     setSignInPopupState
 } from "../../redux/modules/login/actions";
+import GoogleAuth from "../../components/googleAuth/GoogleAuth";
 
 class SignInPopup extends React.Component {
     constructor(props) {
@@ -26,7 +27,8 @@ class SignInPopup extends React.Component {
     }
 
     onClickSignIn = () => {
-
+        this.props.setSignInData(this.state.email, this.state.password);
+        this.props.closeSignInPopup();
     }
 
     onClickRegistration = () => {
@@ -60,6 +62,11 @@ class SignInPopup extends React.Component {
                         <div className="modal vr-modal login-modal" id="login-modal">
                             <div className="modal-wrapper" id="signin">
                                 <h2 className="modal-title">Enter the site</h2>
+
+                                <GoogleAuth/>
+
+                                <p>or</p>
+
                                 <div id="auth-form">
                                     <div className="input-group form-group">
                                         <input className="form-control f-input"
@@ -108,6 +115,9 @@ export const mapDispatchToProps = (dispatch) => {
         },
         openForgotPasswordPopup: () => {
             dispatch(setForgotPasswordPopupState(true));
+        },
+        setSignInData: (email, password) => {
+            dispatch(setSignInData(true, email, password));
         },
     }
 };

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import '../page/popup.scss';
 import {setRegistrationPopupState, setSignInPopupState} from "../../redux/modules/login/actions";
 import Checkbox from "../../components/checkbox/Checkbox";
+import GoogleAuth from "../../components/googleAuth/GoogleAuth";
 
 class RegistrationPopup extends React.Component {
     constructor(props) {
@@ -64,6 +65,11 @@ class RegistrationPopup extends React.Component {
                             <div className="modal register-modal" id="register-modal">
                                 <div className="modal-wrapper" id="register">
                                     <h2 className="modal-title">Registration</h2>
+
+                                    <GoogleAuth/>
+
+                                    <p>Or sign up using your e-mail address:</p>
+
                                     <div id="register-form">
                                         <div className="input-group form-group">
                                             <input className="form-control f-input"

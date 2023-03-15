@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import './page.scss';
 import Header from "../header/Header";
-import Content from "../content/Content";
 import Footer from "../footer/Footer";
 import SignInPopup from "../signinPopup/SignInPopup";
 import {
@@ -13,6 +12,13 @@ import {
 } from "../../redux/modules/login/selectors";
 import RegistrationPopup from "../registrationPopup/RegistrationPopup";
 import ForgotPasswordPopup from "../forgotPasswordPopup/ForgotPasswordPopup";
+import MainPage from "../mainPage/MainPage";
+import Constants from "../../constants/Constants";
+import Cabinet from "../cabinetPage/Cabinet";
+import Policy from "../policyPage/Policy";
+import Rules from "../rulesPage/Rules";
+import {selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
+import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
 
 class Page extends React.Component {
     constructor(props) {
@@ -23,6 +29,12 @@ class Page extends React.Component {
         return true;
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.activePage !== prevProps.activePage) {
+            window.scrollTo(0,0);
+        }
+    }
+
     componentDidMount() {
 
     }
@@ -31,15 +43,31 @@ class Page extends React.Component {
 
     }
 
+    currentPage = () => {
+        switch (this.props.activePage){
+            case Constants.PAGE_MAIN:
+                return <MainPage/>
+            case Constants.PAGE_RULES:
+                return <Rules/>
+            case Constants.PAGE_POLICY:
+                return <Policy/>
+            case Constants.PAGE_CABINET:
+                return <Cabinet/>
+            default:
+                return <MainPage/>;
+        }
+    }
+
     render() {
         return (<div className="page">
             <Header/>
-            <Content/>
+            {this.currentPage()}
             <Footer/>
 
             {this.props.signInPopup && <SignInPopup/>}
             {this.props.registrationPopup && <RegistrationPopup/>}
             {this.props.forgotPasswordPopup && <ForgotPasswordPopup/>}
+            {this.props.addReviewPopup && <AddReviewPopup/>}
         </div>);
     }
 }
@@ -49,6 +77,8 @@ export const mapStateToProps = (state) => {
         signInPopup: selectSignInPopup(state),
         registrationPopup: selectRegistrationPopup(state),
         forgotPasswordPopup: selectForgotPasswordPopup(state),
+        addReviewPopup: selectAddReviewPopup(state),
+        activePage: selectActivePage(state),
     }
 };
 
