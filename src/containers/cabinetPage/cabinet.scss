@@ -1,135 +1,37 @@
-header {
-  padding: 38px 0;
+.user-account {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-  .top {
+  .item {
+    width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    height: 50px;
+    font-size: 13px;
 
-    .logo {
-      width: 157px;
-
-      a, img {
-        display: block;
-      }
+    .item-title {
+      font-weight: 600;
+      margin-right: 10px;
     }
 
-    .menu {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      width: 625px;
-      -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-      justify-content: space-between;
-      margin: 0 auto;
-
-      li {
-        position: relative;
-
-        a {
-          display: block;
-          font-weight: 600;
-          color: #858DA6;
-        }
-
-        &.active a {
-          color: #131B34;
-        }
-      }
-    }
-
-    .top-account {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      margin: 0;
-
-      .btn {
-        margin-right: 20px;
-        font-size: 14px;
-        line-height: 20px;
-        padding: 12px 22px;
-      }
-
-      .top-register {
-        font-weight: 600;
-        color: #131B34;
-        cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+    span {
+      color: #A3ABC4;
+      margin-right: 0;
+      margin-left: auto;
     }
   }
 }
-
-@media (max-width: 1199.98px) {
-  header {
-    .top {
-      .menu {
-        width: 470px;
-        li a {
-          font-size: 13px;
-          text-align: center
-        }
-      }
-      .top-account {
-        .btn {
-          margin-right: 15px;
-          padding: 10px 15px;
-        }
-        .top-register {
-          font-size: 12px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 991.98px) {
-  header {
-    padding: 15px 0;
-
-    .top {
-      position: relative;
-
-      .logo {
-        margin: 0 auto;
-      }
-      .top-account {
-        position: absolute;
-        background: #FFFFFF;
-        -webkit-box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);
-        box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.15);
-        border-radius: 10px;
-        width: 150px;
-        padding: 10px;
-        top: 41px;
-        right: 0;
-        z-index: 15;
-        overflow: hidden;
-        display: none;
-
-        a, .btn {
-          margin: 5px auto 15px;
-          text-align: center;
-          display: block;
-        }
-      }
-    }
-  }
+.cabinet-footer {
+  margin: 15px 0;
+  display: flex;
+  justify-content: flex-end;
 }

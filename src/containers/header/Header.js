@@ -33,9 +33,9 @@ class Header extends React.Component {
         this.props.openRegistrationPopup();
     }
 
-    onClickUserAccount = () => {
-
-    }
+    // onClickUserAccount = () => {
+    //
+    // }
 
     render() {
         return (<header className="header">
@@ -53,7 +53,7 @@ class Header extends React.Component {
                     <div className="top-account">
                         {!this.props.isLoggedIn && <a className="btn popup-modal" onClick={this.onClickSignIn}>Sign in</a>}
                         {!this.props.isLoggedIn && <a className="top-register popup-modal" onClick={this.onClickRegistration}>Registration</a>}
-                        {this.props.isLoggedIn && <a className="top-register" onClick={this.onClickUserAccount}>{this.props.userData.email}</a>}
+                        {this.props.isLoggedIn && <a className="top-register" onClick={() => this.props.setActivePage(Constants.PAGE_CABINET)}>{this.props.userData.email}</a>}
                     </div>
                 </div>
             </div>
