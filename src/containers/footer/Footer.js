@@ -19,12 +19,7 @@ const Footer = () => {
 
                 <div className="footerMenu">
                     <div className="footerMenuBlock">
-                        <a href="#">AML</a>
                         <a onClick={() => this.props.setActivePage(Constants.PAGE_RULES)}>Terms of service</a>
-                    </div>
-
-                    <div className="footerMenuBlock">
-                        <a href="#">Reliability Guarantees</a>
                         <a onClick={() => this.props.setActivePage(Constants.PAGE_POLICY)}>Privacy policy</a>
                     </div>
 

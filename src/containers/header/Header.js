@@ -37,6 +37,18 @@ class Header extends React.Component {
     //
     // }
 
+    onClickDiscounts = () => {
+
+    }
+
+    onClickCurrencyReserves = () => {
+
+    }
+
+    onClickFeedback = () => {
+
+    }
+
     render() {
         return (<header className="header">
             <div className="container">
@@ -46,9 +58,9 @@ class Header extends React.Component {
                     </div>
                     <ul className="menu">
                         <li className="active"><a onClick={() => this.props.setActivePage(Constants.PAGE_MAIN)}>Exchange</a></li>
-                        <li className=""><a href="#">Discounts</a></li>
-                        <li className=""><a href="#">Currency reserves</a></li>
-                        <li className=""><a href="#">Feedback</a></li>
+                        <li className=""><a onClick={this.onClickDiscounts}>Discounts</a></li>
+                        <li className=""><a onClick={this.onClickCurrencyReserves}>Currency reserves</a></li>
+                        <li className=""><a onClick={this.onClickFeedback}>Feedback</a></li>
                     </ul>
                     <div className="top-account">
                         {!this.props.isLoggedIn && <a className="btn popup-modal" onClick={this.onClickSignIn}>Sign in</a>}

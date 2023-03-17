@@ -19,13 +19,17 @@ class Reviews extends React.Component {
         this.props.openAddReviewPopup();
     }
 
+    onClickAllReviews = () => {
+
+    }
+
     render() {
         return (<div className="main-page-reviews" id="reviews">
             <div className="title-block">
                 <h2 className="title">Reviews about us</h2>
 
                 <div className="right">
-                    <a href="#" className="btn">View all reviews</a>
+                    <a className="btn" onClick={this.onClickAllReviews}>View all reviews</a>
                     <a className="btn btn-white popup-modal" onClick={this.onWriteReview}>Write a review</a>
                 </div>
             </div>
@@ -77,11 +81,6 @@ class Reviews extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div className="main-reviews-bottom">
-                <a href="#" className="btn">View all reviews</a>
-                <a href="#" className="btn btn-white popup-modal">Write a review</a>
             </div>
         </div>);
     }

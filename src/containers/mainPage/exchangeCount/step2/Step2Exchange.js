@@ -19,7 +19,7 @@ class Step2Exchange extends React.Component {
     }
 
     onClickReturnBack = () => {
-        this.props.onChangeStep(1)
+        this.props.changeStep(1)
     }
 
     updateLogin = (val) => {

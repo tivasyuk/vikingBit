@@ -129,7 +129,8 @@ class RightSideExchange extends React.Component {
     }
 
     onClickExchange = () => {
-        this.props.onChangeStep(2)
+        this.props.changeStep(2);
+        this.state.getExchangeData.name.includes('Cash') ? this.props.getType('cash') : this.props.getType('');
     }
 
     render() {
@@ -227,7 +228,7 @@ class RightSideExchange extends React.Component {
                         isChecked={this.state.checkAgree}
                         onClickHandler={this.onAgreeCheckboxClick}
                     />
-                    <a className="btn" id="showProps" onClick={this.onClickExchange}>Exchange</a>
+                    <a className={`btn${!this.state.checkAgree ? ' disable' : ''}`} id="showProps" onClick={this.onClickExchange}>Exchange</a>
                 </div>
             </div>
         </div>);
