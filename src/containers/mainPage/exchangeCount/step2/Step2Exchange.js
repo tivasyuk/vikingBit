@@ -89,7 +89,7 @@ class Step2Exchange extends React.Component {
                 <a className="btn btn-white" onClick={this.onClickReturnBack}>Return back</a>
                 <a className="btn btn-primary">Start an exchange</a>
                 <div className="gotoPaymAgree">
-                    Press the button "Start an exchange", you agree with <a href="#" target="_blank">exchange rules</a>
+                    Press the button "Start an exchange", you agree with <a href="/" target="_blank">exchange rules</a>
                 </div>
             </div>
         </div>);
