@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 import './exchangeCount.scss';
 import LeftSideExchange from "./main/leftSideExchange/LeftSideExchange";
 import RightSideExchange from "./main/rightSideExchange/RightSideExchange";
-import ExchangeCardToCrypto from "./stepExchange/ExchangeCardToCrypto";
 import ExchangeToCash from "./stepExchange/ExchangeToCash";
+import ExchangeToCard from "./stepExchange/ExchangeToCard";
+import ExchangeToCrypto from "./stepExchange/ExchangeToCrypto";
 
 class ExchangeCount extends React.Component {
     constructor(props) {
@@ -33,9 +34,9 @@ class ExchangeCount extends React.Component {
         return (<div className={`main exchangeCont home-change step${this.state.step}`} id="home-exchange">
             <LeftSideExchange/>
             <RightSideExchange changeStep={this.changeStep} getType={this.getType}/>
-            {this.state.step === 2 && this.state.getAmountType !== 'cash' && <ExchangeCardToCrypto changeStep={this.changeStep}/>}
-            {this.state.step === 2 && this.state.getAmountType === 'cash' && <ExchangeToCash changeStep={this.changeStep}/>}
-            {/*<ExchangeCardToCrypto changeStep={this.changeStep}/>*/}
+            {this.state.step === 2 && this.state.getAmountType === 'toCash' && <ExchangeToCash changeStep={this.changeStep}/>}
+            {this.state.step === 2 && this.state.getAmountType === 'toCard' && <ExchangeToCard changeStep={this.changeStep}/>}
+            {this.state.step === 2 && this.state.getAmountType === 'toCrypto' && <ExchangeToCrypto changeStep={this.changeStep}/>}
         </div>);
     }
 }

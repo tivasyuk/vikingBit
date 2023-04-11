@@ -6,7 +6,7 @@ import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/
 import {selectExchangeValue} from "../../../../redux/modules/exchange/selectors";
 import {setOrderExchangeData} from "../../../../utility/api";
 
-class ExchangeCardToCrypto extends React.Component {
+class ExchangeToCrypto extends React.Component {
     constructor(props) {
         super(props);
 
@@ -20,6 +20,7 @@ class ExchangeCardToCrypto extends React.Component {
             transactionDate: Date.now(),
             copyWalletWaiting: false,
             copySumWaiting: false,
+            coupon: ''
         }
     }
 
@@ -36,7 +37,7 @@ class ExchangeCardToCrypto extends React.Component {
     }
 
     onClickMoveToStepThree = () => {
-        if (this.state.cardName.length <= 0 || this.state.walletNumbers.length !== 16) return;
+        if (this.state.walletNumbers.length === 0) return;
         this.setState({step: 3});
     }
 
@@ -53,6 +54,7 @@ class ExchangeCardToCrypto extends React.Component {
             currency: `${this.props.exchangeValue.sendCurrency}/${this.props.exchangeValue.getCurrency}`,
             fromSum: this.props.exchangeValue.sendAmount,
             toSum: this.props.exchangeValue.getAmount,
+            coupon: this.state.coupon,
             wallet: this.state.walletNumbers,
             cardName: this.state.cardName,
             login: this.state.login,
@@ -69,7 +71,7 @@ class ExchangeCardToCrypto extends React.Component {
 
     updateWallet = (val) => {
 
-        const cardValue = val
+        /*const cardValue = val
             .replace(/\D/g, '')
             .match(/(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})/);
         val = !cardValue[2]
@@ -77,9 +79,13 @@ class ExchangeCardToCrypto extends React.Component {
             : `${cardValue[1]} ${cardValue[2]}${`${
                 cardValue[3] ? ` ${cardValue[3]}` : ''
             }`}${`${cardValue[4] ? ` ${cardValue[4]}` : ''}`}`;
-        const numbers = val.replace(/(\D)/g, '');
+        const numbers = val.replace(/(\D)/g, '');*/
 
-        this.setState({wallet: val, walletNumbers: numbers})
+        this.setState({wallet: val, walletNumbers: val})
+    }
+
+    updateCoupon = (val) => {
+        this.setState({coupon: val})
     }
 
     updateCardName = (val) => {
@@ -141,15 +147,14 @@ class ExchangeCardToCrypto extends React.Component {
 
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label>Credit card number</label>
+                            <label>Wallet for receiving</label>
                             <div className="form-field">
                                 <input className="form-control f-input"
-                                       placeholder='4111 1111 1111 1111'
+                                       placeholder='For example: 0x7eB3fec4E5Ec111aDaCcA94E9483c2Cbc6fc9aA2'
                                        onChange={e => {
                                            this.updateWallet(e.target.value)
                                        }}
                                        value={this.state.wallet}
-                                       inputMode={"numeric"}
                                 />
                             </div>
                         </div>
@@ -157,14 +162,14 @@ class ExchangeCardToCrypto extends React.Component {
 
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label>Name on card</label>
+                            <label>Coupon</label>
                             <div className="form-field">
                                 <input className="form-control f-input"
-                                       placeholder='John Smith'
+                                       placeholder='Coupon Code (If available)'
                                        onChange={e => {
-                                           this.updateCardName(e.target.value)
+                                           this.updateCoupon(e.target.value)
                                        }}
-                                       value={this.state.cardName}
+                                       value={this.state.coupon}
                                 />
                             </div>
                         </div>
@@ -173,7 +178,7 @@ class ExchangeCardToCrypto extends React.Component {
 
                 <div className="change__block-footer">
                     <a className="btn btn-white" onClick={this.onClickReturnToStepOne}>Return back</a>
-                    <a className={`btn${(this.state.cardName.length > 0 && this.state.walletNumbers.length === 16) ? '' : ' disable'}`} onClick={this.onClickMoveToStepThree}>Continue</a>
+                    <a className={`btn${(this.state.walletNumbers.length > 0) ? '' : ' disable'}`} onClick={this.onClickMoveToStepThree}>Continue</a>
                 </div>
             </div>
 
@@ -185,7 +190,7 @@ class ExchangeCardToCrypto extends React.Component {
                     <div className="col-md-6 ff-removable">
                         <div className="form-group send">
                             <label>Wallet to send</label>
-                            <span>Tether TRC20 wallet: </span>
+                            <span>{this.props.exchangeValue.sendCurrency} wallet: </span> {/*TODO: show correct name*/}
                             <div className="withCopyBtn">
                                 <input value={this.props.getWallet} readOnly />
                                 {navigator.clipboard && <div className={`copyButton${this.state.copyWalletWaiting ? ' active' : ''}`} onClick={this.onClickCopyWallet}><span className="copyButtonIcon" /></div>}
@@ -197,20 +202,20 @@ class ExchangeCardToCrypto extends React.Component {
                         </div>
                     </div>
 
-                    {/*<div className="col-md-6 ff-removable">*/}
-                    {/*    <div className="form-group get">*/}
-                    {/*        <label>Your get data</label>*/}
-                    {/*        <p><span>Card: </span>{this.state.wallet}</p>*/}
-                    {/*        <p><span>Name on card: </span>{this.state.cardName}</p>*/}
-                    {/*        <p><span>Sum: </span>{this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    <div className="col-md-6 ff-removable getSection">
+                    <div className="col-md-6 ff-removable">
                         <div className="form-group get">
-                            <span className="cardWallet">{this.state.wallet}</span>
-                            <span className="cardName">{this.state.cardName}</span>
+                            <label>Your get data</label>
+                            <p><span>Wallet: </span>{this.state.wallet}</p>
+                            <p><span>Sum: </span>{this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</p>
+                            <p><span>Coupon: </span>{this.state.coupon || '-'}</p>
                         </div>
                     </div>
+                    {/*<div className="col-md-6 ff-removable getSection">*/}
+                    {/*    <div className="form-group get">*/}
+                    {/*        <span className="cardWallet">{this.state.wallet}</span>*/}
+                    {/*        <span className="cardName">{this.state.cardName}</span>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
 
                 <p>Press the button "Accept", you agree that you send {this.props.exchangeValue.sendAmount} {this.props.exchangeValue.sendCurrency} to get {this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}.</p>
@@ -236,7 +241,6 @@ class ExchangeCardToCrypto extends React.Component {
 
 
                 <div>You will get your money after moderating (It could take up to 24 hours).</div>
-                {/*<div><img className="clockWaitingGif" src={clock} alt="clock"/></div>*/}
 
                 <div className="change__block-footer">
                     <a className="btn" onClick={this.onClickReturnToStepOne}>Return to Main Page</a>
@@ -252,7 +256,7 @@ export const mapStateToProps = (state) => {
         isLoggedIn: selectIsLoggedIn(state),
         userData: selectUserData(state),
         exchangeValue: selectExchangeValue(state),
-        getWallet: "0x6465146532146863513146465",
+        getWallet: "0x6465146532146863513146465", //TODO: getCorrectWallet
     }
 };
 
@@ -261,4 +265,4 @@ export const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExchangeCardToCrypto);
+export default connect(mapStateToProps, mapDispatchToProps)(ExchangeToCrypto);

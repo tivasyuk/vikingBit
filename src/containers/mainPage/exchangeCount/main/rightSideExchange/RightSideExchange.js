@@ -136,7 +136,10 @@ class RightSideExchange extends React.Component {
     onClickExchange = () => {
         if (!this.state.checkAgree) return;
         this.props.changeStep(2);
-        this.state.getExchangeData.name.includes('Cash') ? this.props.getType('cash') : this.props.getType('');
+
+        if (this.state.getExchangeData.name.includes('Cash')) this.props.getType('toCash')
+            else if (this.state.getExchangeData.name.includes('Visa') || this.state.getExchangeData.name.includes('Card')) this.props.getType('toCard')
+            else this.props.getType('toCrypto');
     }
 
     render() {
