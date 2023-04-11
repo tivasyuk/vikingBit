@@ -13,12 +13,13 @@ import {
 import RegistrationPopup from "../registrationPopup/RegistrationPopup";
 import ForgotPasswordPopup from "../forgotPasswordPopup/ForgotPasswordPopup";
 import MainPage from "../mainPage/MainPage";
-import Constants from "../../constants/Constants";
+import {PAGES} from "../../constants/Constants";
 import Cabinet from "../cabinetPage/Cabinet";
 import Policy from "../policyPage/Policy";
 import Rules from "../rulesPage/Rules";
 import {selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
 import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
+import {setActivePage} from "../../redux/modules/state/actions";
 
 class Page extends React.Component {
     constructor(props) {
@@ -45,13 +46,13 @@ class Page extends React.Component {
 
     currentPage = () => {
         switch (this.props.activePage){
-            case Constants.PAGE_MAIN:
+            case PAGES.PAGE_MAIN:
                 return <MainPage/>
-            case Constants.PAGE_RULES:
+            case PAGES.PAGE_RULES:
                 return <Rules/>
-            case Constants.PAGE_POLICY:
+            case PAGES.PAGE_POLICY:
                 return <Policy/>
-            case Constants.PAGE_CABINET:
+            case PAGES.PAGE_CABINET:
                 return <Cabinet/>
             default:
                 return <MainPage/>;
@@ -62,7 +63,7 @@ class Page extends React.Component {
         return (<div className="page">
             <Header/>
             {this.currentPage()}
-            <Footer/>
+            <Footer setActivePage={this.props.setActivePage}/>
 
             {this.props.signInPopup && <SignInPopup/>}
             {this.props.registrationPopup && <RegistrationPopup/>}
@@ -83,7 +84,11 @@ export const mapStateToProps = (state) => {
 };
 
 export const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        setActivePage: (value) => {
+            dispatch(setActivePage(value));
+        },
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

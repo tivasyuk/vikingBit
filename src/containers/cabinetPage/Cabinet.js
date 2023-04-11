@@ -5,7 +5,7 @@ import './cabinet.scss';
 import {selectIsLoggedIn, selectUserData} from "../../redux/modules/login/selectors";
 import {setSignInData} from "../../redux/modules/login/actions";
 import {setActivePage} from "../../redux/modules/state/actions";
-import Constants from "../../constants/Constants";
+import {PAGES} from "../../constants/Constants";
 
 class Cabinet extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Cabinet extends React.Component {
     }
 
     onClickLoggedOut = () => {
-        this.props.setActivePage(Constants.PAGE_MAIN)
+        this.props.setActivePage(PAGES.PAGE_MAIN)
         this.props.setSignInData();
     }
 

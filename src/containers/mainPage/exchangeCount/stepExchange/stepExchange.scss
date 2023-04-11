@@ -1,0 +1,205 @@
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.formFields {
+  display: flex;
+}
+.f-home-fields .ff-removable {
+  width: 100%;
+  margin: 10px 1%;
+  &.col-md-4 {
+    width: 31.3%;
+  }
+  &.col-md-6 {
+    width: 49%;
+  }
+}
+.f-home-fields .form-group label {
+  color: #858DA6;
+  display: block;
+  margin-bottom: 7px;
+}
+.f-home-fields .form-group select, .f-home-fields .form-group input {
+  background: #FFFFFF;
+  width: 100%;
+  border: 1px solid #D6DBE9;
+  -webkit-box-shadow: inset 0px 3px 0px rgb(0 0 0 / 3%);
+  box-shadow: inset 0px 3px 0px rgb(0 0 0 / 3%);
+  border-radius: 10px;
+  padding: 15px;
+  height: 60px;
+  display: block;
+}
+.change__block-footer {
+  width: 98%;
+  margin: 15px 1%;
+  .btn:first-child {
+    margin-right: 10px;
+  }
+}
+.gotoPaymAgree {
+  margin-top: 20px;
+}
+.center {
+  text-align: center;
+}
+.hideStep {
+  display: none
+}
+
+.cardToCrypto {
+  .step2 {
+
+  }
+  .step3 {
+    .formFields {
+      .ff-removable {
+        background: #FFFFFF;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+
+        label {
+          font-weight: 700;
+          margin-bottom: 20px;
+        }
+        .form-group {
+          &.send {
+            font-weight: 700;
+          }
+          &.get {
+            color: #A3ABC4;
+          }
+        }
+        &.getSection {
+          position: relative;
+          background: transparent url(../../../../img/debitCard.png) 0 0 no-repeat;
+          background-size: 320px;
+          box-shadow: none;
+          .cardWallet {
+            position: absolute;
+            left: 30px;
+            top: 110px;
+            color: #fff;
+            font-size: 17px;
+            letter-spacing: 1px;
+          }
+          .cardName {
+            position: absolute;
+            left: 30px;
+            top: 140px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.withCopyBtn {
+  display: flex;
+
+  input {
+    width: 90% !important;
+  }
+
+  .copyButton {
+    position: relative;
+    cursor: pointer;
+
+    .copyButtonIcon {
+      &:before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        display: block;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: 10px;
+        background: transparent url(../../../../img/copy-icon.png) center no-repeat;
+        background-size: contain;
+      }
+    }
+    &:before {
+      content: "Copied";
+      position: absolute;
+      top: -45px;
+      left: -10px;
+      background: #ff006b;
+      color: #fff;
+      padding: 8px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      display: none;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 15px;
+      width: 10px;
+      height: 10px;
+      background: #ff006b;
+      transform: rotate(45deg);
+      display: none;
+    }
+    &.active:before,
+    &.active:after {
+      display: block;
+    }
+  }
+
+  &:last-child {
+    margin-top: 20px;
+  }
+}
+
+.clockWaitingGif {
+  max-height: 80px;
+}
+
+.desc {
+  margin: 10px 0;
+  .desc-label {
+    font-weight: 700;
+    padding-right: 15px;
+  }
+}
+
+.status {
+  background: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  padding: 5px 15px;
+
+  &.status-pending {
+    background: #ff006b;
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    padding-left: 40px;
+    &:before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      width: 20px;
+      height: 20px;
+      margin-top: -10px;
+      margin-left: -10px;
+      border-radius: 50%;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-top-color: #fff;
+      animation: spinner .6s linear infinite;
+    }
+  }
+  &.status-success {
+
+  }
+  &.status-failure {
+
+  }
+}

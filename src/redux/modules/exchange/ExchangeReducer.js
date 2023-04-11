@@ -7,8 +7,10 @@ const initialState = {
         rate: 0
     },
     exchangeValue: {
-        send: '',
-        get: ''
+        sendAmount: '',
+        sendCurrency: '',
+        getAmount: '',
+        getCurrency: ''
     }
 }
 
@@ -27,8 +29,10 @@ const ExchangeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 exchangeValue: {
-                    send: action.value.send,
-                    get: action.value.get
+                    sendAmount: action.value.sendAmount,
+                    sendCurrency: action.value.sendCurrency,
+                    getAmount: action.value.getAmount,
+                    getCurrency: action.value.getCurrency,
                 }
             };
         default: {

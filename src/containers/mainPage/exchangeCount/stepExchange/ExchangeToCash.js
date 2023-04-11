@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import './step2Exchange.scss';
+import './stepExchange.scss';
 
-class Step2ExchangeCash extends React.Component {
+class ExchangeToCash extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -43,4 +43,4 @@ export const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step2ExchangeCash);
+export default connect(mapStateToProps, mapDispatchToProps)(ExchangeToCash);

@@ -1,8 +1,8 @@
-import {SET_ACTIVE_PAGE, SET_ADD_REVIEW_POPUP_STATE, SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE} from "./actions";
-import Constants from "../../../constants/Constants";
+import {SET_ACTIVE_PAGE, SET_ADD_REVIEW_POPUP_STATE} from "./actions";
+import {PAGES} from "../../../constants/Constants";
 
 const initialState = {
-    activePage: Constants.PAGE_MAIN,
+    activePage: PAGES.PAGE_MAIN,
     isAddReviewPopupVisible: false
 }
 

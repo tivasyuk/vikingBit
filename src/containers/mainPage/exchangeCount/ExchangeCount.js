@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import './exchangeCount.scss';
-import LeftSideExchange from "./step1/leftSideExchange/LeftSideExchange";
-import RightSideExchange from "./step1/rightSideExchange/RightSideExchange";
-import Step2Exchange from "./step2/Step2Exchange";
-import Step2ExchangeCash from "./step2/Step2ExchangeCash";
+import LeftSideExchange from "./main/leftSideExchange/LeftSideExchange";
+import RightSideExchange from "./main/rightSideExchange/RightSideExchange";
+import ExchangeCardToCrypto from "./stepExchange/ExchangeCardToCrypto";
+import ExchangeToCash from "./stepExchange/ExchangeToCash";
 
 class ExchangeCount extends React.Component {
     constructor(props) {
@@ -21,11 +21,7 @@ class ExchangeCount extends React.Component {
         return true;
     }
 
-    changeStepToSecond = (step) => {
-        this.setState({step: step});
-    }
-
-    changeStepToThird = (step) => {
+    changeStep = (step) => {
         this.setState({step: step});
     }
 
@@ -36,9 +32,10 @@ class ExchangeCount extends React.Component {
     render() {
         return (<div className={`main exchangeCont home-change step${this.state.step}`} id="home-exchange">
             <LeftSideExchange/>
-            <RightSideExchange changeStep={this.changeStepToSecond} getType={this.getType}/>
-            {this.state.step === 2 && this.state.getAmountType !== 'cash' && <Step2Exchange changeStep={this.changeStepToThird}/>}
-            {this.state.step === 2 && this.state.getAmountType === 'cash' && <Step2ExchangeCash changeStep={this.changeStepToThird}/>}
+            <RightSideExchange changeStep={this.changeStep} getType={this.getType}/>
+            {this.state.step === 2 && this.state.getAmountType !== 'cash' && <ExchangeCardToCrypto changeStep={this.changeStep}/>}
+            {this.state.step === 2 && this.state.getAmountType === 'cash' && <ExchangeToCash changeStep={this.changeStep}/>}
+            {/*<ExchangeCardToCrypto changeStep={this.changeStep}/>*/}
         </div>);
     }
 }

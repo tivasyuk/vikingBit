@@ -12,6 +12,7 @@ import cash from "../../../../../img/exchangeIcons/cash.png";
 import Checkbox from "../../../../../components/checkbox/Checkbox";
 import {exchangeConverter} from "../../../../../utility/exchangeData";
 import {selectExchangeRate, selectExchangeValue} from "../../../../../redux/modules/exchange/selectors";
+import {getCurrencyList} from "../../../../../utility/api";
 
 class RightSideExchange extends React.Component {
     constructor(props) {
@@ -45,6 +46,10 @@ class RightSideExchange extends React.Component {
         }
 
         exchangeConverter(this.state.getExchangeData.currency, this.state.sendExchangeData.currency)
+
+        getCurrencyList().then( data => {
+            console.log(data)
+        });
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -53,11 +58,11 @@ class RightSideExchange extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.exchangeValue !== prevProps.exchangeValue) {
-            if(this.props.exchangeValue.get === parseFloat(this.state.enterGetAmount)) {
-                this.setState({enterSendAmount: this.props.exchangeValue.send})
+            if(this.props.exchangeValue.getAmount === parseFloat(this.state.enterGetAmount)) {
+                this.setState({enterSendAmount: this.props.exchangeValue.sendAmount})
             }
-            if(this.props.exchangeValue.send === parseFloat(this.state.enterSendAmount)) {
-                this.setState({enterGetAmount: this.props.exchangeValue.get})
+            if(this.props.exchangeValue.sendAmount === parseFloat(this.state.enterSendAmount)) {
+                this.setState({enterGetAmount: this.props.exchangeValue.getAmount})
             }
         }
     }

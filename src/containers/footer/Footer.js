@@ -1,26 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import logo from "../../img/logo.png"
 import {Link} from "react-scroll";
 
 import './footer.scss';
-import {setActivePage} from "../../redux/modules/state/actions";
-import Constants from "../../constants/Constants";
+import {PAGES} from "../../constants/Constants";
 
-const Footer = () => {
-        return (<footer>
+const Footer = (props) => {
+    return (
+        <footer>
             <div className="container">
                 <div className="footer-main">
                     <div className="footer-logo">
-                        <a onClick={() => this.props.setActivePage(Constants.PAGE_MAIN)}><img src={ logo } alt="logo" /></a>
+                        <a onClick={() => props.setActivePage(PAGES.PAGE_MAIN)}><img src={logo} alt="logo"/></a>
                     </div>
                     <p className="copyright">Copyright © 2023 VikingBit. </p>
                 </div>
 
                 <div className="footerMenu">
                     <div className="footerMenuBlock">
-                        <a onClick={() => this.props.setActivePage(Constants.PAGE_RULES)}>Terms of service</a>
-                        <a onClick={() => this.props.setActivePage(Constants.PAGE_POLICY)}>Privacy policy</a>
+                        <a onClick={() => props.setActivePage(PAGES.PAGE_RULES)}>Terms of service</a>
+                        <a onClick={() => props.setActivePage(PAGES.PAGE_POLICY)}>Privacy policy</a>
                     </div>
 
                     <div className="footerMenuBlock">
@@ -34,22 +33,9 @@ const Footer = () => {
                         <a href="https://t.me/VikingBitBot" target="_blank">We are in Telegram</a>
                     </div>
                 </div>
-
             </div>
         </footer>
     );
 }
 
-export const mapStateToProps = (state) => {
-    return {}
-};
-
-export const mapDispatchToProps = (dispatch) => {
-    return {
-        setActivePage: (value) => {
-            dispatch(setActivePage(value));
-        },
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default Footer;
