@@ -99,6 +99,6 @@ export const exchangeConverter = (to, from, amount = '', direction = '') => {
         sendAmount = parseFloat(amount) / currentRate.rate;
         getAmount = parseFloat(amount);
     }
-    let change = {sendAmount: sendAmount, sendCurrency: from, getAmount: getAmount, getCurrency: to};
+    let change = {sendAmount: sendAmount || "", sendCurrency: from, getAmount: getAmount || "", getCurrency: to};
     store.dispatch(setExchangeValue(change));
 }

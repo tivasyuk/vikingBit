@@ -58,10 +58,10 @@ class RightSideExchange extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.exchangeValue !== prevProps.exchangeValue) {
-            if(this.props.exchangeValue.getAmount === parseFloat(this.state.enterGetAmount)) {
+            if(this.props.exchangeValue.getAmount === (parseFloat(this.state.enterGetAmount) || this.state.enterGetAmount)) {
                 this.setState({enterSendAmount: this.props.exchangeValue.sendAmount})
             }
-            if(this.props.exchangeValue.sendAmount === parseFloat(this.state.enterSendAmount)) {
+            if(this.props.exchangeValue.sendAmount === (parseFloat(this.state.enterSendAmount) || this.state.enterSendAmount)) {
                 this.setState({enterGetAmount: this.props.exchangeValue.getAmount})
             }
         }
@@ -237,7 +237,7 @@ class RightSideExchange extends React.Component {
                         isChecked={this.state.checkAgree}
                         onClickHandler={this.onAgreeCheckboxClick}
                     />
-                    <a className={`btn${!this.state.checkAgree ? ' disable' : ''}`} id="showProps" onClick={this.onClickExchange}>Exchange</a>
+                    <a className={`btn${(!this.state.checkAgree || this.state.enterSendAmount < this.props.exchangeRate.minSum) ? ' disable' : ''}`} id="showProps" onClick={this.onClickExchange}>Exchange</a>
                 </div>
             </div>
         </div>);
