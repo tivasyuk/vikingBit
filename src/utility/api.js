@@ -9,7 +9,7 @@ export const getCurrencyList = async () => {
 }
 
 export const setOrderExchangeData = async (data) => {
-    await fetch(`${SERVER_URL}/order`, {
+    await fetch(`${SERVER_URL}/orders`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
