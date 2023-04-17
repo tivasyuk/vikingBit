@@ -207,7 +207,7 @@ class ExchangeCardToCrypto extends React.Component {
                     {/*        <p><span>Sum: </span>{this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</p>*/}
                     {/*    </div>*/}
                     {/*</div>*/}
-                    <div className="col-md-6 ff-removable getSection">
+                    <div className="col-md-6 ff-removable getCardSection">
                         <div className="form-group get">
                             <span className="cardWallet">{this.state.wallet}</span>
                             <span className="cardName">{this.state.cardName}</span>

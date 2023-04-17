@@ -202,20 +202,14 @@ class ExchangeToCrypto extends React.Component {
                         </div>
                     </div>
 
-                    <div className="col-md-6 ff-removable">
+                    <div className="col-md-6 ff-removable getCryptoSection">
                         <div className="form-group get">
-                            <label>Your get data</label>
-                            <p><span>Wallet: </span>{this.state.wallet}</p>
-                            <p><span>Sum: </span>{this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</p>
-                            <p><span>Coupon: </span>{this.state.coupon || '-'}</p>
+                                    <label>Your wallet</label>
+                            {/*        <p><span>Sum: </span>{this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</p>*/}
+                            {/*        <p><span>Coupon: </span>{this.state.coupon || '-'}</p>*/}
+                            <span className="cardWallet">{this.state.wallet}0x6465146532146863513146465</span>
                         </div>
                     </div>
-                    {/*<div className="col-md-6 ff-removable getSection">*/}
-                    {/*    <div className="form-group get">*/}
-                    {/*        <span className="cardWallet">{this.state.wallet}</span>*/}
-                    {/*        <span className="cardName">{this.state.cardName}</span>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                 </div>
 
                 <p>Press the button "Accept", you agree that you send {this.props.exchangeValue.sendAmount} {this.props.exchangeValue.sendCurrency} to get {this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}.</p>

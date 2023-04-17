@@ -72,7 +72,7 @@
             color: #A3ABC4;
           }
         }
-        &.getSection {
+        &.getCardSection {
           position: relative;
           background: transparent url(../../../../img/debitCard.png) 0 0 no-repeat;
           background-size: 320px;
@@ -90,6 +90,27 @@
             left: 30px;
             top: 140px;
             color: #fff;
+          }
+        }
+        &.getCryptoSection {
+          position: relative;
+          background: transparent url(../../../../img/cryptoCard.png) 0 0 no-repeat;
+          background-size: 470px;
+          box-shadow: none;
+          label {
+            position: absolute;
+            left: 30px;
+            top: 35px;
+            color: #fff;
+            font-size: 17px;
+          }
+          .cardWallet {
+            position: absolute;
+            left: 30px;
+            top: 130px;
+            color: #fff;
+            font-size: 17px;
+            letter-spacing: 1px;
           }
         }
       }
