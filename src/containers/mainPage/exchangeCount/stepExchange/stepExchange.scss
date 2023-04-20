@@ -224,3 +224,8 @@
 
   }
 }
+select {
+  &:focus-visible {
+    outline: none;
+  }
+}

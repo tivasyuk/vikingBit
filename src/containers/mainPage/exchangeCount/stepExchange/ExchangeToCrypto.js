@@ -20,7 +20,8 @@ class ExchangeToCrypto extends React.Component {
             transactionDate: Date.now(),
             copyWalletWaiting: false,
             copySumWaiting: false,
-            coupon: ''
+            coupon: '',
+            network: 'ERC-20',
         }
     }
 
@@ -55,6 +56,7 @@ class ExchangeToCrypto extends React.Component {
             fromSum: this.props.exchangeValue.sendAmount,
             toSum: this.props.exchangeValue.getAmount,
             coupon: this.state.coupon,
+            network: this.state.network,
             wallet: this.state.walletNumbers,
             cardName: this.state.cardName,
             login: this.state.login,
@@ -82,6 +84,10 @@ class ExchangeToCrypto extends React.Component {
         const numbers = val.replace(/(\D)/g, '');*/
 
         this.setState({wallet: val, walletNumbers: val})
+    }
+
+    updateNetwork = (event) => {
+        this.setState({network: event.target.value})
     }
 
     updateCoupon = (val) => {
@@ -141,6 +147,22 @@ class ExchangeToCrypto extends React.Component {
                                            }}
                                            value={this.state.login} />
                                 }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-4 ff-removable">
+                        <div className="form-group mb-4">
+                            <label>Network</label>
+                            <div className="form-field">
+                                <select className="form-control f-input"
+                                        value={this.state.network}
+                                        onChange={this.updateNetwork}
+                                >
+                                    <option key={'ERC-20'} value={'ERC-20'}>ERC-20</option>
+                                    <option key={'TRC-20'} value={'TRC-20'}>TRC-20</option>
+                                    <option key={'BEP-20'} value={'BEP-20'}>BEP-20</option>
+                                </select>
                             </div>
                         </div>
                     </div>

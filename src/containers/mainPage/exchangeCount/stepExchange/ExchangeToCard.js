@@ -20,7 +20,8 @@ class ExchangeCardToCrypto extends React.Component {
             transactionDate: Date.now(),
             copyWalletWaiting: false,
             copySumWaiting: false,
-            coupon: ''
+            coupon: '',
+            network: ''
         }
     }
 
@@ -55,6 +56,7 @@ class ExchangeCardToCrypto extends React.Component {
             fromSum: this.props.exchangeValue.sendAmount,
             toSum: this.props.exchangeValue.getAmount,
             coupon: this.state.coupon,
+            network: this.state.network,
             wallet: this.state.walletNumbers,
             cardName: this.state.cardName,
             login: this.state.login,
