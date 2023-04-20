@@ -1,0 +1,54 @@
+@keyframes animateBg {
+  0% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.banner {
+  .block_table {
+    display: flex;
+    flex-direction: row;
+    background: rgba(255, 255, 255, 0.4);
+
+    animation: animateBg 30s linear infinite;
+    background-image: linear-gradient(0deg,#ff006d,#943ad9,#ffb029,#ff006d,#943ad9);
+    background-size: 100% 400%;
+  }
+
+  .table {
+    display: flex;
+    flex-direction: column;
+    border: #fff 1px solid;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    &.table_title {
+      max-width: 50px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    &:first-child {
+      border-left: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .col_title {
+    text-align: center;
+    background: #ff006b;
+    background: rgba(255, 255, 255, 0.4);
+    width: 100%;
+    padding: 5px 0;
+    font-weight: 600;
+  }
+
+  .row {
+    list-style: none;
+    margin: 0;
+    text-align: center;
+  }
+}

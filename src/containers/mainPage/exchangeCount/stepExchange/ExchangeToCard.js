@@ -237,7 +237,7 @@ class ExchangeCardToCrypto extends React.Component {
                 <div className="desc"><span className="desc-label">Wallet:</span> {this.state.wallet}</div>
 
 
-                <div>You will get your money after moderating (It could take up to 24 hours).</div>
+                <div>You will get your money after moderating.</div>
 
                 <div className="change__block-footer">
                     <a className="btn" onClick={this.onClickReturnToStepOne}>Return to Main Page</a>

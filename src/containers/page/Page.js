@@ -20,6 +20,7 @@ import Rules from "../rulesPage/Rules";
 import {selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
 import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
 import {setActivePage} from "../../redux/modules/state/actions";
+import Banner from "../banner/Banner";
 
 class Page extends React.Component {
     constructor(props) {
@@ -62,6 +63,7 @@ class Page extends React.Component {
     render() {
         return (<div className="page">
             <Header/>
+            <Banner/>
             {this.currentPage()}
             <Footer setActivePage={this.props.setActivePage}/>
 

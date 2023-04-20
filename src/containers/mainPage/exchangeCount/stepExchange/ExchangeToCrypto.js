@@ -207,7 +207,7 @@ class ExchangeToCrypto extends React.Component {
                                     <label>Your wallet</label>
                             {/*        <p><span>Sum: </span>{this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</p>*/}
                             {/*        <p><span>Coupon: </span>{this.state.coupon || '-'}</p>*/}
-                            <span className="cardWallet">{this.state.wallet}0x6465146532146863513146465</span>
+                            <span className="cardWallet">{this.state.wallet}</span>
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@ class ExchangeToCrypto extends React.Component {
                 <div className="desc"><span className="desc-label">Wallet:</span> {this.state.wallet}</div>
 
 
-                <div>You will get your money after moderating (It could take up to 24 hours).</div>
+                <div>You will get your money after moderating.</div>
 
                 <div className="change__block-footer">
                     <a className="btn" onClick={this.onClickReturnToStepOne}>Return to Main Page</a>
