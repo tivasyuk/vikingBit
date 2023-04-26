@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import configureStore from "./redux/store";
+import { storeContainer } from "./redux/store";
 import {Provider} from "react-redux";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-export const store = configureStore();
+export const store = storeContainer; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

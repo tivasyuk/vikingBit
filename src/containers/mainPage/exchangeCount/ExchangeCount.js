@@ -7,42 +7,35 @@ import RightSideExchange from "./main/rightSideExchange/RightSideExchange";
 import ExchangeToCash from "./stepExchange/ExchangeToCash";
 import ExchangeToCard from "./stepExchange/ExchangeToCard";
 import ExchangeToCrypto from "./stepExchange/ExchangeToCrypto";
+import { selectExchangeScreenState, selectOrderData } from '../../../redux/modules/exchange/selectors';
+import OrderScreen from './main/orderScreen/orderScreen'
 
 class ExchangeCount extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            step: 1,
-            getAmountType: ''
-        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         return true;
     }
 
-    changeStep = (step) => {
-        this.setState({step: step});
-    }
-
-    getType = (type) => {
-        this.setState({getAmountType: type});
-    }
-
     render() {
-        return (<div className={`main exchangeCont home-change step${this.state.step}`} id="home-exchange">
-            <LeftSideExchange/>
-            <RightSideExchange changeStep={this.changeStep} getType={this.getType}/>
-            {this.state.step === 2 && this.state.getAmountType === 'toCash' && <ExchangeToCash changeStep={this.changeStep}/>}
-            {this.state.step === 2 && this.state.getAmountType === 'toCard' && <ExchangeToCard changeStep={this.changeStep}/>}
-            {this.state.step === 2 && this.state.getAmountType === 'toCrypto' && <ExchangeToCrypto changeStep={this.changeStep}/>}
+        return (<div className={`main exchangeCont home-change step${this.props.screenState.screenStep}`} id="home-exchange">
+            {this.props.screenState.screenStep <= 2 && !this.props.orderData?.transactionID && <LeftSideExchange/> }
+            {this.props.screenState.screenStep <= 2 && !this.props.orderData?.transactionID && <RightSideExchange />}
+            {this.props.screenState.screenStep >= 2 && !this.props.orderData?.transactionID && this.props.screenState.exchangeType === 'toCash' && <ExchangeToCash />}
+            {this.props.screenState.screenStep >= 2 && !this.props.orderData?.transactionID && this.props.screenState.exchangeType === 'toCard' && <ExchangeToCard />}
+            {this.props.screenState.screenStep >= 2 && !this.props.orderData?.transactionID && this.props.screenState.exchangeType === 'toCrypto' && <ExchangeToCrypto/>}
+            {this.props.orderData?.transactionID && <OrderScreen/>}
         </div>);
     }
 }
 
 export const mapStateToProps = (state) => {
-        return {}
+        return {
+            screenState: selectExchangeScreenState(state),
+            orderData: selectOrderData(state)
+        }
     }
 ;
 

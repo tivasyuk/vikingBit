@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import './stepExchange.scss';
+import { setScreenState } from '../../../../redux/modules/exchange/actions';
 
 class ExchangeToCash extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class ExchangeToCash extends React.Component {
     }
 
     onClickReturnBack = () => {
-        this.props.changeStep(1)
+        this.props.onScreenStateChange({ screenStep: 1 })
     }
 
     render() {
@@ -40,6 +41,9 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
     return {
+        onScreenStateChange: screenState => {
+            dispatch(setScreenState(screenState));
+        },
     }
 };
 

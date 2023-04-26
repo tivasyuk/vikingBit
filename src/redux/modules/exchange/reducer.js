@@ -1,4 +1,4 @@
-import {SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE} from "./actions";
+import { SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, PUT_NEW_ORDER_FAILURE, SET_SCREEN_STATE, SHOW_LOADING, HIDE_LOADING, GET_ORDER_DATA_COMPLEATE } from "./types";
 
 const initialState = {
     exchangeRate: {
@@ -11,7 +11,13 @@ const initialState = {
         sendCurrency: '',
         getAmount: '',
         getCurrency: ''
-    }
+    },
+    loading: false,
+    exchangeScreenState: {
+        screenStep: 1,
+        exchangeType: ''
+    },
+    orderData: {}
 }
 
 const ExchangeReducer = (state = initialState, action) => {
@@ -35,6 +41,22 @@ const ExchangeReducer = (state = initialState, action) => {
                     getCurrency: action.value.getCurrency,
                 }
             };
+        case SET_SCREEN_STATE:
+            return {
+                ...state,
+                exchangeScreenState: {
+                    screenStep: action.screenState?.screenStep,
+                    exchangeType: action.screenState?.exchangeType || state.exchangeScreenState.exchangeType
+                }
+            };
+        case SHOW_LOADING: 
+            return { ...state, loading: true };
+        case HIDE_LOADING:
+            return { ...state, loading: false };
+        case PUT_NEW_ORDER_FAILURE:
+            return { ...state, errorMessage: action.message, loading: false };
+        case GET_ORDER_DATA_COMPLEATE:
+            return {...state, orderData: action.data}
         default: {
             return state;
         }

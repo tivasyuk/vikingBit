@@ -1,15 +1,11 @@
-import {combineReducers} from 'redux';
-
 import StateReducer from "./state/StateReducer";
 import LoginReducer from "./login/LoginReducer";
-import ExchangeReducer from "./exchange/ExchangeReducer";
+import ExchangeReducer from "./exchange/reducer";
 
-let createReducer = () => {
-    return combineReducers({
-        state: StateReducer,
-        login: LoginReducer,
-        exchange: ExchangeReducer,
-    });
+let createRootReducer  =  {
+    state: StateReducer,
+    login: LoginReducer,
+    exchange: ExchangeReducer,
 }
 
-export default createReducer;
+export default createRootReducer;

@@ -1,0 +1,9 @@
+export const SET_EXCHANGE_RATE = 'state/SET_EXCHANGE_RATE';
+export const SET_EXCHANGE_VALUE = 'state/SET_EXCHANGE_VALUE';
+export const PUT_NEW_ORDER_COMPLEATE = 'state/PUT_NEW_ORDER_COMPLEATE';
+export const GET_ORDER_DATA_COMPLEATE = 'state/GET_ORDER_DATA_COMPLEATE';
+export const GET_ORDER_DATA_FAILURE = 'state/GET_ORDER_DATA_FAILURE';
+export const SHOW_LOADING = 'state/SHOW_LOADING';
+export const HIDE_LOADING = 'state/HIDE_LOADING';
+export const PUT_NEW_ORDER_FAILURE = 'state/PUT_NEW_ORDER_FAILURE';
+export const SET_SCREEN_STATE = 'state/SET_SCREEN_STATE';

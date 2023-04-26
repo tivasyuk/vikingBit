@@ -3,15 +3,14 @@ import {connect} from 'react-redux';
 
 import './stepExchange.scss';
 import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/selectors";
-import {selectExchangeValue} from "../../../../redux/modules/exchange/selectors";
-import {setOrderExchangeData} from "../../../../utility/api";
+import {selectExchangeValue, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
+import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
 
 class ExchangeToCrypto extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            step: 2,
             login: '',
             cardName: '',
             wallet: '',
@@ -30,27 +29,26 @@ class ExchangeToCrypto extends React.Component {
     }
 
     onClickReturnToStepOne = () => {
-        this.props.changeStep(1)
+        this.props.onScreenStateChange({ screenStep: 1 });
     }
 
     onClickReturnToStepTwo = () => {
-        this.setState({step: 2});
+        this.props.onScreenStateChange({ screenStep: 2 });
     }
 
     onClickMoveToStepThree = () => {
         if (this.state.walletNumbers.length === 0) return;
-        this.setState({step: 3});
+        this.props.onScreenStateChange({ screenStep: 3 });
     }
 
     onClickAccept = () => {
         const timestamp = Date.now();
         this.setState({
-            step: 4,
             transactionDate: timestamp
         });
 
         //send all data
-        setOrderExchangeData({
+        this.props.onPutOrderExchangeData({
             transactionID: this.state.transactionID,
             currency: `${this.props.exchangeValue.sendCurrency}/${this.props.exchangeValue.getCurrency}`,
             fromSum: this.props.exchangeValue.sendAmount,
@@ -62,8 +60,6 @@ class ExchangeToCrypto extends React.Component {
             login: this.state.login,
             timestamp: timestamp,
             status: 'pending'
-        }).then( () => {
-
         });
     }
 
@@ -130,7 +126,7 @@ class ExchangeToCrypto extends React.Component {
     render() {
         return (<div className="main-exchange-wrapper bg-opacity s2 cardToCrypto">
             <h1>Digital currency conversion service</h1>
-            <div className={`f-home-fields step2 ${this.state.step !== 2 && ' hideStep'}`}>
+            <div className={`f-home-fields step2 ${this.props.screenState.screenStep !== 2 && ' hideStep'}`}>
                 <h3>Step 2</h3>
                 <h4>Enter the recipient's wallet address</h4>
                 <div className="formFields">
@@ -204,7 +200,7 @@ class ExchangeToCrypto extends React.Component {
                 </div>
             </div>
 
-            <div className={`f-home-fields step3 ${this.state.step !== 3 && ' hideStep'}`}>
+            <div className={`f-home-fields step3 ${this.props.screenState.screenStep !== 3 && ' hideStep'}`}>
                 <h3>Step 3</h3>
                 <h4>Send tokens to continue the exchange</h4>
 
@@ -246,23 +242,6 @@ class ExchangeToCrypto extends React.Component {
                 </div>
 
             </div>
-
-            <div className={`f-home-fields step4 ${this.state.step !== 4 && ' hideStep'}`}>
-                <h3>Transaction Details</h3>
-                <div className="desc"><span className="desc-label">Transaction ID:</span> #<span>{this.state.transactionID}</span></div>
-                <div className="desc"><span className="desc-label">Status:</span> <span className="status status-pending">Processing...</span></div>
-                <div className="desc"><span className="desc-label">Created on:</span> <span>{("" + (new Date(this.state.transactionDate)).toLocaleString())}</span></div>
-                <div className="desc"><span className="desc-label">Transaction amount:</span> {this.props.exchangeValue.sendAmount} {this.props.exchangeValue.sendCurrency} &#8658; {this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</div>
-                <div className="desc"><span className="desc-label">Wallet:</span> {this.state.wallet}</div>
-
-
-                <div>You will get your money after moderating.</div>
-
-                <div className="change__block-footer">
-                    <a className="btn" onClick={this.onClickReturnToStepOne}>Return to Main Page</a>
-                </div>
-
-            </div>
         </div>);
     }
 }
@@ -273,12 +252,19 @@ export const mapStateToProps = (state) => {
         userData: selectUserData(state),
         exchangeValue: selectExchangeValue(state),
         getWallet: "0x6465146532146863513146465", //TODO: getCorrectWallet
+        screenState: selectExchangeScreenState(state)
     }
 };
 
 export const mapDispatchToProps = (dispatch) => {
     return {
-    }
+        onScreenStateChange: screenState => {
+            dispatch(setScreenState(screenState));
+        },
+        onPutOrderExchangeData: orderData => {
+          dispatch(putOrderExchangeData(orderData));
+        }
+      };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExchangeToCrypto);

@@ -10,3 +10,13 @@ export const selectExchangeValue = createSelector(
     selectExchangeDomain,
     (exchangeDomain) => exchangeDomain.exchangeValue
 );
+
+export const selectExchangeScreenState = createSelector(
+    selectExchangeDomain,
+    (exchangeDomain) => exchangeDomain.exchangeScreenState
+);
+
+export const selectOrderData = createSelector(
+    selectExchangeDomain,
+    (exchangeDomain) => exchangeDomain.orderData
+);

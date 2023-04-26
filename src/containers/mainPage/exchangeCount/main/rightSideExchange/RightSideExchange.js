@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import './rightSideExchange.scss';
 import btc from "../../../../../img/exchangeIcons/bitcoin.svg";
@@ -10,9 +10,10 @@ import euroCard from "../../../../../img/exchangeIcons/ps-visamc.png";
 import usdt from "../../../../../img/exchangeIcons/tether.svg";
 import cash from "../../../../../img/exchangeIcons/cash.png";
 import Checkbox from "../../../../../components/checkbox/Checkbox";
-import {exchangeConverter} from "../../../../../utility/exchangeData";
-import {selectExchangeRate, selectExchangeValue} from "../../../../../redux/modules/exchange/selectors";
-import {getCurrencyList} from "../../../../../utility/api";
+import { exchangeConverter } from "../../../../../utility/exchangeData";
+import { selectExchangeRate, selectExchangeValue } from "../../../../../redux/modules/exchange/selectors";
+import { getCurrencyList } from "../../../../../utility/api";
+import { setScreenState } from '../../../../../redux/modules/exchange/actions';
 
 class RightSideExchange extends React.Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class RightSideExchange extends React.Component {
 
         exchangeConverter(this.state.getExchangeData.currency, this.state.sendExchangeData.currency)
 
-        getCurrencyList().then( data => {
+        getCurrencyList().then(data => {
             console.log(data)
         });
     }
@@ -57,21 +58,21 @@ class RightSideExchange extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.exchangeValue !== prevProps.exchangeValue) {
-            if(this.props.exchangeValue.getAmount === (parseFloat(this.state.enterGetAmount) || this.state.enterGetAmount)) {
-                this.setState({enterSendAmount: this.props.exchangeValue.sendAmount})
+        if (this.props.exchangeValue !== prevProps.exchangeValue) {
+            if (this.props.exchangeValue.getAmount === (parseFloat(this.state.enterGetAmount) || this.state.enterGetAmount)) {
+                this.setState({ enterSendAmount: this.props.exchangeValue.sendAmount })
             }
-            if(this.props.exchangeValue.sendAmount === (parseFloat(this.state.enterSendAmount) || this.state.enterSendAmount)) {
-                this.setState({enterGetAmount: this.props.exchangeValue.getAmount})
+            if (this.props.exchangeValue.sendAmount === (parseFloat(this.state.enterSendAmount) || this.state.enterSendAmount)) {
+                this.setState({ enterGetAmount: this.props.exchangeValue.getAmount })
             }
         }
     }
 
     addSendExchangeListData = () => {
         const items = this.state.sendExchangeListData.map((item, index) => {
-            return <div className="item currency__item psItem" key={item.name + index} onClick={ () => {this.onClickSendExchangeSelect(item)}}>
+            return <div className="item currency__item psItem" key={item.name + index} onClick={() => { this.onClickSendExchangeSelect(item) }}>
                 <div className="item-img">
-                    <img alt={item.name} src={item.imgSrc}/>
+                    <img alt={item.name} src={item.imgSrc} />
                 </div>
                 <div className="item-title">{item.name}</div>
                 <span>{item.currency}</span>
@@ -85,9 +86,9 @@ class RightSideExchange extends React.Component {
 
     addGetExchangeListData = () => {
         const items = this.state.getExchangeListData.map((item, index) => {
-            return <div className="item currency__item psItem" key={item.name + index} onClick={ () => {this.onClickGetExchangeSelect(item)}}>
+            return <div className="item currency__item psItem" key={item.name + index} onClick={() => { this.onClickGetExchangeSelect(item) }}>
                 <div className="item-img">
-                    <img alt={item.name} src={item.imgSrc}/>
+                    <img alt={item.name} src={item.imgSrc} />
                 </div>
                 <div className="item-title">{item.name}</div>
                 <span>{item.currency}</span>
@@ -100,46 +101,46 @@ class RightSideExchange extends React.Component {
     }
 
     onClickSendExchangeSelect = (item) => {
-        this.setState({sendExchangeData: item, showSendExchangeList: false, enterSendAmount: '', enterGetAmount: ''})
+        this.setState({ sendExchangeData: item, showSendExchangeList: false, enterSendAmount: '', enterGetAmount: '' })
 
         exchangeConverter(this.state.getExchangeData.currency, item.currency, this.state.enterSendAmount, "from")
     }
 
     onClickGetExchangeSelect = (item) => {
-        this.setState({getExchangeData: item, showGetExchangeList: false, enterSendAmount: '', enterGetAmount: ''})
+        this.setState({ getExchangeData: item, showGetExchangeList: false, enterSendAmount: '', enterGetAmount: '' })
 
         exchangeConverter(item.currency, this.state.sendExchangeData.currency, this.state.enterGetAmount, "to")
     }
 
     onAgreeCheckboxClick = () => {
-        this.setState({checkAgree: !this.state.checkAgree});
+        this.setState({ checkAgree: !this.state.checkAgree });
     }
 
     onClickSendExchangeList = () => {
-        this.setState({showSendExchangeList: !this.state.showSendExchangeList, showGetExchangeList: false});
+        this.setState({ showSendExchangeList: !this.state.showSendExchangeList, showGetExchangeList: false });
     }
 
     onClickGetExchangeList = () => {
-        this.setState({showGetExchangeList: !this.state.showGetExchangeList, showSendExchangeList: false});
+        this.setState({ showGetExchangeList: !this.state.showGetExchangeList, showSendExchangeList: false });
     }
 
     updateSendAmount = (val) => {
-        this.setState({enterSendAmount: val})
+        this.setState({ enterSendAmount: val })
         exchangeConverter(this.state.getExchangeData.currency, this.state.sendExchangeData.currency, val, "from")
     }
 
     updateGetAmount = (val) => {
-        this.setState({enterGetAmount: val})
+        this.setState({ enterGetAmount: val })
         exchangeConverter(this.state.getExchangeData.currency, this.state.sendExchangeData.currency, val, "to")
     }
 
     onClickExchange = () => {
         if (!this.state.checkAgree) return;
-        this.props.changeStep(2);
-
-        if (this.state.getExchangeData.name.includes('Cash')) this.props.getType('toCash')
-            else if (this.state.getExchangeData.name.includes('Visa') || this.state.getExchangeData.name.includes('Card')) this.props.getType('toCard')
-            else this.props.getType('toCrypto');
+        let exchangeType = '';
+        if (this.state.getExchangeData.name.includes('Cash')) exchangeType = 'toCash'
+        else if (this.state.getExchangeData.name.includes('Visa') || this.state.getExchangeData.name.includes('Card')) exchangeType = 'toCard'
+        else exchangeType = 'toCrypto';
+        this.props.onScreenStateChange({screenStep: 2, exchangeType});
     }
 
     render() {
@@ -161,7 +162,7 @@ class RightSideExchange extends React.Component {
                         </div>
                         <div className="main-exchange-valute send-valute" onClick={this.onClickSendExchangeList}>
                             <div className="main-exchange-valute-wrapper">
-                                <img alt={this.state.sendExchangeData.name} src={this.state.sendExchangeData.imgSrc}/>
+                                <img alt={this.state.sendExchangeData.name} src={this.state.sendExchangeData.imgSrc} />
                                 <span>{this.state.sendExchangeData.name}</span>
                             </div>
                         </div>
@@ -176,18 +177,18 @@ class RightSideExchange extends React.Component {
                     <div className="main-exchange-inputs exch-val-cont">
                         <div className="main-exchange-input" id="rightSumm">
                             <input className="f-input"
-                                   placeholder='The amount'
-                                   onChange={e => { this.updateGetAmount(e.target.value) }}
-                                   value={this.state.enterGetAmount}
-                                   type="number"
-                                   autoComplete="off"
-                                   inputMode="decimal"
+                                placeholder='The amount'
+                                onChange={e => { this.updateGetAmount(e.target.value) }}
+                                value={this.state.enterGetAmount}
+                                type="number"
+                                autoComplete="off"
+                                inputMode="decimal"
                             />
                             <span id="f-currency-to">{this.state.getExchangeData.currency}</span>
                         </div>
                         <div className="main-exchange-valute get-valute" onClick={this.onClickGetExchangeList}>
                             <div className="main-exchange-valute-wrapper">
-                                <img alt={this.state.getExchangeData.name} src={this.state.getExchangeData.imgSrc}/>
+                                <img alt={this.state.getExchangeData.name} src={this.state.getExchangeData.imgSrc} />
                                 <span>{this.state.getExchangeData.name}</span>
                             </div>
                         </div>
@@ -245,16 +246,19 @@ class RightSideExchange extends React.Component {
 }
 
 export const mapStateToProps = (state) => {
-        return {
-            exchangeRate: selectExchangeRate(state),
-            exchangeValue: selectExchangeValue(state),
-        }
+    return {
+        exchangeRate: selectExchangeRate(state),
+        exchangeValue: selectExchangeValue(state),
     }
-;
+}
+    ;
 
 export const mapDispatchToProps = (dispatch) => {
-        return {}
+    return {
+        onScreenStateChange: screenState => {
+            dispatch(setScreenState(screenState));
+        }
     }
-;
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightSideExchange);
