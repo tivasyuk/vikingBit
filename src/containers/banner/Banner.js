@@ -1,7 +1,26 @@
 import React from 'react';
 import './banner.scss';
+import { selectCurrencyList } from '../../redux/modules/state/selectors';
+import { connect } from 'react-redux';
 
-const Banner = () => {
+const Banner = (props) => {
+    const buildBanner = (props) => {
+        let index = 0;
+        const tablesArray = [];
+        for (const key in props.currencyList) {
+            index += 1;
+            const item = props.currencyList[key];
+            tablesArray.push(  
+                <ul className="table" key={index}>
+                    <li className="col_title">{key}</li>
+                    <li className="row">{item.buy}</li>
+                    <li className="row">{item.sell}</li>
+                </ul>
+            )
+        }
+        return tablesArray;
+
+    }
     return (
         <div className="banner">
             <div className="block_table">
@@ -10,39 +29,16 @@ const Banner = () => {
                     <li className="row">Buy</li>
                     <li className="row">Sell</li>
                 </ul>
-                <ul className="table">
-                    <li className="col_title">Bitcoin (BTC)</li>
-                    <li className="row">1.081.600,00</li>
-                    <li className="row">1.081.600,00</li>
-                </ul>
-                <ul className="table">
-                    <li className="col_title">Ethereum (ETH)</li>
-                    <li className="row">76.283,00</li>
-                    <li className="row">76.283,00</li>
-                </ul>
-                <ul className="table">
-                    <li className="col_title">Tether (USDT)</li>
-                    <li className="row">36,77</li>
-                    <li className="row">36,77</li>
-                </ul>
-                <ul className="table">
-                    <li className="col_title">BNB (BNB)</li>
-                    <li className="row">12.506,30</li>
-                    <li className="row">12.506,30</li>
-                </ul>
-                <ul className="table">
-                    <li className="col_title">Euro (EUR)</li>
-                    <li className="row">40</li>
-                    <li className="row">41</li>
-                </ul>
-                <ul className="table">
-                    <li className="col_title">Dollar (USD)</li>
-                    <li className="row">38</li>
-                    <li className="row">39</li>
-                </ul>
+                {buildBanner(props)}
             </div>
         </div>
     );
 }
 
-export default Banner;
+export const mapStateToProps = (state) => {
+    return {
+        currencyList: selectCurrencyList(state),
+    }
+};
+
+export default connect(mapStateToProps, null)(Banner);

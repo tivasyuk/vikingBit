@@ -1,6 +1,7 @@
 import axios from "axios";
 import {SERVER_URL} from "../../../constants/Constants";
-import { GET_ORDER_DATA_COMPLEATE, GET_ORDER_DATA_FAILURE, HIDE_LOADING, PUT_NEW_ORDER_FAILURE, SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, SET_SCREEN_STATE, SHOW_LOADING } from "./types";
+import { GET_ORDER_DATA_COMPLEATE,  SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, SET_SCREEN_STATE } from "./types";
+import { requestFailure, setLoadingAnimation } from "../state/actions";
 
 export const setExchangeRate = value => {
     return {
@@ -16,26 +17,8 @@ export const setExchangeValue = value => {
     };
 };
 
-const setLoadingAnimation = () => ({
-    type: SHOW_LOADING
-})
-
-const hideLoadingAnimation = () => ({
-    type: HIDE_LOADING
-})
-
-const putNewOrderFailure = message => ({
-    type: PUT_NEW_ORDER_FAILURE,
-    message
-})
-
 const getOrderDataCompleate = data => ({
     type: GET_ORDER_DATA_COMPLEATE,
-    data
-})
-
-const getOrderDataFailure = data => ({
-    type: GET_ORDER_DATA_FAILURE,
     data
 })
 
@@ -53,7 +36,7 @@ export const putOrderExchangeData = (data) => {
             dispatch(getOrderById(data.transactionID));
         })
         .catch(responseData => {
-            dispatch(putNewOrderFailure(responseData.message));
+            dispatch(requestFailure(responseData.message));
         })
     }
 }
@@ -64,9 +47,10 @@ export const getOrderById = (transactionID) => {
         axios.get(`${SERVER_URL}/orders?id=${transactionID}`)
         .then(responseData => {
             dispatch(getOrderDataCompleate(responseData.data));
+            dispatch(setScreenState({screenStep: 4}))
         })
         .catch(responseData => {
-            dispatch(getOrderDataFailure(responseData.message));
+            dispatch(requestFailure(responseData.message));
         })
     }
 }

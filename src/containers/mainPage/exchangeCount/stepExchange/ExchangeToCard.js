@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import './stepExchange.scss';
 import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/selectors";
-import {selectExchangeValue, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
+import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
 
 class ExchangeCardToCrypto extends React.Component {
@@ -50,9 +50,9 @@ class ExchangeCardToCrypto extends React.Component {
         //send all data
         this.props.onPutOrderExchangeData({
             transactionID: this.state.transactionID,
-            currency: `${this.props.exchangeValue.sendCurrency}/${this.props.exchangeValue.getCurrency}`,
-            fromSum: this.props.exchangeValue.sendAmount,
-            toSum: this.props.exchangeValue.getAmount,
+            currency: `${this.props.exchangeValues.sendCurrency.name}/${this.props.exchangeValues.getCurrency.name}`,
+            fromSum: this.props.exchangeValues.sendAmount,
+            toSum: this.props.exchangeValues.getAmount,
             coupon: this.state.coupon,
             network: this.state.network,
             wallet: this.state.walletNumbers,
@@ -60,8 +60,6 @@ class ExchangeCardToCrypto extends React.Component {
             login: this.state.login,
             timestamp: timestamp,
             status: 'pending'
-        }).then( () => {
-
         });
     }
 
@@ -103,7 +101,7 @@ class ExchangeCardToCrypto extends React.Component {
 
     }
     onClickCopySum = () => {
-        navigator.clipboard.writeText(this.props.exchangeValue.sendAmount)
+        navigator.clipboard.writeText(this.props.exchangeValues.sendAmount)
             .then(() => {
                 this.setState({copySumWaiting: true});
                 setTimeout( () => {
@@ -187,13 +185,13 @@ class ExchangeCardToCrypto extends React.Component {
                     <div className="col-md-6 ff-removable">
                         <div className="form-group send">
                             <label>Wallet to send</label>
-                            <span>{this.props.exchangeValue.sendCurrency} wallet: </span> {/*TODO: show correct name*/}
+                            <span>{this.props.exchangeValues.sendCurrency.name} wallet: </span> {/*TODO: show correct name*/}
                             <div className="withCopyBtn">
                                 <input value={this.props.getWallet} readOnly />
                                 {navigator.clipboard && <div className={`copyButton${this.state.copyWalletWaiting ? ' active' : ''}`} onClick={this.onClickCopyWallet}><span className="copyButtonIcon" /></div>}
                             </div>
                             <div className="withCopyBtn">
-                                <span>Sum:&nbsp;</span>{this.props.exchangeValue.sendAmount} {this.props.exchangeValue.sendCurrency}
+                                <span>Sum:&nbsp;</span>{this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name}
                                 {navigator.clipboard && <div className={`copyButton${this.state.copySumWaiting ? ' active' : ''}`} onClick={this.onClickCopySum}><span className="copyButtonIcon" /></div>}
                             </div>
                         </div>
@@ -204,7 +202,7 @@ class ExchangeCardToCrypto extends React.Component {
                     {/*        <label>Your get data</label>*/}
                     {/*        <p><span>Card: </span>{this.state.wallet}</p>*/}
                     {/*        <p><span>Name on card: </span>{this.state.cardName}</p>*/}
-                    {/*        <p><span>Sum: </span>{this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}</p>*/}
+                    {/*        <p><span>Sum: </span>{this.props.exchangeValues.getAmount} {this.props.exchangeValues.getCurrency}</p>*/}
                     {/*    </div>*/}
                     {/*</div>*/}
                     <div className="col-md-6 ff-removable getCardSection">
@@ -215,7 +213,7 @@ class ExchangeCardToCrypto extends React.Component {
                     </div>
                 </div>
 
-                <p>Press the button "Accept", you agree that you send {this.props.exchangeValue.sendAmount} {this.props.exchangeValue.sendCurrency} to get {this.props.exchangeValue.getAmount} {this.props.exchangeValue.getCurrency}.</p>
+                <p>Press the button "Accept", you agree that you send {this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name} to get {this.props.exchangeValues.getAmount} {this.props.exchangeValues.getCurrency.name}.</p>
                 <p>You will get your money after moderating.</p>
 
                 <div className="change__block-footer">
@@ -235,7 +233,7 @@ export const mapStateToProps = (state) => {
     return {
         isLoggedIn: selectIsLoggedIn(state),
         userData: selectUserData(state),
-        exchangeValue: selectExchangeValue(state),
+        exchangeValues: selectExchangeValues(state),
         getWallet: "0x6465146532146863513146465", //TODO: getCorrectWallet
         screenState: selectExchangeScreenState(state)
     }

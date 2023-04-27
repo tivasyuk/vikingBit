@@ -21,12 +21,12 @@ class ExchangeCount extends React.Component {
 
     render() {
         return (<div className={`main exchangeCont home-change step${this.props.screenState.screenStep}`} id="home-exchange">
-            {this.props.screenState.screenStep <= 2 && !this.props.orderData?.transactionID && <LeftSideExchange/> }
-            {this.props.screenState.screenStep <= 2 && !this.props.orderData?.transactionID && <RightSideExchange />}
-            {this.props.screenState.screenStep >= 2 && !this.props.orderData?.transactionID && this.props.screenState.exchangeType === 'toCash' && <ExchangeToCash />}
-            {this.props.screenState.screenStep >= 2 && !this.props.orderData?.transactionID && this.props.screenState.exchangeType === 'toCard' && <ExchangeToCard />}
-            {this.props.screenState.screenStep >= 2 && !this.props.orderData?.transactionID && this.props.screenState.exchangeType === 'toCrypto' && <ExchangeToCrypto/>}
-            {this.props.orderData?.transactionID && <OrderScreen/>}
+            {this.props.screenState.screenStep <= 2 && this.props.screenState.screenStep < 4 && <LeftSideExchange/> }
+            {this.props.screenState.screenStep <= 2 && this.props.screenState.screenStep < 4 && <RightSideExchange />}
+            {this.props.screenState.screenStep >= 2 && this.props.screenState.screenStep < 4 && this.props.screenState.exchangeType === 'toCash' && <ExchangeToCash />}
+            {this.props.screenState.screenStep >= 2 && this.props.screenState.screenStep < 4 && this.props.screenState.exchangeType === 'toCard' && <ExchangeToCard />}
+            {this.props.screenState.screenStep >= 2 && this.props.screenState.screenStep < 4 && this.props.screenState.exchangeType === 'toCrypto' && <ExchangeToCrypto/>}
+            {this.props.screenState.screenStep === 4 && <OrderScreen/>}
         </div>);
     }
 }

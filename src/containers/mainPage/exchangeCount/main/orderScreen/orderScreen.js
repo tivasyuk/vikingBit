@@ -33,7 +33,7 @@ class OrderScreen extends React.Component {
                     <div>You will get your money after moderating.</div>
 
                     <div className="change__block-footer">
-                        <a className="btn" onClick={this.onClickReturnToStepOne}>Return to Main Page</a>
+                        <a className="btn" onClick={this.onClickReturnBack}>Return to Main Page</a>
                 </div>
 
                 </div>

@@ -1,5 +1,6 @@
 import {SET_ACTIVE_PAGE, SET_ADD_REVIEW_POPUP_STATE} from "./actions";
 import {PAGES} from "../../../constants/Constants";
+import { GET_CURRENCY_LIST_COMPLEATE } from "../exchange/types";
 
 const initialState = {
     activePage: PAGES.PAGE_MAIN,
@@ -17,6 +18,11 @@ const StateReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAddReviewPopupVisible: action.value
+            };
+        case GET_CURRENCY_LIST_COMPLEATE:
+            return {
+                ...state,
+                currencyList: action.data
             };
         default: {
             return state;

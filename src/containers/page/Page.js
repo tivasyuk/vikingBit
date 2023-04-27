@@ -19,7 +19,7 @@ import Policy from "../policyPage/Policy";
 import Rules from "../rulesPage/Rules";
 import {selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
 import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
-import {setActivePage} from "../../redux/modules/state/actions";
+import {getCurrencyList, setActivePage} from "../../redux/modules/state/actions";
 import Banner from "../banner/Banner";
 
 class Page extends React.Component {
@@ -38,7 +38,7 @@ class Page extends React.Component {
     }
 
     componentDidMount() {
-
+        this.props.onGetCurrencyList();
     }
 
     componentWillUnmount() {
@@ -89,6 +89,9 @@ export const mapDispatchToProps = (dispatch) => {
     return {
         setActivePage: (value) => {
             dispatch(setActivePage(value));
+        },
+        onGetCurrencyList: () => {
+            dispatch(getCurrencyList());
         },
     }
 };

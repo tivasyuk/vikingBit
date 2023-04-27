@@ -6,9 +6,9 @@ export const selectExchangeRate = createSelector(
     selectExchangeDomain,
     (exchangeDomain) => exchangeDomain.exchangeRate
 );
-export const selectExchangeValue = createSelector(
+export const selectExchangeValues = createSelector(
     selectExchangeDomain,
-    (exchangeDomain) => exchangeDomain.exchangeValue
+    (exchangeDomain) => exchangeDomain.exchangeValues
 );
 
 export const selectExchangeScreenState = createSelector(

@@ -10,3 +10,8 @@ export const selectAddReviewPopup = createSelector(
     selectStateDomain,
     (stateDomain) => stateDomain.isAddReviewPopupVisible
 );
+
+export const selectCurrencyList = createSelector(
+    selectStateDomain,
+    (stateDomain) => stateDomain.currencyList
+);
