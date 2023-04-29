@@ -13,14 +13,15 @@ import {
 import RegistrationPopup from "../registrationPopup/RegistrationPopup";
 import ForgotPasswordPopup from "../forgotPasswordPopup/ForgotPasswordPopup";
 import MainPage from "../mainPage/MainPage";
-import {PAGES} from "../../constants/Constants";
 import Cabinet from "../cabinetPage/Cabinet";
 import Policy from "../policyPage/Policy";
 import Rules from "../rulesPage/Rules";
 import {selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
 import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
-import {getCurrencyList, setActivePage} from "../../redux/modules/state/actions";
+import {getCurrencyList} from "../../redux/modules/state/actions";
 import Banner from "../banner/Banner";
+import { Route,  Routes  } from 'react-router-dom';
+import OrderScreen from '../mainPage/exchangeCount/main/orderScreen/orderScreen';
 
 class Page extends React.Component {
     constructor(props) {
@@ -46,32 +47,30 @@ class Page extends React.Component {
     }
 
     currentPage = () => {
-        switch (this.props.activePage){
-            case PAGES.PAGE_MAIN:
-                return <MainPage/>
-            case PAGES.PAGE_RULES:
-                return <Rules/>
-            case PAGES.PAGE_POLICY:
-                return <Policy/>
-            case PAGES.PAGE_CABINET:
-                return <Cabinet/>
-            default:
-                return <MainPage/>;
-        }
+        return(
+            <Routes>
+                <Route exact path="/" element={<MainPage/>}/>
+                <Route path="/terms" element={<Rules/>}/>
+                <Route path="/policy" element={<Policy/>}/>
+                <Route path="/order" element={<OrderScreen/>}/>
+                <Route element={<Cabinet/>}/>
+            </Routes>
+        )
     }
 
     render() {
-        return (<div className="page">
+        return (
+        <div className="page">
             <Header/>
             <Banner/>
             {this.currentPage()}
-            <Footer setActivePage={this.props.setActivePage}/>
-
+            <Footer/>
             {this.props.signInPopup && <SignInPopup/>}
             {this.props.registrationPopup && <RegistrationPopup/>}
             {this.props.forgotPasswordPopup && <ForgotPasswordPopup/>}
             {this.props.addReviewPopup && <AddReviewPopup/>}
-        </div>);
+        </div>
+        );
     }
 }
 
@@ -87,9 +86,6 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
     return {
-        setActivePage: (value) => {
-            dispatch(setActivePage(value));
-        },
         onGetCurrencyList: () => {
             dispatch(getCurrencyList());
         },

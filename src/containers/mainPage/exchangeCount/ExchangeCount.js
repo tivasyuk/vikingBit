@@ -8,7 +8,6 @@ import ExchangeToCash from "./stepExchange/ExchangeToCash";
 import ExchangeToCard from "./stepExchange/ExchangeToCard";
 import ExchangeToCrypto from "./stepExchange/ExchangeToCrypto";
 import { selectExchangeScreenState, selectOrderData } from '../../../redux/modules/exchange/selectors';
-import OrderScreen from './main/orderScreen/orderScreen'
 
 class ExchangeCount extends React.Component {
     constructor(props) {
@@ -26,7 +25,6 @@ class ExchangeCount extends React.Component {
             {this.props.screenState.screenStep >= 2 && this.props.screenState.screenStep < 4 && this.props.screenState.exchangeType === 'toCash' && <ExchangeToCash />}
             {this.props.screenState.screenStep >= 2 && this.props.screenState.screenStep < 4 && this.props.screenState.exchangeType === 'toCard' && <ExchangeToCard />}
             {this.props.screenState.screenStep >= 2 && this.props.screenState.screenStep < 4 && this.props.screenState.exchangeType === 'toCrypto' && <ExchangeToCrypto/>}
-            {this.props.screenState.screenStep === 4 && <OrderScreen/>}
         </div>);
     }
 }

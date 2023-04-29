@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 import './cabinet.scss';
 import {selectIsLoggedIn, selectUserData} from "../../redux/modules/login/selectors";
 import {setSignInData} from "../../redux/modules/login/actions";
-import {setActivePage} from "../../redux/modules/state/actions";
-import {PAGES} from "../../constants/Constants";
 
 class Cabinet extends React.Component {
     constructor(props) {
@@ -17,7 +15,7 @@ class Cabinet extends React.Component {
     }
 
     onClickLoggedOut = () => {
-        this.props.setActivePage(PAGES.PAGE_MAIN)
+        window.location.href = '/'
         this.props.setSignInData();
     }
 
@@ -73,9 +71,6 @@ export const mapDispatchToProps = (dispatch) => {
     return {
         setSignInData: () => {
             dispatch(setSignInData(false, '', ''));
-        },
-        setActivePage: (value) => {
-            dispatch(setActivePage(value));
         },
     }
 };

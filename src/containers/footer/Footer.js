@@ -3,7 +3,6 @@ import logo from "../../img/logo.png"
 import {Link} from "react-scroll";
 
 import './footer.scss';
-import {PAGES} from "../../constants/Constants";
 
 const Footer = (props) => {
     return (
@@ -11,15 +10,15 @@ const Footer = (props) => {
             <div className="container">
                 <div className="footer-main">
                     <div className="footer-logo">
-                        <a onClick={() => props.setActivePage(PAGES.PAGE_MAIN)}><img src={logo} alt="logo"/></a>
+                        <a href='/'><img src={logo} alt="logo"/></a>
                     </div>
                     <p className="copyright">Copyright © 2023 VikingBit. </p>
                 </div>
 
                 <div className="footerMenu">
                     <div className="footerMenuBlock">
-                        <a onClick={() => props.setActivePage(PAGES.PAGE_RULES)}>Terms of service</a>
-                        <a onClick={() => props.setActivePage(PAGES.PAGE_POLICY)}>Privacy policy</a>
+                        <a href='/terms'>Terms of service</a>
+                        <a href='/policy'>Privacy policy</a>
                     </div>
 
                     <div className="footerMenuBlock">

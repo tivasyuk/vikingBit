@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import './stepExchange.scss';
 import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/selectors";
 import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
@@ -16,7 +15,6 @@ class ExchangeCardToCrypto extends React.Component {
             wallet: '',
             walletNumbers: '',
             transactionID: Math.floor(Math.random() * 100000) + 1,
-            transactionDate: Date.now(),
             copyWalletWaiting: false,
             copySumWaiting: false,
             coupon: '',
@@ -42,25 +40,20 @@ class ExchangeCardToCrypto extends React.Component {
     }
 
     onClickAccept = () => {
-        const timestamp = Date.now();
-        this.setState({
-            transactionDate: timestamp
-        });
-
         //send all data
         this.props.onPutOrderExchangeData({
             transactionID: this.state.transactionID,
-            currency: `${this.props.exchangeValues.sendCurrency.name}/${this.props.exchangeValues.getCurrency.name}`,
-            fromSum: this.props.exchangeValues.sendAmount,
-            toSum: this.props.exchangeValues.getAmount,
+            fromSum: {value: this.props.exchangeValues.sendAmount, currency:this.props.exchangeValues.sendCurrency.name},
+            toSum: {value: this.props.exchangeValues.getAmount, currency: this.props.exchangeValues.getCurrency.name},
             coupon: this.state.coupon,
             network: this.state.network,
             wallet: this.state.walletNumbers,
             cardName: this.state.cardName,
             login: this.state.login,
-            timestamp: timestamp,
+            timestamp: Date.now(),
             status: 'pending'
         });
+        window.location.href = `http://localhost:3000/order?id=${this.state.transactionID}`;
     }
 
     updateLogin = (val) => {
