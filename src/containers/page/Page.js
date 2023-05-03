@@ -18,7 +18,7 @@ import Policy from "../policyPage/Policy";
 import Rules from "../rulesPage/Rules";
 import {isShowLoading, selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
 import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
-import {getCurrencyList} from "../../redux/modules/state/actions";
+import {getCurrencyList, getWalletsList} from "../../redux/modules/state/actions";
 import Banner from "../banner/Banner";
 import { Route,  Routes  } from 'react-router-dom';
 import OrderScreen from '../mainPage/exchangeCount/main/orderScreen/orderScreen';
@@ -41,6 +41,7 @@ class Page extends React.Component {
 
     componentDidMount() {
         this.props.onGetCurrencyList();
+        this.props.onGetWalletsList();
     }
 
     componentWillUnmount() {
@@ -92,6 +93,9 @@ export const mapDispatchToProps = (dispatch) => {
     return {
         onGetCurrencyList: () => {
             dispatch(getCurrencyList());
+        },
+        onGetWalletsList: () => {
+            dispatch(getWalletsList());
         },
     }
 };

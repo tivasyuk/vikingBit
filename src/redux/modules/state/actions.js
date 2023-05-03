@@ -1,5 +1,11 @@
 import axios from "axios";
-import { GET_CURRENCY_LIST_COMPLEATE, HIDE_LOADING, REQUEST_FAILURE, SHOW_LOADING } from "../exchange/types";
+import {
+    GET_CURRENCY_LIST_COMPLEATE,
+    GET_WALLETS_LIST_COMPLEATE,
+    HIDE_LOADING,
+    REQUEST_FAILURE,
+    SHOW_LOADING
+} from "../exchange/types";
 import { SERVER_URL } from "../../../constants/Constants";
 
 export const SET_ADD_REVIEW_POPUP_STATE = 'state/SET_ADD_REVIEW_POPUP_STATE';
@@ -23,8 +29,13 @@ export const requestFailure = data => ({
     data
 })
 
-export const getCurrencyListCompleate = data => ({
+export const getCurrencyListComplete = data => ({
     type: GET_CURRENCY_LIST_COMPLEATE,
+    data
+})
+
+export const getWalletsListComplete = data => ({
+    type: GET_WALLETS_LIST_COMPLEATE,
     data
 })
 
@@ -33,11 +44,23 @@ export const getCurrencyList = () => {
         dispatch(setLoadingAnimation())
         axios.get(`${SERVER_URL}/currencyList`)
         .then(responseData => {
-            dispatch(getCurrencyListCompleate(responseData.data));
+            dispatch(getCurrencyListComplete(responseData.data));
             dispatch(hideLoadingAnimation())
         })
         .catch(responseData => {
             dispatch(requestFailure(responseData.message));
         })
+    }
+}
+
+export const getWalletsList = () => {
+    return async dispatch => {
+        axios.get(`${SERVER_URL}/wallets`)
+            .then(responseData => {
+                dispatch(getWalletsListComplete(responseData.data));
+            })
+            .catch(responseData => {
+                dispatch(requestFailure(responseData.message));
+            })
     }
 }

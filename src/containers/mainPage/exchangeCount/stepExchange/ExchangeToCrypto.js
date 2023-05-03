@@ -5,6 +5,8 @@ import './stepExchange.scss';
 import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/selectors";
 import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
+import {selectWalletsList} from "../../../../redux/modules/state/selectors";
+import {CRYPTO_WALLETS} from "../../../../constants/Constants";
 
 class ExchangeToCrypto extends React.Component {
     constructor(props) {
@@ -95,7 +97,7 @@ class ExchangeToCrypto extends React.Component {
     }
 
     onClickCopyWallet = () => {
-        navigator.clipboard.writeText(this.props.getWallet)
+        navigator.clipboard.writeText(this.props.wallets && this.props.wallets[CRYPTO_WALLETS[this.props.exchangeValues.sendCurrency.type]])
             .then(() => {
                 this.setState({copyWalletWaiting: true});
                 setTimeout( () => {
@@ -210,7 +212,7 @@ class ExchangeToCrypto extends React.Component {
                             <label>Wallet to send</label>
                             <span>{this.props.exchangeValues.sendCurrency.name} wallet: </span>
                             <div className="withCopyBtn">
-                                <input value={this.props.getWallet} readOnly />
+                                <input value={this.props.wallets && this.props.wallets[CRYPTO_WALLETS[this.props.exchangeValues.sendCurrency.type]]} readOnly />
                                 {navigator.clipboard && <div className={`copyButton${this.state.copyWalletWaiting ? ' active' : ''}`} onClick={this.onClickCopyWallet}><span className="copyButtonIcon" /></div>}
                             </div>
                             <div className="withCopyBtn">
@@ -275,7 +277,7 @@ export const mapStateToProps = (state) => {
         isLoggedIn: selectIsLoggedIn(state),
         userData: selectUserData(state),
         exchangeValues: selectExchangeValues(state),
-        getWallet: "0x6465146532146863513146465", //TODO: getCorrectWallet
+        wallets: selectWalletsList(state),
         screenState: selectExchangeScreenState(state)
     }
 };

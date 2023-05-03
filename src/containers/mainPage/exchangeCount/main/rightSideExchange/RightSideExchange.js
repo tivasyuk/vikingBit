@@ -170,7 +170,7 @@ class RightSideExchange extends React.Component {
         let exchangeType = '';
         if (this.state.getExchangeData.type === 'fiat' && this.state.selectedFiatGetExchangeType.name === 'Cash') exchangeType = 'toCash'
         else if (this.state.sendExchangeData.type === 'fiat' && this.state.selectedFiatSendExchangeType.name === 'Cash') exchangeType = 'toCash'
-        else if (this.state.getExchangeData.type === 'fiat' && this.state.selectedFiatGetExchangeType.name === 'Visa/Mastercard') exchangeType = 'toCard'
+        else if (this.state.getExchangeData.type === 'fiat' && (this.state.selectedFiatGetExchangeType.name === 'Visa/Mastercard' || this.state.selectedFiatGetExchangeType.name === '')) exchangeType = 'toCard'
         else exchangeType = 'toCrypto';
         this.props.onScreenStateChange({screenStep: 2, exchangeType});
     }
