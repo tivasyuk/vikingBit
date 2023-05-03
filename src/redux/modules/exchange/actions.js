@@ -1,7 +1,7 @@
 import axios from "axios";
 import {SERVER_URL} from "../../../constants/Constants";
 import { GET_ORDER_DATA_COMPLEATE,  SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, SET_SCREEN_STATE } from "./types";
-import { requestFailure, setLoadingAnimation } from "../state/actions";
+import {hideLoadingAnimation, requestFailure, setLoadingAnimation} from "../state/actions";
 
 export const setExchangeRate = value => {
     return {
@@ -34,6 +34,7 @@ export const putOrderExchangeData = (data) => {
         axios.put(`${SERVER_URL}/orders`, data)
         .then(responseData => {
             dispatch(getOrderById(data.transactionID));
+            dispatch(hideLoadingAnimation())
         })
         .catch(responseData => {
             dispatch(requestFailure(responseData.message));
@@ -48,6 +49,7 @@ export const getOrderById = (transactionID) => {
         .then(responseData => {
             dispatch(getOrderDataCompleate(responseData.data));
             dispatch(setScreenState({screenStep: 4}))
+            dispatch(hideLoadingAnimation())
         })
         .catch(responseData => {
             dispatch(requestFailure(responseData.message));

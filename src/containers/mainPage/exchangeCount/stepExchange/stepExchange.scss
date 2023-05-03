@@ -185,41 +185,6 @@
   max-height: 80px;
 }
 
-.status {
-  background: #FFFFFF;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 7px;
-  padding: 5px 15px;
-
-  &.status-pending {
-    background: #ff006b;
-    color: #fff;
-    font-weight: 600;
-    position: relative;
-    padding-left: 40px;
-    &:before {
-      content: '';
-      box-sizing: border-box;
-      position: absolute;
-      top: 50%;
-      left: 20px;
-      width: 20px;
-      height: 20px;
-      margin-top: -10px;
-      margin-left: -10px;
-      border-radius: 50%;
-      border: 3px solid rgba(0, 0, 0, 0.1);
-      border-top-color: #fff;
-      animation: spinner .6s linear infinite;
-    }
-  }
-  &.status-success {
-
-  }
-  &.status-failure {
-
-  }
-}
 select {
   &:focus-visible {
     outline: none;

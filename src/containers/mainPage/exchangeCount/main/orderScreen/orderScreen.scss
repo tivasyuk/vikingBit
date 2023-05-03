@@ -5,3 +5,56 @@
       padding-right: 15px;
     }
 }
+
+.status {
+  background: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  padding: 5px 15px 5px 40px;
+  font-weight: 600;
+  position: relative;
+  &:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+  }
+
+  &.status-pending {
+    background: #ffedb5;
+    color: #665e48;
+    //background: #ff006b;
+    //color: #fff;
+    &:before {
+      border-radius: 50%;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-top-color: #665e48;
+      //border-top-color: #fff;
+      animation: spinner .6s linear infinite;
+    }
+  }
+  &.status-confirm {
+    background: #d5ecdb;
+    color: #316f41;
+
+    &:before {
+      background: transparent url(../../../../../img/success.png) center no-repeat;
+      background-size: contain;
+    }
+  }
+  &.status-reject {
+    //color: #636363;
+    //background-color: #f0f0f0;
+    background-color: #fcd3d2;
+    color: #811211;
+    &:before {
+      background: transparent url(../../../../../img/failure.png) center no-repeat;
+      background-size: contain;
+    }
+  }
+}
