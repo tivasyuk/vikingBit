@@ -139,11 +139,11 @@ class RightSideExchange extends React.Component {
     }
 
     onClickSendExchangeList = () => {
-        this.setState({ showSendExchangeList: !this.state.showSendExchangeList, showGetExchangeList: false });
+        this.setState({ showSendExchangeList: !this.state.showSendExchangeList, showGetExchangeList: false, showFiatSendExchangeTypeList: false, showFiatGetExchangeTypeList: false });
     }
 
     onClickGetExchangeList = () => {
-        this.setState({ showGetExchangeList: !this.state.showGetExchangeList, showSendExchangeList: false });
+        this.setState({ showGetExchangeList: !this.state.showGetExchangeList, showSendExchangeList: false, showFiatSendExchangeTypeList: false, showFiatGetExchangeTypeList: false });
     }
 
     onShowFiatSendExchangeTypeList = () => {

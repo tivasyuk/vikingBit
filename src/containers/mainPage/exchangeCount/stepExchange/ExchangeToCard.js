@@ -20,7 +20,9 @@ class ExchangeCardToCrypto extends React.Component {
             copyWalletWaiting: false,
             copySumWaiting: false,
             coupon: '',
-            network: ''
+            network: '',
+            paymentProof: '',
+            screenshot: '',
         }
     }
 
@@ -48,6 +50,7 @@ class ExchangeCardToCrypto extends React.Component {
             fromSum: {value: this.props.exchangeValues.sendAmount, currency:this.props.exchangeValues.sendCurrency.name},
             toSum: {value: this.props.exchangeValues.getAmount, currency: this.props.exchangeValues.getCurrency.name},
             coupon: this.state.coupon,
+            paymentProof: this.state.paymentProof,
             network: this.state.network,
             wallet: this.state.walletNumbers,
             cardName: this.state.cardName,
@@ -81,6 +84,10 @@ class ExchangeCardToCrypto extends React.Component {
         this.setState({cardName: val})
     }
 
+    updatePaymentProof = (val) => {
+        this.setState({paymentProof: val})
+    }
+
     onClickCopyWallet = () => {
         navigator.clipboard.writeText(this.props.wallets && this.props.wallets[CRYPTO_WALLETS[this.props.exchangeValues.sendCurrency.type]])
             .then(() => {
@@ -92,9 +99,8 @@ class ExchangeCardToCrypto extends React.Component {
             .catch(err => {
                 console.log('Something went wrong', err);
             });
-
-
     }
+
     onClickCopySum = () => {
         navigator.clipboard.writeText(this.props.exchangeValues.sendAmount)
             .then(() => {
@@ -106,7 +112,9 @@ class ExchangeCardToCrypto extends React.Component {
             .catch(err => {
                 console.log('Something went wrong', err);
             });
+    }
 
+    handleAddImage = () => {
 
     }
 
@@ -205,6 +213,36 @@ class ExchangeCardToCrypto extends React.Component {
                             <span className="cardWallet">{this.state.wallet}</span>
                             <span className="cardName">{this.state.cardName}</span>
                         </div>
+                    </div>
+                </div>
+
+                <div className="paymentProofField">
+                    <div className="form-group">
+                        {
+                            this.props.exchangeValues.sendCurrency.type === 'fiat' &&
+                            <div className="col-md-6 ff-removable">
+                                <span>Attach your screenshot of payment: </span>
+                                <input
+                                    type='file'
+                                    placeholder='Screenshot'
+                                    onChange={this.handleAddImage}
+                                    value={this.state.screenshot}
+                                />
+                            </div>
+                        }
+
+                        {
+                            this.props.exchangeValues.sendCurrency.type === 'crypto' &&
+                            <div className="col-md-6 ff-removable">
+                                <span>Add your payment hash: </span>
+                                <input className="f-input"
+                                       placeholder='Payment hash'
+                                       onChange={e => { this.updatePaymentProof(e.target.value) }}
+                                       value={this.state.paymentProof}
+                                       autoComplete="off"
+                                />
+                            </div>
+                        }
                     </div>
                 </div>
 

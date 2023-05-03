@@ -26,15 +26,12 @@
   }
 
   &.status-pending {
-    background: #ffedb5;
-    color: #665e48;
-    //background: #ff006b;
-    //color: #fff;
+    background: #ff006b;
+    color: #fff;
     &:before {
       border-radius: 50%;
       border: 3px solid rgba(0, 0, 0, 0.1);
-      border-top-color: #665e48;
-      //border-top-color: #fff;
+      border-top-color: #fff;
       animation: spinner .6s linear infinite;
     }
   }
@@ -48,8 +45,6 @@
     }
   }
   &.status-reject {
-    //color: #636363;
-    //background-color: #f0f0f0;
     background-color: #fcd3d2;
     color: #811211;
     &:before {

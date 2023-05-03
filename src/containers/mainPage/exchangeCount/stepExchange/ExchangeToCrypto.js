@@ -23,6 +23,7 @@ class ExchangeToCrypto extends React.Component {
             coupon: '',
             network: 'ERC-20',
             paymentProof: '',
+            screenshot: '',
         }
     }
 
@@ -107,9 +108,8 @@ class ExchangeToCrypto extends React.Component {
             .catch(err => {
                 console.log('Something went wrong', err);
             });
-
-
     }
+
     onClickCopySum = () => {
         navigator.clipboard.writeText(this.props.exchangeValues.sendAmount)
             .then(() => {
@@ -121,7 +121,9 @@ class ExchangeToCrypto extends React.Component {
             .catch(err => {
                 console.log('Something went wrong', err);
             });
+    }
 
+    handleAddImage = () => {
 
     }
 
@@ -234,12 +236,18 @@ class ExchangeToCrypto extends React.Component {
 
                 <div className="paymentProofField">
                     <div className="form-group">
-                        {/*{*/}
-                        {/*    this.props.exchangeValues.sendCurrency.type === 'fiat' &&*/}
-                        {/*    <div className="paymentProof">*/}
-                        {/*        <span>Attach your screenshot of payment: </span>*/}
-                        {/*    </div>*/}
-                        {/*}*/}
+                        {
+                            this.props.exchangeValues.sendCurrency.type === 'fiat' &&
+                            <div className="col-md-6 ff-removable">
+                                <span>Attach your screenshot of payment: </span>
+                                <input
+                                    type='file'
+                                    placeholder='Screenshot'
+                                    onChange={this.handleAddImage}
+                                    value={this.state.screenshot}
+                                />
+                            </div>
+                        }
 
                         {
                             this.props.exchangeValues.sendCurrency.type === 'crypto' &&
