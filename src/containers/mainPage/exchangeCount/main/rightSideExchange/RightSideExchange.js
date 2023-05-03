@@ -20,8 +20,8 @@ class RightSideExchange extends React.Component {
             showGetExchangeList: false,
             showFiatSendExchangeTypeList: false,
             showFiatGetExchangeTypeList: false,
-            enterSendAmount: '',
-            enterGetAmount: '',
+            enterSendAmount: props.exchangeValues.sendAmount || '',
+            enterGetAmount: props.exchangeValues.getAmount || '',
             selectedFiatSendExchangeType: {
                 name:'',
                 img: ''
@@ -30,11 +30,11 @@ class RightSideExchange extends React.Component {
                 name:'',
                 img: ''
             },
-            sendExchangeData: {
+            sendExchangeData: props.exchangeValues.sendCurrency || {
                 name: '',
                 img: ''
             },
-            getExchangeData: {
+            getExchangeData: props.exchangeValues.getCurrency || {
                 name: '',
                 img: ''
             }
@@ -55,12 +55,18 @@ class RightSideExchange extends React.Component {
                 this.setState({ enterGetAmount: this.props.exchangeValues.getAmount })
             }
         }
-        // if (this.props.currencyList !== prevProps.currencyList && this.props.currencyList) {
-        //     this.setState({
-        //         sendExchangeData: this.props.currencyList['BTC'],
-        //         getExchangeData: this.props.currencyList['USDT']
-        //     })
-        // }
+        if (this.props.currencyList) {
+            if (this.state.sendExchangeData.name === '') {
+                this.setState({
+                    sendExchangeData: this.props.exchangeValues.sendCurrency || this.props.currencyList['BTC'],
+                })
+            }
+            if (this.state.getExchangeData.name === '') {
+                this.setState({
+                    getExchangeData: this.props.exchangeValues.getCurrency || this.props.currencyList['USDT']
+                })
+            }
+        }
     }
 
     addExchangeListData = (currencyList, type) => {

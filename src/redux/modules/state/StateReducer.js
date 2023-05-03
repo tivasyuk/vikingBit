@@ -1,8 +1,9 @@
 import { SET_ADD_REVIEW_POPUP_STATE} from "./actions";
-import { GET_CURRENCY_LIST_COMPLEATE } from "../exchange/types";
+import {GET_CURRENCY_LIST_COMPLEATE, HIDE_LOADING, SHOW_LOADING} from "../exchange/types";
 
 const initialState = {
-    isAddReviewPopupVisible: false
+    isAddReviewPopupVisible: false,
+    loading: true
 }
 
 const StateReducer = (state = initialState, action) => {
@@ -16,6 +17,16 @@ const StateReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currencyList: action.data
+            };
+        case SHOW_LOADING:
+            return {
+                ...state,
+                loading: true
+            };
+        case HIDE_LOADING:
+            return {
+                ...state,
+                loading: false
             };
         default: {
             return state;

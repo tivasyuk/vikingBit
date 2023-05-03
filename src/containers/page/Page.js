@@ -16,12 +16,13 @@ import MainPage from "../mainPage/MainPage";
 import Cabinet from "../cabinetPage/Cabinet";
 import Policy from "../policyPage/Policy";
 import Rules from "../rulesPage/Rules";
-import {selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
+import {isShowLoading, selectActivePage, selectAddReviewPopup} from "../../redux/modules/state/selectors";
 import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
 import {getCurrencyList} from "../../redux/modules/state/actions";
 import Banner from "../banner/Banner";
 import { Route,  Routes  } from 'react-router-dom';
 import OrderScreen from '../mainPage/exchangeCount/main/orderScreen/orderScreen';
+import Preloader from "../preloader/Preloader";
 
 class Page extends React.Component {
     constructor(props) {
@@ -69,6 +70,8 @@ class Page extends React.Component {
             {this.props.registrationPopup && <RegistrationPopup/>}
             {this.props.forgotPasswordPopup && <ForgotPasswordPopup/>}
             {this.props.addReviewPopup && <AddReviewPopup/>}
+
+            {this.props.loading && <Preloader/>}
         </div>
         );
     }
@@ -81,6 +84,7 @@ export const mapStateToProps = (state) => {
         forgotPasswordPopup: selectForgotPasswordPopup(state),
         addReviewPopup: selectAddReviewPopup(state),
         activePage: selectActivePage(state),
+        loading: isShowLoading(state),
     }
 };
 

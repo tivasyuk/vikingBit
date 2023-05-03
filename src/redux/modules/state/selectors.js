@@ -15,3 +15,8 @@ export const selectCurrencyList = createSelector(
     selectStateDomain,
     (stateDomain) => stateDomain.currencyList
 );
+
+export const isShowLoading = createSelector(
+    selectStateDomain,
+    (stateDomain) => stateDomain.loading
+);
