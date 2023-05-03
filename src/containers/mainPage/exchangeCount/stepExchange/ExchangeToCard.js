@@ -22,7 +22,7 @@ class ExchangeCardToCrypto extends React.Component {
             coupon: '',
             network: '',
             paymentProof: '',
-            screenshot: '',
+            screenshot: null,
         }
     }
 
@@ -51,6 +51,7 @@ class ExchangeCardToCrypto extends React.Component {
             toSum: {value: this.props.exchangeValues.getAmount, currency: this.props.exchangeValues.getCurrency.name},
             coupon: this.state.coupon,
             paymentProof: this.state.paymentProof,
+            screenshot: this.state.screenshot,
             network: this.state.network,
             wallet: this.state.walletNumbers,
             cardName: this.state.cardName,
@@ -114,8 +115,11 @@ class ExchangeCardToCrypto extends React.Component {
             });
     }
 
-    handleAddImage = () => {
-
+    handleAddImage = (e) => {
+        if (e.target.files[0]) {
+            console.log(e.target.files[0], 'console of side image')
+            this.setState({screenshot: e.target.files[0]})
+        }
     }
 
     render() {
@@ -225,8 +229,8 @@ class ExchangeCardToCrypto extends React.Component {
                                 <input
                                     type='file'
                                     placeholder='Screenshot'
-                                    onChange={this.handleAddImage}
-                                    value={this.state.screenshot}
+                                    onChange={(e) => this.handleAddImage(e)}
+                                    // value={this.state.screenshot}
                                 />
                             </div>
                         }
