@@ -63,6 +63,12 @@
           align-items: center;
           position: relative;
 
+          &.prefer-cash-valute {
+            width: 100%;
+            border-radius: 10px;
+            background-position-x: 459px;
+          }
+
           &:hover {
             cursor: pointer;
           }
@@ -261,6 +267,9 @@
         .main-exchange-inputs {
           .main-exchange-valute {
             background: #fff url(../../../../../img/arrow-down.svg) 190px center no-repeat;
+            &.prefer-cash-valute {
+              background-position-x: 386px;
+            }
           }
         }
       }
@@ -315,84 +324,79 @@
 
       .main-exchange {
         margin-bottom: 15px;
-      }
 
-      .main-exchange h3 {
-        margin: 0 0 5px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        font-size: 14px;
-        font-weight: 600;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-      }
+        h3 {
+          margin: 0 0 5px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          font-size: 14px;
+          font-weight: 600;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
 
-      .main-exchange h3 span {
-        display: block;
-        font-size: 10px;
-        font-weight: 400;
-      }
+          span {
+            display: block;
+            font-size: 10px;
+            font-weight: 400;
+          }
+          strong {
+            font-weight: 600;
+          }
+        }
 
-      .main-exchange h3 strong {
-        font-weight: 600;
-      }
+        .main-exchange-inputs {
+          .main-exchange-input {
+            width: 50%;
+            input {
+              height: 40px;
+              padding: 10px 40px 10px 10px;
+              font-size: 12px;
+              line-height: 16px;
+            }
+            span {
+              font-size: 12px;
+              line-height: 1.4;
+              top: 11px;
+            }
+          }
 
-      .main-exchange-input {
-        width: 50%;
-      }
+          .main-exchange-valute {
+            width: 50%;
+            height: 40px;
+            padding: 10px 30px 10px 10px;
+            background: #fff url(../../../../../img/arrow-down.svg) 90% center no-repeat;
+            &.prefer-cash-valute {
+              background-position-x: 95%;
+            }
 
-      .main-exchange-input input {
-        height: 40px;
-        padding: 10px 40px 10px 10px;
-        font-size: 12px;
-        line-height: 16px;
-      }
-
-      .main-exchange-input span {
-        font-size: 12px;
-        line-height: 1.4;
-        top: 11px;
-      }
-
-      .main-exchange-valute {
-        width: 50%;
-        height: 40px;
-        padding: 10px 30px 10px 10px;
-        background: #fff url(../../../../../img/arrow-down.svg) 90% center no-repeat;
-      }
-
-      .main-exchange-valute img {
-        width: 20px;
-      }
-
-      .main-exchange-valute span {
-        font-size: 12px;
+            img {
+              width: 20px;
+            }
+            span {
+              font-size: 12px;
+            }
+          }
+        }
       }
 
       .main-exchange-bottom-info .col {
         font-size: 10px;
+        &.min-summa {
+          display: none;
+        }
+        &.course {
+          width: 50%;
+          margin: 0;
+        }
+        .col-wrap {
+          padding: 5px 3px;
+        }
       }
-
-      .main-exchange-bottom-info .col.min-summa {
-        display: none;
-      }
-
-      .main-exchange-bottom-info .col.course {
-        width: 50%;
-        margin: 0;
-      }
-
-      .main-exchange-bottom-info .col .col-wrap {
-        padding: 5px 3px;
-      }
-
-
-
 
       /*.main-exchange-valute-search {
         width: calc(100% - 30px);
@@ -409,14 +413,14 @@
 
       .main-exchange-list-top {
         overflow: auto;
+        a {
+          padding: 6px 9px;
+          font-size: 8px;
+          line-height: 10px;
+          white-space: nowrap;
+        }
       }
 
-      .main-exchange-list-top a {
-        padding: 6px 9px;
-        font-size: 8px;
-        line-height: 10px;
-        white-space: nowrap;
-      }
     }
   }
 }

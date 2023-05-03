@@ -18,17 +18,21 @@ class RightSideExchange extends React.Component {
             checkAgree: false,
             showSendExchangeList: false,
             showGetExchangeList: false,
-            showFiatExchangeTypeList: false,
+            showFiatSendExchangeTypeList: false,
+            showFiatGetExchangeTypeList: false,
             enterSendAmount: '',
             enterGetAmount: '',
-            selectedFiatExchangeType: {
+            selectedFiatSendExchangeType: {
+                name:'',
+                img: ''
+            },
+            selectedFiatGetExchangeType: {
                 name:'',
                 img: ''
             },
             sendExchangeData: {
                 name: '',
                 img: ''
-                
             },
             getExchangeData: {
                 name: '',
@@ -51,6 +55,12 @@ class RightSideExchange extends React.Component {
                 this.setState({ enterGetAmount: this.props.exchangeValues.getAmount })
             }
         }
+        // if (this.props.currencyList !== prevProps.currencyList && this.props.currencyList) {
+        //     this.setState({
+        //         sendExchangeData: this.props.currencyList['BTC'],
+        //         getExchangeData: this.props.currencyList['USDT']
+        //     })
+        // }
     }
 
     addExchangeListData = (currencyList, type) => {
@@ -74,7 +84,7 @@ class RightSideExchange extends React.Component {
         </div>;
     }
 
-    addFiatExchangeTypesListData = () => {
+    addFiatExchangeTypesListData = (type) => {
         const fiatTypes = [
             {
                 name: 'Cash',
@@ -86,7 +96,7 @@ class RightSideExchange extends React.Component {
             }
         ]
         const itemsArray = fiatTypes.map((item, index) => {
-            return <div className="item currency__item psItem" key={item.name + index} onClick={() => { this.onSelectedFiatExchangeType(item) }}>
+            return <div className="item currency__item psItem" key={item.name + index} onClick={() => { type === 'send'? this.onSelectedSendFiatExchangeType(item) : this.onSelectedGetFiatExchangeType(item) }}>
                 <div className="item-img">
                     <img alt={item.name} src={item.img} />
                 </div>
@@ -105,8 +115,11 @@ class RightSideExchange extends React.Component {
         exchangeConverter(this.state.getExchangeData, item, this.state.enterSendAmount, "from")
     }
 
-    onSelectedFiatExchangeType = (type) => {
-        this.setState({selectedFiatExchangeType: type, showFiatExchangeTypeList: false})
+    onSelectedSendFiatExchangeType = (type) => {
+        this.setState({selectedFiatSendExchangeType: type, showFiatSendExchangeTypeList: false})
+    }
+    onSelectedGetFiatExchangeType = (type) => {
+        this.setState({selectedFiatGetExchangeType: type, showFiatGetExchangeTypeList: false})
     }
 
     onClickGetExchangeSelect = (item) => {
@@ -127,8 +140,13 @@ class RightSideExchange extends React.Component {
         this.setState({ showGetExchangeList: !this.state.showGetExchangeList, showSendExchangeList: false });
     }
 
-    onShowFiatExchangeTypeList = () => {
-        this.setState({ showFiatExchangeTypeList: !this.state.showGetExchangeList, showSendExchangeList: false,  showGetExchangeList: false});
+    onShowFiatSendExchangeTypeList = () => {
+        this.setState({ showFiatSendExchangeTypeList: !this.state.showFiatSendExchangeTypeList,
+            showSendExchangeList: false, showGetExchangeList: false, showFiatGetExchangeTypeList: false});
+    }
+    onShowFiatGetExchangeTypeList = () => {
+        this.setState({ showFiatGetExchangeTypeList: !this.state.showFiatGetExchangeTypeList,
+            showSendExchangeList: false, showGetExchangeList: false, showFiatSendExchangeTypeList: false});
     }
 
     updateSendAmount = (val) => {
@@ -142,10 +160,11 @@ class RightSideExchange extends React.Component {
     }
 
     onClickExchange = () => {
-        if (!this.state.checkAgree) return;
+        if (!this.state.checkAgree || this.state.enterGetAmount < this.state.getExchangeData.minExchange) return;
         let exchangeType = '';
-        if (this.state.getExchangeData.type === 'fiat' && this.state.selectedFiatExchangeType.name === 'Cash') exchangeType = 'toCash'
-        else if (this.state.getExchangeData.type === 'fiat' && this.state.selectedFiatExchangeType.name === 'Visa/Mastercard') exchangeType = 'toCard'
+        if (this.state.getExchangeData.type === 'fiat' && this.state.selectedFiatGetExchangeType.name === 'Cash') exchangeType = 'toCash'
+        else if (this.state.sendExchangeData.type === 'fiat' && this.state.selectedFiatSendExchangeType.name === 'Cash') exchangeType = 'toCash'
+        else if (this.state.getExchangeData.type === 'fiat' && this.state.selectedFiatGetExchangeType.name === 'Visa/Mastercard') exchangeType = 'toCard'
         else exchangeType = 'toCrypto';
         this.props.onScreenStateChange({screenStep: 2, exchangeType});
     }
@@ -203,20 +222,41 @@ class RightSideExchange extends React.Component {
                     </div>
                 </div>
 
-                {(this.state.getExchangeData.type === 'fiat' || this.state.sendExchangeData.type === 'fiat') && <div className="main-exchange">
-                    <h3>Select prefeared exchenge type</h3>
-                    <div className="main-exchange-inputs exch-val-cont">
-                        <div className="main-exchange-valute get-valute" onClick={this.onShowFiatExchangeTypeList}>
-                            <div className="main-exchange-valute-wrapper">
-                                <img alt={this.state.selectedFiatExchangeType.name} src={this.state.selectedFiatExchangeType.img} />
-                                <span>{this.state.selectedFiatExchangeType.name}</span>
+                {
+                    this.state.sendExchangeData.type === 'fiat' &&
+                    <div className="main-exchange">
+                        <h3>Select preferred send exchange type</h3>
+                        <div className="main-exchange-inputs exch-val-cont">
+                            <div className="main-exchange-valute prefer-cash-valute" onClick={this.onShowFiatSendExchangeTypeList}>
+                                <div className="main-exchange-valute-wrapper">
+                                    <img alt={this.state.selectedFiatSendExchangeType.name} src={this.state.selectedFiatSendExchangeType.img} />
+                                    <span>{this.state.selectedFiatSendExchangeType.name}</span>
+                                </div>
+                            </div>
+                            <div className={`main-exchange-list${this.state.showFiatSendExchangeTypeList ? ' visible' : ''}`}>
+                                {this.addFiatExchangeTypesListData('send')}
                             </div>
                         </div>
-                        <div className={`main-exchange-list${this.state.showFiatExchangeTypeList ? ' visible' : ''}`}>
-                            {this.addFiatExchangeTypesListData()}
+                    </div>
+                }
+
+                {
+                    this.state.getExchangeData.type === 'fiat' &&
+                    <div className="main-exchange">
+                        <h3>Select preferred get exchange type</h3>
+                        <div className="main-exchange-inputs exch-val-cont">
+                            <div className="main-exchange-valute prefer-cash-valute" onClick={this.onShowFiatGetExchangeTypeList}>
+                                <div className="main-exchange-valute-wrapper">
+                                    <img alt={this.state.selectedFiatGetExchangeType.name} src={this.state.selectedFiatGetExchangeType.img} />
+                                    <span>{this.state.selectedFiatGetExchangeType.name}</span>
+                                </div>
+                            </div>
+                            <div className={`main-exchange-list${this.state.showFiatGetExchangeTypeList ? ' visible' : ''}`}>
+                                {this.addFiatExchangeTypesListData('get')}
+                            </div>
                         </div>
                     </div>
-                </div>}
+                }
 
                 {this.state.getExchangeData.name && this.state.sendExchangeData.name && <div className="main-exchange-bottom-info">
                     <div className="col min-summa">
@@ -240,7 +280,8 @@ class RightSideExchange extends React.Component {
                 </div>}
 
                 {
-                    this.state.selectedFiatExchangeType.name === 'Cash' &&
+                    (this.state.selectedFiatSendExchangeType.name === 'Cash' ||
+                    this.state.selectedFiatGetExchangeType.name === 'Cash') &&
                     <div className="main-exchange-bottom-info">
                         <div className="col cashInfo">
                             <div className="col-wrap">
@@ -258,7 +299,7 @@ class RightSideExchange extends React.Component {
                         isChecked={this.state.checkAgree}
                         onClickHandler={this.onAgreeCheckboxClick}
                     />
-                    <a className={`btn${(!this.state.checkAgree || this.state.enterSendAmount < this.state.getExchangeData.minExchange) ? ' disable' : ''}`} id="showProps" onClick={this.onClickExchange}>Exchange</a>
+                    <a className={`btn${(!this.state.checkAgree || this.state.enterGetAmount < this.state.getExchangeData.minExchange) ? ' disable' : ''}`} id="showProps" onClick={this.onClickExchange}>Exchange</a>
                 </div>
             </div>}
         </div>);

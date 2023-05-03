@@ -20,6 +20,7 @@ class ExchangeToCrypto extends React.Component {
             copySumWaiting: false,
             coupon: '',
             network: 'ERC-20',
+            paymentProof: '',
         }
     }
 
@@ -47,6 +48,7 @@ class ExchangeToCrypto extends React.Component {
             fromSum: {value: this.props.exchangeValues.sendAmount, currency:this.props.exchangeValues.sendCurrency.name},
             toSum: {value: this.props.exchangeValues.getAmount, currency: this.props.exchangeValues.getCurrency.name},
             coupon: this.state.coupon,
+            paymentProof: this.state.paymentProof,
             network: this.state.network,
             wallet: this.state.walletNumbers,
             cardName: this.state.cardName,
@@ -86,6 +88,10 @@ class ExchangeToCrypto extends React.Component {
 
     updateCardName = (val) => {
         this.setState({cardName: val})
+    }
+
+    updatePaymentProof = (val) => {
+        this.setState({paymentProof: val})
     }
 
     onClickCopyWallet = () => {
@@ -202,7 +208,7 @@ class ExchangeToCrypto extends React.Component {
                     <div className="col-md-6 ff-removable">
                         <div className="form-group send">
                             <label>Wallet to send</label>
-                            <span>{this.props.exchangeValues.sendCurrency.name} wallet: </span> {/*TODO: show correct name*/}
+                            <span>{this.props.exchangeValues.sendCurrency.name} wallet: </span>
                             <div className="withCopyBtn">
                                 <input value={this.props.getWallet} readOnly />
                                 {navigator.clipboard && <div className={`copyButton${this.state.copyWalletWaiting ? ' active' : ''}`} onClick={this.onClickCopyWallet}><span className="copyButtonIcon" /></div>}
@@ -221,6 +227,30 @@ class ExchangeToCrypto extends React.Component {
                             {/*        <p><span>Coupon: </span>{this.state.coupon || '-'}</p>*/}
                             <span className="cardWallet">{this.state.wallet}</span>
                         </div>
+                    </div>
+                </div>
+
+                <div className="paymentProofField">
+                    <div className="form-group">
+                        {/*{*/}
+                        {/*    this.props.exchangeValues.sendCurrency.type === 'fiat' &&*/}
+                        {/*    <div className="paymentProof">*/}
+                        {/*        <span>Attach your screenshot of payment: </span>*/}
+                        {/*    </div>*/}
+                        {/*}*/}
+
+                        {
+                            this.props.exchangeValues.sendCurrency.type === 'crypto' &&
+                            <div className="col-md-6 ff-removable">
+                                <span>Add your payment hash: </span>
+                                <input className="f-input"
+                                       placeholder='Payment hash'
+                                       onChange={e => { this.updatePaymentProof(e.target.value) }}
+                                       value={this.state.paymentProof}
+                                       autoComplete="off"
+                                />
+                            </div>
+                        }
                     </div>
                 </div>
 
