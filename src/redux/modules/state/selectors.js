@@ -16,9 +16,9 @@ export const selectCurrencyList = createSelector(
     (stateDomain) => stateDomain.currencyList
 );
 
-export const selectWalletsList = createSelector(
+export const selectAppConfig = createSelector(
     selectStateDomain,
-    (stateDomain) => stateDomain.walletsList
+    (stateDomain) => stateDomain.appConfig
 );
 
 export const isShowLoading = createSelector(
