@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
     GET_CURRENCY_LIST_COMPLEATE,
-    GET_WALLETS_LIST_COMPLEATE,
+    GET_APP_CONFIG_COMPLEATE,
     HIDE_LOADING,
     REQUEST_FAILURE,
     SHOW_LOADING
@@ -34,8 +34,8 @@ export const getCurrencyListComplete = data => ({
     data
 })
 
-export const getWalletsListComplete = data => ({
-    type: GET_WALLETS_LIST_COMPLEATE,
+export const getAppConfigComplete = data => ({
+    type: GET_APP_CONFIG_COMPLEATE,
     data
 })
 
@@ -53,11 +53,11 @@ export const getCurrencyList = () => {
     }
 }
 
-export const getWalletsList = () => {
+export const getAppConfig = () => {
     return async dispatch => {
-        axios.get(`${SERVER_URL}/wallets`)
+        axios.get(`${SERVER_URL}/appConfig`)
             .then(responseData => {
-                dispatch(getWalletsListComplete(responseData.data));
+                dispatch(getAppConfigComplete(responseData.data));
             })
             .catch(responseData => {
                 dispatch(requestFailure(responseData.message));

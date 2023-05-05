@@ -5,7 +5,7 @@ import './stepExchange.scss';
 import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/selectors";
 import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
-import {selectWalletsList} from "../../../../redux/modules/state/selectors";
+import {selectAppConfig} from "../../../../redux/modules/state/selectors";
 import {CRYPTO_WALLETS} from "../../../../constants/Constants";
 
 class ExchangeToCrypto extends React.Component {
@@ -164,8 +164,8 @@ class ExchangeToCrypto extends React.Component {
                                         onChange={this.updateNetwork}
                                 >
                                     <option key={'ERC-20'} value={'ERC-20'}>ERC-20</option>
-                                    <option key={'TRC-20'} value={'TRC-20'}>TRC-20</option>
                                     <option key={'BEP-20'} value={'BEP-20'}>BEP-20</option>
+                                    <option key={'ERC-2'} value={'ERC-2'}>ERC-2</option>
                                 </select>
                             </div>
                         </div>
@@ -289,7 +289,7 @@ export const mapStateToProps = (state) => {
         isLoggedIn: selectIsLoggedIn(state),
         userData: selectUserData(state),
         exchangeValues: selectExchangeValues(state),
-        wallets: selectWalletsList(state),
+        wallets: selectAppConfig(state),
         screenState: selectExchangeScreenState(state)
     }
 };

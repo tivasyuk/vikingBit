@@ -5,7 +5,7 @@ import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/
 import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
 import {CRYPTO_WALLETS} from "../../../../constants/Constants";
-import {selectWalletsList} from "../../../../redux/modules/state/selectors";
+import {selectAppConfig} from "../../../../redux/modules/state/selectors";
 
 class ExchangeCardToCrypto extends React.Component {
     constructor(props) {
@@ -117,7 +117,7 @@ class ExchangeCardToCrypto extends React.Component {
 
     handleAddImage = (e) => {
         if (e.target.files[0]) {
-            console.log(e.target.files[0], 'console of side image')
+            console.log(e.target.files[0]);
             this.setState({screenshot: e.target.files[0]})
         }
     }
@@ -271,7 +271,7 @@ export const mapStateToProps = (state) => {
         isLoggedIn: selectIsLoggedIn(state),
         userData: selectUserData(state),
         exchangeValues: selectExchangeValues(state),
-        wallets: selectWalletsList(state),
+        wallets: selectAppConfig(state),
         screenState: selectExchangeScreenState(state)
     }
 };
