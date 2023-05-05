@@ -31,56 +31,6 @@ const Banner = (props) => {
     }, []);
 
     useEffect(() => {
-        document.addEventListener('mousedown', onMouseDown);
-        document.addEventListener('mouseup', onMouseUp);
-        document.addEventListener('mousemove', onMouseMove);
-
-        return () => {
-            document.removeEventListener('mousedown', onMouseDown);
-            document.removeEventListener('mouseup', onMouseUp);
-            document.removeEventListener('mousemove', onMouseMove);
-        }
-    }, [])
-
-    const onMouseMove = e => {
-        if (ref && ref.current && !ref.current.contains(e.target)) return;
-        e.preventDefault();
-
-        const {clientX, scrollX, isScrolling} = state;
-
-        if (isScrolling) {
-            ref.current.scrollLeft = scrollX + e.clientX - clientX;
-
-            setState({
-                ...state,
-                scrollX: scrollX + e.clientX - clientX,
-                clientX: e.clientX
-            })
-        }
-    }
-
-    const onMouseDown = e => {
-        if (ref && ref.current && !ref.current.contains(e.target)) return;
-        e.preventDefault();
-
-        setState({
-            ...state,
-            isScrolling: true,
-            clientX: e.clientX
-        })
-    }
-
-    const onMouseUp = e => {
-        if (ref && ref.current && !ref.current.contains(e.target)) return;
-        e.preventDefault();
-
-        setState({
-            ...state,
-            isScrolling: false,
-        })
-    }
-
-    useEffect(() => {
         const el = ref.current;
 
         if (el) {
@@ -149,13 +99,9 @@ const Banner = (props) => {
                     <li className="row">Buy</li>
                     <li className="row">Sell</li>
                 </ul>
-                <div
-                    className="bannerScrollableContainer"
-                    ref={ref}
-                    onMouseDown={onMouseDown}
-                    onMouseUp={onMouseUp}
-                    onMouseMove={onMouseMove}
-                >{buildBanner(props)}</div>
+                <div ref={ref} className="bannerScrollableContainer">
+                    {buildBanner(props)}
+                </div>
                 {state.showScrollArrows && <span className="scrollBtn scrollToLeft" onClick={moveToLeft}/>}
                 {state.showScrollArrows && <span className="scrollBtn scrollToRight" onClick={moveToRight}/>}
             </div>
