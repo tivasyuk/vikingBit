@@ -9,7 +9,7 @@ import { getOrderById } from '../../../../../redux/modules/exchange/actions';
 const statusText = {
     pending: "Processing...",
     confirm: "Success!",
-    reject: "Fail",
+    reject: "Canceled",
 }
 
 const OrderScreen = (props) => {

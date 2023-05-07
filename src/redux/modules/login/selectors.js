@@ -22,3 +22,7 @@ export const selectUserData = createSelector(
     selectLoginDomain,
     (loginDomain) => loginDomain.userData
 );
+export const selectExchangeHistoryData = createSelector(
+    selectLoginDomain,
+    (loginDomain) => loginDomain.userExchangeHistoryData
+);

@@ -1,3 +1,8 @@
+import {GET_USER_EXCHANGE_HISTORY_COMPLETE} from "../exchange/types";
+import axios from "axios";
+import {SERVER_URL} from "../../../constants/Constants";
+import {hideLoadingAnimation, requestFailure, setLoadingAnimation} from "../state/actions";
+
 export const SET_SIGN_IN_POPUP_STATE = 'state/SET_SIGN_IN_POPUP_STATE';
 export const setSignInPopupState = value => {
     return {
@@ -31,3 +36,22 @@ export const setSignInData = (isLoggedIn, email, password) => {
         password
     };
 };
+
+export const getUserExchangeHistoryComplete = data => ({
+    type: GET_USER_EXCHANGE_HISTORY_COMPLETE,
+    data
+})
+
+export const getUserExchangeHistory = () => {
+    return async dispatch => {
+        dispatch(setLoadingAnimation())
+        axios.get(`${SERVER_URL}/orders`)
+            .then(responseData => {
+                dispatch(getUserExchangeHistoryComplete(responseData.data));
+                dispatch(hideLoadingAnimation())
+            })
+            .catch(responseData => {
+                dispatch(requestFailure(responseData.message));
+            })
+    }
+}

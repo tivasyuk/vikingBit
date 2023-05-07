@@ -23,6 +23,7 @@ import Banner from "../banner/Banner";
 import { Route,  Routes  } from 'react-router-dom';
 import OrderScreen from '../mainPage/exchangeCount/main/orderScreen/orderScreen';
 import Preloader from "../preloader/Preloader";
+import ExchangeHistory from "../cabinetPage/ExchangeHistory";
 
 class Page extends React.Component {
     constructor(props) {
@@ -56,6 +57,7 @@ class Page extends React.Component {
                 <Route path="/policy" element={<Policy/>}/>
                 <Route path="/order" element={<OrderScreen/>}/>
                 <Route element={<Cabinet/>}/>
+                <Route element={<ExchangeHistory/>}/>
             </Routes>
         )
     }

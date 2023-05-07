@@ -4,6 +4,7 @@ import {
     SET_SIGN_IN_DATA,
     SET_SIGN_IN_POPUP_STATE
 } from "./actions";
+import {GET_USER_EXCHANGE_HISTORY_COMPLETE} from "../exchange/types";
 
 const initialState = {
     isSignInPopupVisible: false,
@@ -12,7 +13,8 @@ const initialState = {
     isLoggedIn: false,
     userData: {
         email: ''
-    }
+    },
+    userExchangeHistoryData: {}
 }
 
 const LoginReducer = (state = initialState, action) => {
@@ -37,6 +39,11 @@ const LoginReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: action.isLoggedIn,
                 userData: {email: action.email}
+            };
+        case GET_USER_EXCHANGE_HISTORY_COMPLETE:
+            return {
+                ...state,
+                userExchangeHistoryData: action.data
             };
         default: {
             return state;
