@@ -8,13 +8,13 @@ export const exchangeConverter = (to, from, amount = '', direction = '') => {
     let sendAmount = '';
     let getAmount = '';
     if (direction === "from") {
-        getAmount = parseFloat(amount) * currentRate;
+        getAmount = +(parseFloat(amount) * currentRate).toFixed(11);
         sendAmount = parseFloat(amount);
     }
     if (direction === "to") {
-        sendAmount = parseFloat(amount) / currentRate;
+        sendAmount = +(parseFloat(amount) / currentRate).toFixed(11);
         getAmount = parseFloat(amount);
     }
-    let change = {sendAmount: sendAmount || "", sendCurrency: from, getAmount: getAmount || "", getCurrency: to};
+    let change = {sendAmount: sendAmount >= 0 ? sendAmount : "", sendCurrency: from, getAmount: getAmount >= 0 ? getAmount : "", getCurrency: to};
     store.dispatch(setExchangeValue(change));
 }

@@ -48,10 +48,10 @@ class RightSideExchange extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.exchangeValues !== prevProps.exchangeValues) {
-            if (this.props.exchangeValues.getAmount === (parseFloat(this.state.enterGetAmount) || this.state.enterGetAmount)) {
+            if (this.props.exchangeValues.getAmount === parseFloat(this.state.enterGetAmount) || this.props.exchangeValues.getAmount === this.state.enterGetAmount) {
                 this.setState({ enterSendAmount: this.props.exchangeValues.sendAmount })
             }
-            if (this.props.exchangeValues.sendAmount === (parseFloat(this.state.enterSendAmount) || this.state.enterSendAmount)) {
+            if (this.props.exchangeValues.sendAmount === parseFloat(this.state.enterSendAmount) || this.props.exchangeValues.sendAmount === this.state.enterSendAmount) {
                 this.setState({ enterGetAmount: this.props.exchangeValues.getAmount })
             }
         }
