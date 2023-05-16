@@ -311,15 +311,28 @@
     -ms-flex-order: 1;
     order: 1;
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     margin: 0 auto 30px;
+    padding: 0;
+
+    .main-exchange-wrapper {
+      .main-exchange {
+        .main-exchange-inputs {
+          .main-exchange-valute {
+            background: #fff url(../../../../../img/arrow-down.svg) 90% center no-repeat;
+
+            &.prefer-cash-valute {
+              background-position-x: 95%;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
 @media (max-width: 575.98px) {
   .main-right {
-    padding: 0;
-
     .main-exchange-wrapper {
 
       .main-exchange {

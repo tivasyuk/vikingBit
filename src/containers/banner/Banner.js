@@ -79,12 +79,20 @@ const Banner = (props) => {
         const tablesArray = [];
         for (const key in props.currencyList) {
             index += 1;
+            if (key === 'UAH') continue;
             const item = props.currencyList[key];
+            let titleText = key;
+            let buyValue = item.buy;
+            let sellValue = item.sell;
+            if (item.type === 'crypto') {
+                titleText = `${key} (to ${props.currencyList['USD'].name})`;
+                buyValue = +(item.buy / props.currencyList['USD'].buy).toFixed(3);
+                sellValue = +(item.sell / props.currencyList['USD'].sell).toFixed(3);
+            }
             tablesArray.push(
                 <ul className="table" key={index}>
-                    <li className="col_title">{key}</li>
-                    <li className="row">{item.buy}</li>
-                    <li className="row">{item.sell}</li>
+                    <li className="col_title">{titleText}</li>
+                    <li className="row">{buyValue} / {sellValue}</li>
                 </ul>
             )
         }
@@ -96,8 +104,7 @@ const Banner = (props) => {
             <div className="block_table">
                 <ul className="table table_title">
                     <li className="col_title">📈</li>
-                    <li className="row">Buy</li>
-                    <li className="row">Sell</li>
+                    <li className="row">Buy / Sell</li>
                 </ul>
                 <div ref={ref} className="bannerScrollableContainer">
                     {buildBanner(props)}
