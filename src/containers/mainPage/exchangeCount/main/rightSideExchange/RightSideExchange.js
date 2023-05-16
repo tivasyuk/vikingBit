@@ -64,6 +64,8 @@ class RightSideExchange extends React.Component {
             if (this.state.getExchangeData.name === '') {
                 this.setState({
                     getExchangeData: this.props.exchangeValues.getCurrency || this.props.currencyList['USDT']
+                }, () => {
+                    exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData);
                 })
             }
         }
@@ -318,8 +320,7 @@ export const mapStateToProps = (state) => {
         exchangeValues: selectExchangeValues(state),
         currencyList: selectCurrencyList(state),
     }
-}
-    ;
+};
 
 export const mapDispatchToProps = (dispatch) => {
     return {

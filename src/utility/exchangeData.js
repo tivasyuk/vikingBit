@@ -2,7 +2,7 @@ import {setExchangeRate, setExchangeValue} from "../redux/modules/exchange/actio
 import { store } from "../index";
 
 export const exchangeConverter = (to, from, amount = '', direction = '') => {
-    let currentRate =  ((+from.sell) / (+to.sell)).toFixed(11);
+    let currentRate = +((+from.sell) / (+to.buy)).toFixed(11);
     store.dispatch(setExchangeRate(currentRate))
 
     let sendAmount = '';
