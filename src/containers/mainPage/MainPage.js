@@ -13,7 +13,7 @@ const MainPage = () => {
             <div className="container">
                 <ExchangeCount/>
                 <Steps/>
-                <Reviews/>
+                {/*<Reviews/>*/}
                 <Telegram/>
             </div>
         </div>

@@ -22,13 +22,13 @@ const Footer = (props) => {
                     </div>
 
                     <div className="footerMenuBlock">
-                        <Link
-                            to="reviews"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                        >Reviews</Link>
+                        {/*<Link*/}
+                        {/*    to="reviews"*/}
+                        {/*    spy={true}*/}
+                        {/*    smooth={true}*/}
+                        {/*    offset={-70}*/}
+                        {/*    duration={500}*/}
+                        {/*>Reviews</Link>*/}
                         <a href="https://t.me/VikingBitBot" target="_blank">We are in Telegram</a>
                     </div>
                 </div>
