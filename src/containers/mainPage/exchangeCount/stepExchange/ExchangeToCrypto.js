@@ -6,7 +6,7 @@ import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/
 import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
 import {selectAppConfig} from "../../../../redux/modules/state/selectors";
-import {CRYPTO_WALLETS} from "../../../../constants/Constants";
+import {CRYPTO_NETWORKS, CRYPTO_WALLETS} from "../../../../constants/Constants";
 
 class ExchangeToCrypto extends React.Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class ExchangeToCrypto extends React.Component {
             copyWalletWaiting: false,
             copySumWaiting: false,
             coupon: '',
-            network: 'ERC-20',
+            network: CRYPTO_NETWORKS[this.props.exchangeValues.getCurrency.name][0] || '',
             paymentProof: '',
             screenshot: null,
         }
@@ -131,6 +131,12 @@ class ExchangeToCrypto extends React.Component {
         }
     }
 
+    getNetworkList = () => {
+        return CRYPTO_NETWORKS[this.props.exchangeValues.getCurrency.name].map( item => {
+            return <option key={item} value={item}>{item}</option>;
+        })
+    }
+
     render() {
         return (<div className="main-exchange-wrapper bg-opacity s2 cardToCrypto">
             <h1>Digital currency conversion service</h1>
@@ -163,9 +169,7 @@ class ExchangeToCrypto extends React.Component {
                                         value={this.state.network}
                                         onChange={this.updateNetwork}
                                 >
-                                    <option key={'ERC-20'} value={'ERC-20'}>ERC-20</option>
-                                    <option key={'BEP-20'} value={'BEP-20'}>BEP-20</option>
-                                    <option key={'ERC-2'} value={'ERC-2'}>ERC-2</option>
+                                    {this.getNetworkList()}
                                 </select>
                             </div>
                         </div>
