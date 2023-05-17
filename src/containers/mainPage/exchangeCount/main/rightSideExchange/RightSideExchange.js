@@ -77,7 +77,10 @@ class RightSideExchange extends React.Component {
         for (const key in currencyList) {
             index += 1;
             const item = currencyList[key];
-            itemsArray.push(  
+
+            if (type === 'send' && JSON.stringify(this.state.getExchangeData) === JSON.stringify(item)) continue;
+            if (type === 'get' && JSON.stringify(this.state.sendExchangeData) === JSON.stringify(item)) continue;
+            itemsArray.push(
                 <div className="item currency__item psItem" key={item.name + index} onClick={() => { type === 'send'? this.onClickSendExchangeSelect(item) : this.onClickGetExchangeSelect(item) }}>
                     <div className="item-img">
                         <img alt={item.name} src={item.img} />
