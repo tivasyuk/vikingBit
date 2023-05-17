@@ -24,12 +24,6 @@
     margin: 0;
     width: 100%;
 
-    &.table_title {
-      width: 100px;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.4);
-    }
-
     &:first-child {
       border-left: none;
     }
@@ -57,7 +51,7 @@
   .bannerScrollableContainer {
     display: flex;
     flex-direction: row;
-    width: calc(100% - 100px);
+    width: 100%;
     overflow-x: scroll;
 
     .table {
@@ -84,7 +78,7 @@
     }
 
     &.scrollToLeft {
-      left: 100px;
+      left: 0;
       background: linear-gradient(to left, transparent 0%, #88596d 100%);
 
       &:before {

@@ -102,10 +102,6 @@ const Banner = (props) => {
     return (
         <div className="banner">
             <div className="block_table">
-                <ul className="table table_title">
-                    <li className="col_title">📈</li>
-                    <li className="row">Buy / Sell</li>
-                </ul>
                 <div ref={ref} className="bannerScrollableContainer">
                     {buildBanner(props)}
                 </div>
