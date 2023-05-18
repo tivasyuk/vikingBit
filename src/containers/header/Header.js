@@ -58,7 +58,7 @@ class Header extends React.Component {
                         <li className="active"><a href='/'>Exchange</a></li>
                         <li className=""><a href='/discounts'>Discounts</a></li>
                         <li className=""><a href='/reserves'>Currency reserves</a></li>
-                        <li className=""><a href='/feedback'>Feedback</a></li>
+                        {/* <li className=""><a href='/feedback'>Feedback</a></li> */}
                     </ul>
                     <div className="top-account">
                         {!this.props.isLoggedIn && <a className="btn popup-modal" onClick={this.onClickSignIn}>Sign in</a>}

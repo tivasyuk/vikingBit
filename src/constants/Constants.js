@@ -6,9 +6,9 @@ const CRYPTO_WALLETS = {
 }
 
 const CRYPTO_NETWORKS = {
-    'Bitcoin': ['ERC-20', 'BEP-20', 'ERC-2'], //BTC
-    'Etherium': ['TRC-20', 'ERC-20', 'WEB-20'], //ETH
-    'USDC': ['TRC-20', 'ERC-20', 'WEB-20'],
+    'Bitcoin': ['BEP-2'], //BTC
+    'Etherium': ['ERC-20'], //ETH
+    'USDC': ['TRC-20'],
     'Tether': ['TRC-20', 'ERC-20', 'WEB-20'], //USDT
 }
 
