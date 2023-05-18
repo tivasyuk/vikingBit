@@ -161,11 +161,13 @@ class RightSideExchange extends React.Component {
     }
 
     updateSendAmount = (val) => {
+        val = val.replace("-", "");
         this.setState({ enterSendAmount: val })
         exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, val, "from")
     }
 
     updateGetAmount = (val) => {
+        val = val.replace("-", "");
         this.setState({ enterGetAmount: val })
         exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, val, "to")
     }
