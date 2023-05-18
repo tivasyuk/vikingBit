@@ -44,22 +44,25 @@ class ExchangeCardToCrypto extends React.Component {
     }
 
     onClickAccept = () => {
-        //send all data
-        this.props.onPutOrderExchangeData({
-            transactionID: this.state.transactionID,
-            fromSum: {value: this.props.exchangeValues.sendAmount, currency:this.props.exchangeValues.sendCurrency.name},
-            toSum: {value: this.props.exchangeValues.getAmount, currency: this.props.exchangeValues.getCurrency.name},
-            coupon: this.state.coupon,
-            paymentProof: this.state.paymentProof,
-            screenshot: this.state.screenshot,
-            network: this.state.network,
-            wallet: this.state.walletNumbers,
-            cardName: this.state.cardName,
-            login: this.state.login,
-            timestamp: Date.now(),
-            status: 'pending'
-        });
-        window.location.href = `http://localhost:3000/order?id=${this.state.transactionID}`;
+        if ((this.props.exchangeValues.sendCurrency.type === 'fiat' && this.state.screenshot) ||
+            (this.props.exchangeValues.sendCurrency.type === 'crypto' && this.state.paymentProof)) {
+            //send all data
+            this.props.onPutOrderExchangeData({
+                transactionID: this.state.transactionID,
+                fromSum: {value: this.props.exchangeValues.sendAmount, currency:this.props.exchangeValues.sendCurrency.name},
+                toSum: {value: this.props.exchangeValues.getAmount, currency: this.props.exchangeValues.getCurrency.name},
+                coupon: this.state.coupon,
+                proofHash: this.state.paymentProof,
+                proofImage: this.state.screenshot,
+                network: this.state.network,
+                wallet: this.state.walletNumbers,
+                cardName: this.state.cardName,
+                login: this.state.login,
+                timestamp: Date.now(),
+                status: 'pending'
+            });
+            window.location.href = `http://localhost:3000/order?id=${this.state.transactionID}`;
+        }
     }
 
     updateLogin = (val) => {
@@ -230,7 +233,7 @@ class ExchangeCardToCrypto extends React.Component {
                                     type='file'
                                     placeholder='Screenshot'
                                     onChange={(e) => this.handleAddImage(e)}
-                                    value={this.state.screenshot}
+                                    //value={this.state.screenshot}
                                 />
                             </div>
                         }
@@ -255,7 +258,7 @@ class ExchangeCardToCrypto extends React.Component {
 
                 <div className="change__block-footer">
                     <a className="btn btn-white" onClick={this.onClickReturnToStepTwo}>Return back</a>
-                    <a className="btn btn-primary" onClick={this.onClickAccept}>Accept</a>
+                    <a className={`btn btn-primary${((this.props.exchangeValues.sendCurrency.type === 'fiat' && this.state.screenshot) || (this.props.exchangeValues.sendCurrency.type === 'crypto' && this.state.paymentProof)) ? '' : ' disable'}`} onClick={this.onClickAccept}>Accept</a>
                     <div className="gotoPaymAgree">
                         Press the button "Accept", you agree with <a href="/" target="_blank">exchange rules</a>
                     </div>
