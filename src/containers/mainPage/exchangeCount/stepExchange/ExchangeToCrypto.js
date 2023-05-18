@@ -252,7 +252,7 @@ class ExchangeToCrypto extends React.Component {
                                     type='file'
                                     placeholder='Screenshot'
                                     onChange={(e) => this.handleAddImage(e)}
-                                    // value={this.state.screenshot}
+                                    value={this.state.screenshot}
                                 />
                             </div>
                         }
