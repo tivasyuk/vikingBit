@@ -29,9 +29,17 @@ export const setScreenState = screenState => ({
 
 
 export const putOrderExchangeData = (data) => {
+    const formData = new FormData()
+    const options = {
+        header: {'content-type': 'multypart/form-data'}
+    }
+    for (let key in data) {
+        formData.append(key, data[key]);
+    }
+    formData.append('orderData', JSON.stringify(data));
     return async dispatch => {
         dispatch(setLoadingAnimation())
-        axios.put(`${SERVER_URL}/orders`, data)
+        axios.put(`${SERVER_URL}/orders`, formData, options)
         .then(responseData => {
             dispatch(getOrderById(data.transactionID));
             dispatch(hideLoadingAnimation())

@@ -9,3 +9,4 @@ export const REQUEST_FAILURE = 'state/REQUEST_FAILURE';
 export const SHOW_LOADING = 'state/SHOW_LOADING';
 export const HIDE_LOADING = 'state/HIDE_LOADING';
 export const SET_SCREEN_STATE = 'state/SET_SCREEN_STATE';
+export const PUT_ORDER_EXCHANGE_DATA = 'state/PUT_ORDER_EXCHANGE_DATA';

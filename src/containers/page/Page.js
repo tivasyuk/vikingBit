@@ -45,10 +45,6 @@ class Page extends React.Component {
         this.props.onGetAppConfig();
     }
 
-    componentWillUnmount() {
-
-    }
-
     currentPage = () => {
         return(
             <Routes>
