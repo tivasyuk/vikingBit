@@ -6,7 +6,7 @@ import {selectIsLoggedIn, selectUserData} from "../../../../redux/modules/login/
 import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux/modules/exchange/selectors";
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
 import {selectAppConfig} from "../../../../redux/modules/state/selectors";
-import {CRYPTO_NETWORKS, CRYPTO_WALLETS, SERVER_URL} from "../../../../constants/Constants";
+import {CRYPTO_NETWORKS, CRYPTO_WALLETS, DOMAIN_NAME, SERVER_URL} from "../../../../constants/Constants";
 
 class ExchangeToCrypto extends React.Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class ExchangeToCrypto extends React.Component {
                 timestamp: Date.now(),
                 status: 'pending'
             });
-            window.location.href = `${SERVER_URL}/order?id=${this.state.transactionID}`;
+            window.location.href = `${DOMAIN_NAME}/order?id=${this.state.transactionID}`;
         }
     }
 
