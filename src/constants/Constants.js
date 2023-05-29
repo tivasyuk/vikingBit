@@ -1,6 +1,6 @@
 // const SERVER_URL = 'http://localhost:3003'
 const SERVER_URL = 'http://139.99.130.52:3003'
-const DOMAIN_NAME = 'http://139.99.130.52:3000'
+const DOMAIN_NAME = 'http://139.99.130.52'
 
 const CRYPTO_WALLETS = {
     'crypto': 'cryptoWallet',
