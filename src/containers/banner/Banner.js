@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './banner.scss';
 import {selectCurrencyList} from '../../redux/modules/state/selectors';
 import {connect} from 'react-redux';
+import { selectExchangeConfig } from '../../redux/modules/exchange/selectors';
 
 const Banner = (props) => {
     let ref = useRef(null);
@@ -77,18 +78,15 @@ const Banner = (props) => {
     const buildBanner = (props) => {
         let index = 0;
         const tablesArray = [];
-        for (const key in props.currencyList) {
+        for (const key in props.exchangeConfig['USD']) {
             index += 1;
-            if (key === 'UAH') continue;
-            const item = props.currencyList[key];
+            const item = props.exchangeConfig['USD'][key];
             let titleText = key;
             let buyValue = item.buy;
             let sellValue = item.sell;
-            if (item.type === 'crypto') {
-                titleText = `${key} (to ${props.currencyList['USD'].name})`;
-                buyValue = +(item.buy / props.currencyList['USD'].buy).toFixed(3);
-                sellValue = +(item.sell / props.currencyList['USD'].sell).toFixed(3);
-            }
+            titleText = `USD / ${key}`;
+            buyValue = +item.buy.toFixed(3);
+            sellValue = +item.sell.toFixed(3);
             tablesArray.push(
                 <ul className="table" key={index}>
                     <li className="col_title">{titleText}</li>
@@ -101,13 +99,13 @@ const Banner = (props) => {
 
     return (
         <div className="banner">
-            <div className="block_table">
+        {props.exchangeConfig && <div className="block_table">
                 <div ref={ref} className="bannerScrollableContainer">
                     {buildBanner(props)}
                 </div>
                 {state.showScrollArrows && <span className="scrollBtn scrollToLeft" onClick={moveToLeft}/>}
                 {state.showScrollArrows && <span className="scrollBtn scrollToRight" onClick={moveToRight}/>}
-            </div>
+            </div>}
         </div>
     );
 }
@@ -115,6 +113,7 @@ const Banner = (props) => {
 export const mapStateToProps = (state) => {
     return {
         currencyList: selectCurrencyList(state),
+        exchangeConfig: selectExchangeConfig(state),
     }
 };
 
