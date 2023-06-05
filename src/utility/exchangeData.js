@@ -2,7 +2,6 @@ import {setExchangeRate, setExchangeValue} from "../redux/modules/exchange/actio
 import { store } from "../index";
 
 export const exchangeConverter = (to, from, config, amount = '', direction = '') => {
-    console.log("exchangeConverter====",to, from, config, 'amount===' , amount, direction);
     let fromValue = null;
     let toValue = null;
     let currentRate = null;
@@ -21,10 +20,9 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             let usdAmount = null;
             if (from.name !== 'USDT') {
                 const usdtPairMult = config['USDT']?.[from.name];
-                const usdtConvertatedCount = usdtPairMult.buy * amount;
-                usdAmount = config['USD']?.['USDT'].buy * usdtConvertatedCount;
+                usdAmount = config['USD']?.['USDT'].buy * usdtPairMult.buy;
             } else {
-                usdAmount = config['USD']?.['USDT'].buy * amount;
+                usdAmount = config['USD']?.['USDT'].buy;
             }
             
             if (to.name === 'USD') {
@@ -38,17 +36,16 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             let usdtAmount = null;
             if (from.name !== 'USD') {
                 const usdPairMult = config['USD']?.[from.name];
-                const usdConvertatedCount = usdPairMult.buy * amount;
-                usdtAmount = config['USD']?.['USDT'].buy * usdConvertatedCount;
+                usdtAmount = config['USD']?.['USDT'].buy * usdPairMult.buy;
             } else {
-                usdtAmount = config['USD']?.['USDT'].buy * amount;
+                usdtAmount = config['USD']?.['USDT'].buy;
             }
             
             if (to.name === 'USDT') {
                 currentRate = usdtAmount;
             } else {
-                const toCurrency = config['USDT']?.[to.name];
-                currentRate = usdtAmount * toCurrency.sell;
+                toValue = config['USDT']?.[to.name];
+                currentRate = usdtAmount * toValue.sell;
             }
         }
     } else {
@@ -59,7 +56,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             currentRate = 1 / config['USDT']?.[from.name].buy;
         }
         else {
-            currentRate = config['USDT']?.[from.name].buy;
+            currentRate =   config['USDT']?.[to.name].sell / config['USDT']?.[from.name].buy;
         }
     }
 
