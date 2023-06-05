@@ -5,6 +5,8 @@ import './header.scss';
 import logo from "../../img/logo.png"
 import {setRegistrationPopupState, setSignInPopupState} from "../../redux/modules/login/actions";
 import {selectIsLoggedIn, selectUserData} from "../../redux/modules/login/selectors";
+import {withTranslation} from 'react-i18next';
+import LanguageFlags from "../../components/languageFlags/LanguageFlags";
 
 class Header extends React.Component {
     constructor(props) {
@@ -48,6 +50,7 @@ class Header extends React.Component {
     }
 
     render() {
+        const { t } = this.props;
         return (<header className="header">
             <div className="container">
                 <div className="top">
@@ -55,16 +58,17 @@ class Header extends React.Component {
                         <a href='/'><img src={ logo } alt="logo" /></a>
                     </div>
                     <ul className="menu">
-                        <li className="active"><a href='/'>Exchange</a></li>
-                        <li className=""><a href='/discounts'>Discounts</a></li>
-                        <li className=""><a href='/reserves'>Currency reserves</a></li>
+                        <li className="active"><a href='/'>{t('exchange')}</a></li>
+                        <li className=""><a href='/discounts'>{t('discounts')}</a></li>
+                        <li className=""><a href='/reserves'>{t('currencyReserves')}</a></li>
                         {/* <li className=""><a href='/feedback'>Feedback</a></li> */}
                     </ul>
                     <div className="top-account">
-                        {!this.props.isLoggedIn && <a className="btn popup-modal" onClick={this.onClickSignIn}>Sign in</a>}
-                        {!this.props.isLoggedIn && <a className="top-register popup-modal" onClick={this.onClickRegistration}>Registration</a>}
+                        {!this.props.isLoggedIn && <a className="btn popup-modal" onClick={this.onClickSignIn}>{t('signIn')}</a>}
+                        {!this.props.isLoggedIn && <a className="top-register popup-modal" onClick={this.onClickRegistration}>{t('registration')}</a>}
                         {this.props.isLoggedIn && <a className="top-register" href='/user'>{this.props.userData.email}</a>}
                     </div>
+                    <LanguageFlags/>
                 </div>
             </div>
         </header>);
@@ -89,4 +93,4 @@ export const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Header));

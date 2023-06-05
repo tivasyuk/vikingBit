@@ -1,0 +1,38 @@
+.flags {
+  padding: 0 20px;
+  position: relative;
+}
+
+.flags-title-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  .flags-icon {
+    width: 17px;
+    margin-right: 5px;
+  }
+
+  .flags-title {
+    font-weight: 500;
+  }
+}
+
+.flags-list {
+  position: absolute;
+  background: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 100px;
+  z-index: 1;
+  left: 0;
+  top: 27px;
+
+  .flags-item {
+    &:hover {
+      cursor: pointer;
+      font-weight: 500;
+    }
+  }
+}

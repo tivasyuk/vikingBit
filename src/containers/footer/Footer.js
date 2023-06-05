@@ -1,10 +1,13 @@
 import React from 'react';
 import logo from "../../img/logo.png"
 import {Link} from "react-scroll";
+import { useTranslation } from "react-i18next";
 
 import './footer.scss';
 
 const Footer = (props) => {
+    const { t } = useTranslation();
+
     return (
         <footer>
             <div className="container">
@@ -17,8 +20,8 @@ const Footer = (props) => {
 
                 <div className="footerMenu">
                     <div className="footerMenuBlock">
-                        <a href='/terms'>Terms of service</a>
-                        <a href='/policy'>Privacy policy</a>
+                        <a href='/terms'>{t('terms')}</a>
+                        <a href='/policy'>{t('policy')}</a>
                     </div>
 
                     <div className="footerMenuBlock">
@@ -29,7 +32,7 @@ const Footer = (props) => {
                         {/*    offset={-70}*/}
                         {/*    duration={500}*/}
                         {/*>Reviews</Link>*/}
-                        <a href="https://t.me/VikingBitBot" target="_blank">We are in Telegram</a>
+                        <a href="https://t.me/VikingBitBot" target="_blank">{t('inTelegram')}</a>
                     </div>
                 </div>
             </div>
