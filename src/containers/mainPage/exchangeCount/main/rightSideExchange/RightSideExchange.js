@@ -6,7 +6,7 @@ import euroCard from "../../../../../img/exchangeIcons/ps-visamc.png";
 import cash from "../../../../../img/exchangeIcons/cash.png";
 import Checkbox from "../../../../../components/checkbox/Checkbox";
 import { exchangeConverter } from "../../../../../utility/exchangeData";
-import { selectExchangeRate, selectExchangeValues } from "../../../../../redux/modules/exchange/selectors";
+import { selectExchangeConfig, selectExchangeRate, selectExchangeValues } from "../../../../../redux/modules/exchange/selectors";
 import { setScreenState } from '../../../../../redux/modules/exchange/actions';
 import { selectCurrencyList } from '../../../../../redux/modules/state/selectors';
 
@@ -55,17 +55,18 @@ class RightSideExchange extends React.Component {
                 this.setState({ enterGetAmount: this.props.exchangeValues.getAmount })
             }
         }
-        if (this.props.currencyList) {
+
+        if (this.props.currencyList && this.props.exchangeConfig) {
             if (this.state.sendExchangeData.name === '') {
                 this.setState({
-                    sendExchangeData: this.props.exchangeValues.sendCurrency || this.props.currencyList['BTC'],
+                    sendExchangeData: this.props.exchangeValues.sendCurrency || this.props.currencyList['USD'],
                 })
             }
             if (this.state.getExchangeData.name === '') {
                 this.setState({
-                    getExchangeData: this.props.exchangeValues.getCurrency || this.props.currencyList['USDT']
+                    getExchangeData: this.props.exchangeValues.getCurrency || this.props.currencyList['UAH']
                 }, () => {
-                    exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData);
+                    exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, this.props.exchangeConfig);
                 })
             }
         }
@@ -123,7 +124,7 @@ class RightSideExchange extends React.Component {
     onClickSendExchangeSelect = (item) => {
         this.setState({ sendExchangeData: item, showSendExchangeList: false, enterSendAmount: '', enterGetAmount: '' })
 
-        exchangeConverter(this.state.getExchangeData, item, this.state.enterSendAmount, "from")
+        exchangeConverter(this.state.getExchangeData, item, this.props.exchangeConfig , this.state.enterSendAmount, "from")
     }
 
     onSelectedSendFiatExchangeType = (type) => {
@@ -136,7 +137,7 @@ class RightSideExchange extends React.Component {
     onClickGetExchangeSelect = (item) => {
         this.setState({ getExchangeData: item, showGetExchangeList: false, enterSendAmount: '', enterGetAmount: '' })
 
-        exchangeConverter(item, this.state.sendExchangeData, this.state.enterGetAmount, "to")
+        exchangeConverter(item, this.state.sendExchangeData, this.props.exchangeConfig, this.state.enterGetAmount, "to")
     }
 
     onAgreeCheckboxClick = () => {
@@ -163,13 +164,13 @@ class RightSideExchange extends React.Component {
     updateSendAmount = (val) => {
         val = val.replace("-", "");
         this.setState({ enterSendAmount: val })
-        exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, val, "from")
+        exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, this.props.exchangeConfig, val, "from")
     }
 
     updateGetAmount = (val) => {
         val = val.replace("-", "");
         this.setState({ enterGetAmount: val })
-        exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, val, "to")
+        exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData,this.props.exchangeConfig, val, "to")
     }
 
     onClickExchange = () => {
@@ -184,7 +185,7 @@ class RightSideExchange extends React.Component {
 
     render() {
         return (<div className="main-right s1">
-            {this.props.currencyList && <div className="main-exchange-wrapper bg-opacity">
+            {this.props.currencyList && this.props.exchangeConfig && <div className="main-exchange-wrapper bg-opacity">
                 <div className="main-exchange">
                     <h3>You send <span className="right-min from_min_amount">Min. sum <strong>100 USDC</strong></span></h3>
                     <div className="main-exchange-inputs exch-val-cont">
@@ -324,6 +325,7 @@ export const mapStateToProps = (state) => {
         exchangeRate: selectExchangeRate(state),
         exchangeValues: selectExchangeValues(state),
         currencyList: selectCurrencyList(state),
+        exchangeConfig: selectExchangeConfig(state)
     }
 };
 

@@ -1,4 +1,4 @@
-import { SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, SET_SCREEN_STATE, SHOW_LOADING, HIDE_LOADING, GET_ORDER_DATA_COMPLEATE, REQUEST_FAILURE } from "./types";
+import { SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, SET_SCREEN_STATE, SHOW_LOADING, HIDE_LOADING, GET_ORDER_DATA_COMPLEATE, REQUEST_FAILURE, GET_EXCHANGE_CONFIG_COMPLEATE } from "./types";
 
 const initialState = {
     exchangeRate: 0,
@@ -41,6 +41,11 @@ const ExchangeReducer = (state = initialState, action) => {
                     exchangeType: action.screenState?.exchangeType || state.exchangeScreenState.exchangeType
                 }
             };
+        case GET_EXCHANGE_CONFIG_COMPLEATE:
+            return {
+                ...state,
+                exchangeConfig: action.data
+            }
         case SHOW_LOADING: 
             return { ...state, loading: true };
         case HIDE_LOADING:

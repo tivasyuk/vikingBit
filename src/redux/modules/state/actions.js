@@ -4,7 +4,8 @@ import {
     GET_APP_CONFIG_COMPLEATE,
     HIDE_LOADING,
     REQUEST_FAILURE,
-    SHOW_LOADING
+    SHOW_LOADING,
+    GET_EXCHANGE_CONFIG_COMPLEATE
 } from "../exchange/types";
 import { SERVER_URL } from "../../../constants/Constants";
 
@@ -34,6 +35,12 @@ export const getCurrencyListComplete = data => ({
     data
 })
 
+
+export const getExchangeConfigComplete = data => ({
+    type: GET_EXCHANGE_CONFIG_COMPLEATE,
+    data
+})
+
 export const getAppConfigComplete = data => ({
     type: GET_APP_CONFIG_COMPLEATE,
     data
@@ -45,6 +52,20 @@ export const getCurrencyList = () => {
         axios.get(`${SERVER_URL}/currencyList`)
         .then(responseData => {
             dispatch(getCurrencyListComplete(responseData.data));
+            dispatch(hideLoadingAnimation())
+        })
+        .catch(responseData => {
+            dispatch(requestFailure(responseData.message));
+        })
+    }
+}
+
+export const getExchangeConfig = () => {
+    return async dispatch => {
+        dispatch(setLoadingAnimation())
+        axios.get(`${SERVER_URL}/exchangeConfig`)
+        .then(responseData => {
+            dispatch(getExchangeConfigComplete(responseData.data));
             dispatch(hideLoadingAnimation())
         })
         .catch(responseData => {

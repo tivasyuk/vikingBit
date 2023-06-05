@@ -16,9 +16,9 @@ import MainPage from "../mainPage/MainPage";
 import Cabinet from "../cabinetPage/Cabinet";
 import Policy from "../policyPage/Policy";
 import Rules from "../rulesPage/Rules";
-import {isShowLoading, selectActivePage, selectAddReviewPopup, selectAppConfig} from "../../redux/modules/state/selectors";
+import {isShowLoading, selectActivePage, selectAddReviewPopup, selectAppConfig, selectExchangeConfig} from "../../redux/modules/state/selectors";
 import AddReviewPopup from "../addReviewPopup/AddReviewPopup";
-import {getCurrencyList, getAppConfig} from "../../redux/modules/state/actions";
+import {getCurrencyList, getAppConfig, getExchangeConfig} from "../../redux/modules/state/actions";
 import Banner from "../banner/Banner";
 import { Route,  Routes  } from 'react-router-dom';
 import OrderScreen from '../mainPage/exchangeCount/main/orderScreen/orderScreen';
@@ -43,6 +43,7 @@ class Page extends React.Component {
     componentDidMount() {
         this.props.onGetCurrencyList();
         this.props.onGetAppConfig();
+        this.props.onGetExchangeConfig();
     }
 
     currentPage = () => {
@@ -84,7 +85,7 @@ export const mapStateToProps = (state) => {
         addReviewPopup: selectAddReviewPopup(state),
         activePage: selectActivePage(state),
         loading: isShowLoading(state),
-        appConfig: selectAppConfig(state)
+        appConfig: selectAppConfig(state),
     }
 };
 
@@ -96,6 +97,9 @@ export const mapDispatchToProps = (dispatch) => {
         onGetAppConfig: () => {
             dispatch(getAppConfig());
         },
+        onGetExchangeConfig: () => {
+            dispatch(getExchangeConfig());
+        }
     }
 };
 

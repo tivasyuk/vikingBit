@@ -16,6 +16,11 @@ export const selectExchangeScreenState = createSelector(
     (exchangeDomain) => exchangeDomain.exchangeScreenState
 );
 
+export const selectExchangeConfig = createSelector(
+    selectExchangeDomain,
+    (exchangeDomain) => exchangeDomain.exchangeConfig
+);
+
 export const selectOrderData = createSelector(
     selectExchangeDomain,
     (exchangeDomain) => exchangeDomain.orderData
