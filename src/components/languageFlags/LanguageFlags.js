@@ -48,7 +48,7 @@ export default function LanguageFlags() {
                     className="flags-list"
                 >
                     {languages.map(({code, name}) => (
-                        <div onClick={() => {
+                        <div key={name} onClick={() => {
                             i18next.changeLanguage(code);
                             onClose()
                         }} className={`flags-item ${currentLanguageCode === code ? 'active' : ''}`}>

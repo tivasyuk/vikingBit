@@ -27,7 +27,7 @@ header {
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;
-      width: 625px;
+      width: 470px;
       -webkit-box-pack: justify;
       -ms-flex-pack: justify;
       justify-content: space-between;
@@ -81,7 +81,6 @@ header {
   header {
     .top {
       .menu {
-        width: 470px;
         li a {
           font-size: 13px;
           text-align: center
@@ -106,7 +105,9 @@ header {
 
     .top {
       position: relative;
-
+      .menu {
+        width: 370px;
+      }
       .logo {
         margin: 0 auto;
       }
@@ -129,6 +130,29 @@ header {
           text-align: center;
           display: block;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  header {
+    .top {
+      .menu {
+        width: 260px;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  header {
+    .top {
+      .menu {
+        margin-left: 10px;
+         li {
+           padding: 0 10px;
+         }
       }
     }
   }

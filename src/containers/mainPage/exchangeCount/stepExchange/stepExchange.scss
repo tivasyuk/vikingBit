@@ -205,3 +205,53 @@ input[type=file]::file-selector-button {
 input[type=file]::file-selector-button:hover {
   background: #ff006b;
 }
+@media (max-width: 767.98px) {
+  .main {
+    padding-bottom: 50px;
+  }
+
+  .f-home-fields {
+    .form-group {
+      select, input {
+        padding: 5px;
+        height: 40px;
+      }
+      span.cardWallet {
+        font-size: 14px !important;
+        top: 100px !important;
+      }
+    }
+  }
+
+  .f-home-fields {
+    .ff-removable {
+      &.col-md-4, &.col-md-6 {
+        width: 100%;
+      }
+      &.getCryptoSection {
+        background-size: 350px !important;
+        height: 160px;
+      }
+      &.getCardSection {
+        background-size: 300px !important;
+        height: 206px;
+        .cardName {
+          top: 130px !important;
+        }
+      }
+    }
+  }
+
+  .formFields {
+    flex-direction: column;
+  }
+
+  .change__block-footer {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
+}
