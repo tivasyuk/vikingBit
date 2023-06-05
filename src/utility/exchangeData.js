@@ -45,7 +45,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
                 currentRate = usdtAmount;
             } else {
                 toValue = config['USDT']?.[to.name];
-                currentRate = usdtAmount * toValue.sell;
+                currentRate = usdtAmount / toValue.sell;
             }
         }
     } else {
@@ -56,7 +56,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             currentRate = 1 / config['USDT']?.[from.name].buy;
         }
         else {
-            currentRate =   config['USDT']?.[to.name].sell / config['USDT']?.[from.name].buy;
+            currentRate = config['USDT']?.[to.name].sell / config['USDT']?.[from.name].buy;
         }
     }
 
