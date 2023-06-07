@@ -9,7 +9,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
         if (config[from.name] && config[from.name]?.[to.name]) {
             fromValue = config[from.name];
             toValue = fromValue[to.name];
-            currentRate = +toValue.buy + config[to.name].buyMultiplier;
+            currentRate = +toValue.buy + toValue.buyMultiplier;
         } else if (config[to.name] && config[to.name]?.[from.name]) {
             fromValue = config[to.name];
             toValue = fromValue[from.name];
