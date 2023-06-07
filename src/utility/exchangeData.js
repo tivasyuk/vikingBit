@@ -13,7 +13,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
         } else if (config[to.name] && config[to.name]?.[from.name]) {
             fromValue = config[to.name];
             toValue = fromValue[from.name];
-            currentRate = (1 / (+toValue.buy)) + config[to.name].buyMultiplier;
+            currentRate = (1 / (+toValue.buy)) + config[to.name]?.[from.name].buyMultiplier;
         }
     } else if ((to.type === 'fiat' && from.type === 'crypto') || (to.type === 'crypto' && from.type === 'fiat')) {
         if (to.type === 'fiat' && from.type === 'crypto') {
