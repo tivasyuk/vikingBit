@@ -16,13 +16,15 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             currentRate = (1 / (+toValue.buy)) + config[to.name]?.[from.name].buyMultiplier;
         }
     } else if ((to.type === 'fiat' && from.type === 'crypto') || (to.type === 'crypto' && from.type === 'fiat')) {
+        const usdtPairBuy = (+config['USD']?.['USDT'].buy);
+        const usdtBuyMultiplier = (+config['USD']?.['USDT'].buyMultiplier);
         if (to.type === 'fiat' && from.type === 'crypto') {
             let usdAmount = null;
             if (from.name !== 'USDT') {
                 const usdtPairMult = config['USDT']?.[from.name];
-                usdAmount = (config['USD']?.['USDT'].buy * usdtPairMult.buy) + usdtPairMult.buyMultiplier;
+                usdAmount = (usdtPairBuy * usdtPairMult.buy) + usdtPairMult.buyMultiplier;
             } else {
-                usdAmount = config['USD']?.['USDT'].buy + config['USD']?.['USDT'].buyMultiplier;
+                usdAmount = (usdtPairBuy) + (usdtBuyMultiplier);
             }
             usdAmount = 1 / usdAmount;
             if (to.name === 'USD') {
@@ -36,9 +38,9 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             let usdtAmount = null;
             if (from.name !== 'USD') {
                 const usdPairMult = config['USD']?.[from.name];
-                usdtAmount = (config['USD']?.['USDT'].buy * usdPairMult.buy) + usdPairMult.buyMultiplier;
+                usdtAmount = (usdtPairBuy * usdPairMult.buy) + usdPairMult.buyMultiplier;
             } else {
-                usdtAmount = config['USD']?.['USDT'].buy + config['USD']?.['USDT'].buyMultiplier;
+                usdtAmount = usdtPairBuy + usdtBuyMultiplier;
             }
             
             if (to.name === 'USDT') {
