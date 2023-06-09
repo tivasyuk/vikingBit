@@ -85,8 +85,8 @@ const Banner = (props) => {
             let buyValue = item.buy;
             let sellValue = item.sell;
             titleText = `USD / ${key}`;
-            buyValue = +item.buy.toFixed(3);
-            sellValue = +item.sell.toFixed(3);
+            buyValue = (+item.buy).toFixed(3);
+            sellValue = (+item.sell).toFixed(3);
             tablesArray.push(
                 <ul className="table" key={index}>
                     <li className="col_title">{titleText}</li>
