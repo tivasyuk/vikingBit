@@ -94,6 +94,38 @@ const Banner = (props) => {
                 </ul>
             )
         }
+        for (const key in props.exchangeConfig['EUR']) {
+            index += 1;
+            const item = props.exchangeConfig['EUR'][key];
+            let titleText = key;
+            let buyValue = item.buy;
+            let sellValue = item.sell;
+            titleText = `EUR / ${key}`;
+            buyValue = (+item.buy).toFixed(3);
+            sellValue = (+item.sell).toFixed(3);
+            tablesArray.push(
+                <ul className="table" key={index}>
+                    <li className="col_title">{titleText}</li>
+                    <li className="row">{buyValue} / {sellValue}</li>
+                </ul>
+            )
+        }
+        for (const key in props.exchangeConfig['USDT']) {
+            index += 1;
+            const item = props.exchangeConfig['USDT'][key];
+            let titleText = key;
+            let buyValue = item.buy;
+            let sellValue = item.sell;
+            titleText = `${key} / USDT`;
+            buyValue = parseFloat(1 / item.buy).toFixed(3);
+            sellValue = parseFloat( 1 /item.sell).toFixed(3);
+            tablesArray.push(
+                <ul className="table" key={index}>
+                    <li className="col_title">{titleText}</li>
+                    <li className="row">{buyValue} / {sellValue}</li>
+                </ul>
+            )
+        }
         return tablesArray;
     }
 
