@@ -59,7 +59,8 @@ class Header extends React.Component {
                     </div>
                     <ul className="menu">
                         <li className="active"><a href='/'>{t('exchange')}</a></li>
-                        <li className=""><a href='/discounts'>{t('discounts')}</a></li>
+                        <li className><a href='/cashTransfers'>{t('cashTransfers')}</a></li>
+                        <li className><a href='/noncashTransfers'>{t('noncashTransfers')}</a></li>
                         <li className=""><a href='/reserves'>{t('currencyReserves')}</a></li>
                         {/* <li className=""><a href='/feedback'>Feedback</a></li> */}
                     </ul>

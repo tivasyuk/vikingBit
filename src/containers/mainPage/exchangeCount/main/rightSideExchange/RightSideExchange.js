@@ -66,7 +66,7 @@ class RightSideExchange extends React.Component {
                 this.setState({
                     getExchangeData: this.props.exchangeValues.getCurrency || this.props.currencyList['UAH']
                 }, () => {
-                    exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, this.props.exchangeConfig);
+                    exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, this.props.exchangeConfig, this.state.getExchangeData.minExchange);
                 })
             }
         }
@@ -163,6 +163,7 @@ class RightSideExchange extends React.Component {
 
     updateSendAmount = (val) => {
         val = val.replace("-", "");
+        
         this.setState({ enterSendAmount: val })
         exchangeConverter(this.state.getExchangeData, this.state.sendExchangeData, this.props.exchangeConfig, val, "from")
     }
@@ -282,7 +283,7 @@ class RightSideExchange extends React.Component {
                     <div className="col course">
                         <div className="col-wrap">
                             <span>Exchange rate</span>
-                            <strong>1 {this.state.sendExchangeData.name} - {this.props.exchangeRate} {this.state.getExchangeData.name}</strong>
+                            <strong>1 {this.state.sendExchangeData.name} - {this.props.exchangeRate.toString().split('.')[1]?.length > 9 ? this.props.exchangeRate.toFixed(9) : this.props.exchangeRate} {this.state.getExchangeData.name}</strong>
                         </div>
                     </div>
                     <div className="col reserve">

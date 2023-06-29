@@ -1,5 +1,8 @@
 {
-  "exchange": "Обмін",
+  "exchange": "Онлайн обмін",
+  "universalExchange": "Грошові перекази",
+  "noncashTransfers": "Безготівкові перекази",
+  "cashTransfers": "Готівкові перекази",
   "discounts": "Знижки",
   "currencyReserves": "Валютні резерви",
   "signIn": "Увійти",

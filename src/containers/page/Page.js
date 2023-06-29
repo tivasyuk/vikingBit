@@ -24,6 +24,8 @@ import { Route,  Routes  } from 'react-router-dom';
 import OrderScreen from '../mainPage/exchangeCount/main/orderScreen/orderScreen';
 import Preloader from "../preloader/Preloader";
 import ExchangeHistory from "../cabinetPage/ExchangeHistory";
+import CashTransfer from '../cashTransferPage/cashTransfer';
+import NonCashTransfer from '../nonCashTransferPage/cashTransfer';
 
 class Page extends React.Component {
     constructor(props) {
@@ -53,6 +55,8 @@ class Page extends React.Component {
                 <Route path="/terms" element={<Rules/>}/>
                 <Route path="/policy" element={<Policy/>}/>
                 <Route path="/order" element={<OrderScreen/>}/>
+                <Route path="/cashTransfers" element={<CashTransfer/>}/>
+                <Route path="/noncashTransfers" element={<NonCashTransfer/>}/>
                 <Route element={<Cabinet/>}/>
                 <Route element={<ExchangeHistory/>}/>
             </Routes>

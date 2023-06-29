@@ -1,5 +1,7 @@
 {
   "exchange": "Exchange",
+  "cashTransfers": "cashTransfers",
+  "noncashTransfers": "noncashTransfers",
   "discounts": "Discounts",
   "currencyReserves": "Currency reserves",
   "signIn": "Sign in",

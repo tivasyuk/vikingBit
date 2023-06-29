@@ -1,7 +1,11 @@
 import {setExchangeRate, setExchangeValue} from "../redux/modules/exchange/actions";
 import { store } from "../index";
+import Decimal from "decimal.js";
 
-export const exchangeConverter = (to, from, config, amount = '', direction = '') => {
+export const exchangeConverter = (to, from, config, amount = 0, direction = '') => {
+    if (!amount) { 
+        amount = 0;
+    } 
     let fromValue = null;
     let toValue = null;
     let currentRate = null;
@@ -13,7 +17,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
         } else if (config[to.name] && config[to.name]?.[from.name]) {
             fromValue = config[to.name];
             toValue = fromValue[from.name];
-            currentRate = (1 / parseFloat(toValue.sell)) + config[to.name]?.[from.name].buyMultiplier;
+            currentRate = parseFloat(1 / parseFloat(toValue.sell)) + config[to.name]?.[from.name].buyMultiplier;
         }
     } else if ((to.type === 'fiat' && from.type === 'crypto') || (to.type === 'crypto' && from.type === 'fiat')) {
         const usdtPairBuy = parseFloat(config['USD']?.['USDT'].buy);
@@ -23,7 +27,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             let usdAmount = null;
             if (from.name !== 'USDT') {
                 const usdtPairMult = config['USDT']?.[from.name];
-                usdAmount = parseFloat(usdtPairBuy * usdtPairMult.buy) + usdtPairMult.buyMultiplier;
+                usdAmount = parseFloat(usdtPairBuy * parseFloat(1 / new Decimal(usdtPairMult.buy).valueOf())) + usdtPairMult.buyMultiplier;
             } else {
                 usdAmount = (usdtPairBuy + usdtBuyMultiplier);
             }
@@ -46,13 +50,13 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             if (from.name !== 'USD') {
                 if (from.name === 'EUR') {
                     const euroPair = config['EUR']?.['USD'];
-                    usdtAmount = (parseFloat(euroPair.buy) / usdtPairSell); 
+                    usdtAmount = parseFloat(parseFloat(euroPair.buy) / usdtPairSell); 
                 } else if (from.name === 'UAH') {
                     const usdPairMult = config['USD']?.[from.name];
-                    usdtAmount = ((1 / parseFloat(usdPairMult.sell)) / usdtPairSell) + parseFloat(usdPairMult.buyMultiplier);
+                    usdtAmount = parseFloat((1 / parseFloat(usdPairMult.sell)) / usdtPairSell) + parseFloat(usdPairMult.buyMultiplier);
                 } else {
                     const usdPairMult = config['USD']?.[from.name];
-                    usdtAmount = (usdtPairSell * parseFloat(usdPairMult.sell)) + parseFloat(usdPairMult.buyMultiplier);
+                    usdtAmount = parseFloat(usdtPairSell * parseFloat(usdPairMult.sell)) + parseFloat(usdPairMult.buyMultiplier);
                 }
                 
             } else {
@@ -63,7 +67,7 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
                 currentRate = usdtAmount;
             } else {
                 toValue = config['USDT']?.[to.name];
-                currentRate = usdtAmount / parseFloat(1 / toValue.sell);
+                currentRate = parseFloat(usdtAmount / parseFloat(1 / toValue.sell));
             }
         }
     } else {
@@ -71,24 +75,33 @@ export const exchangeConverter = (to, from, config, amount = '', direction = '')
             currentRate = parseFloat(config['USDT']?.[to.name].buy) + parseFloat(config['USDT']?.[to.name].buyMultiplier);
         }
         else if (to.name === 'USDT') {
-            currentRate = (1 / parseFloat(config['USDT']?.[from.name].buy)) + parseFloat(config['USDT']?.[from.name].buyMultiplier);
+            currentRate = parseFloat(1 / parseFloat(config['USDT']?.[from.name].buy)) + parseFloat(config['USDT']?.[from.name].buyMultiplier);
         }
         else {
-            currentRate = (parseFloat(config['USDT']?.[to.name].sell) / parseFloat(config['USDT']?.[from.name].buy)) + parseFloat(config['USDT']?.[to.name].buyMultiplier);
+            currentRate = parseFloat(parseFloat(config['USDT']?.[to.name].sell) / parseFloat(config['USDT']?.[from.name].buy)) + parseFloat(config['USDT']?.[to.name].buyMultiplier);
         }
     }
-
+    if (from.name === to.name) {
+        currentRate = 1;
+    }
     let sendAmount = '';
     let getAmount = '';
     
     store.dispatch(setExchangeRate(currentRate))
     if (direction === "from") {
-        getAmount = parseFloat(amount * currentRate);
-        sendAmount = parseFloat(amount);
+        let decimalAmount = new Decimal(parseFloat(amount))
+        getAmount = decimalAmount.mul(currentRate).valueOf();
+        if (getAmount.split('.')[1]?.length > 9) {
+            getAmount = parseFloat(getAmount).toFixed(9);
+        }
+        sendAmount = new Decimal(amount).valueOf();
     }
     if (direction === "to") {
-        sendAmount = parseFloat(amount) / currentRate;
-        getAmount = parseFloat(amount);
+        sendAmount = new Decimal(amount).dividedBy(currentRate).valueOf();
+        if (sendAmount.split('.')[1]?.length > 9) {
+            sendAmount = parseFloat(sendAmount).toFixed(9);
+        }
+        getAmount = new Decimal(amount).valueOf();
     }
     let change = {sendAmount: sendAmount >= 0 ? sendAmount : "", sendCurrency: from, getAmount: getAmount >= 0 ? getAmount : "", getCurrency: to};
     store.dispatch(setExchangeValue(change));
