@@ -61,7 +61,6 @@ class ExchangeCardToCrypto extends React.Component {
                 timestamp: Date.now(),
                 status: 'pending'
             });
-            window.location.href = `${DOMAIN_NAME}/order?id=${this.state.transactionID}`;
         }
     }
 
