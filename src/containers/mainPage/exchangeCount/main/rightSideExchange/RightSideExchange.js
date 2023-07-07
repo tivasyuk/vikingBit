@@ -9,6 +9,7 @@ import { exchangeConverter } from "../../../../../utility/exchangeData";
 import { selectExchangeConfig, selectExchangeRate, selectExchangeValues } from "../../../../../redux/modules/exchange/selectors";
 import { setScreenState } from '../../../../../redux/modules/exchange/actions';
 import { selectCurrencyList } from '../../../../../redux/modules/state/selectors';
+import {withTranslation} from 'react-i18next';
 
 class RightSideExchange extends React.Component {
     constructor(props) {
@@ -185,10 +186,11 @@ class RightSideExchange extends React.Component {
     }
 
     render() {
+       const { t } = this.props
         return (<div className="main-right s1">
             {this.props.currencyList && this.props.exchangeConfig && <div className="main-exchange-wrapper bg-opacity">
                 <div className="main-exchange">
-                    <h3>You send <span className="right-min from_min_amount">Min. sum <strong>100 USDC</strong></span></h3>
+                    <h3>{t('yusend')}<span className="right-min from_min_amount">Min. sum <strong>100 USDC</strong></span></h3>
                     <div className="main-exchange-inputs exch-val-cont">
                         <div className="main-exchange-input" id="leftSumm">
                             <input className="f-input"
@@ -213,7 +215,7 @@ class RightSideExchange extends React.Component {
                 </div>
 
                 <div className="main-exchange" data-side="to">
-                    <h3>You get</h3>
+                    <h3>{t('yuget')}</h3>
                     <div className="main-exchange-inputs exch-val-cont">
                         <div className="main-exchange-input" id="rightSumm">
                             <input className="f-input"
@@ -240,7 +242,7 @@ class RightSideExchange extends React.Component {
                 {
                     this.state.sendExchangeData.type === 'fiat' &&
                     <div className="main-exchange">
-                        <h3>Select preferred send exchange type</h3>
+                        <h3>{t('selectpreferred')}</h3>
                         <div className="main-exchange-inputs exch-val-cont">
                             <div className="main-exchange-valute prefer-cash-valute" onClick={this.onShowFiatSendExchangeTypeList}>
                                 <div className="main-exchange-valute-wrapper">
@@ -258,7 +260,7 @@ class RightSideExchange extends React.Component {
                 {
                     this.state.getExchangeData.type === 'fiat' &&
                     <div className="main-exchange">
-                        <h3>Select preferred get exchange type</h3>
+                        <h3>{t('selectpreferredGet')}</h3>
                         <div className="main-exchange-inputs exch-val-cont">
                             <div className="main-exchange-valute prefer-cash-valute" onClick={this.onShowFiatGetExchangeTypeList}>
                                 <div className="main-exchange-valute-wrapper">
@@ -276,19 +278,19 @@ class RightSideExchange extends React.Component {
                 {this.state.getExchangeData.name && this.state.sendExchangeData.name && <div className="main-exchange-bottom-info">
                     <div className="col min-summa">
                         <div className="col-wrap from_min_amount">
-                            <span>Min. sum</span>
+                            <span>{t('minSum')}</span>
                             <strong>{this.state.getExchangeData.minExchange} {this.state.getExchangeData.name}</strong>
                         </div>
                     </div>
                     <div className="col course">
                         <div className="col-wrap">
-                            <span>Exchange rate</span>
+                            <span>{t('exchangerate')}</span>
                             <strong>1 {this.state.sendExchangeData.name} - {this.props.exchangeRate.toString().split('.')[1]?.length > 9 ? this.props.exchangeRate.toFixed(9) : this.props.exchangeRate} {this.state.getExchangeData.name}</strong>
                         </div>
                     </div>
                     <div className="col reserve">
                         <div className="col-wrap" id="h-reserve">
-                            <span>Reserve</span>
+                            <span>{t('reserv')}</span>
                             <strong>{this.state.getExchangeData.reserve} {this.state.getExchangeData.name}</strong>
                         </div>
                     </div>
@@ -310,7 +312,7 @@ class RightSideExchange extends React.Component {
 
                 <div className="main-exchange-bottom">
                     <Checkbox
-                        name={`I agree with <a href="#"> the rules of the exchange</a>`}
+                        name={`${t('iagree')} <a href="#"> ${t('therulesoftheexchange')}</a>`}
                         isChecked={this.state.checkAgree}
                         onClickHandler={this.onAgreeCheckboxClick}
                     />
@@ -338,4 +340,4 @@ export const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RightSideExchange);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation() (RightSideExchange));
