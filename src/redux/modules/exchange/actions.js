@@ -1,6 +1,6 @@
 import axios from "axios";
-import {SERVER_URL} from "../../../constants/Constants";
-import { GET_ORDER_DATA_COMPLEATE,  SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, SET_SCREEN_STATE } from "./types";
+import {DOMAIN_NAME, SERVER_URL} from "../../../constants/Constants";
+import {GET_ORDER_DATA_COMPLEATE, SET_EXCHANGE_RATE, SET_EXCHANGE_VALUE, SET_SCREEN_STATE} from "./types";
 import {hideLoadingAnimation, requestFailure, setLoadingAnimation} from "../state/actions";
 
 export const setExchangeRate = value => {
@@ -42,6 +42,7 @@ export const putOrderExchangeData = (data) => {
         axios.put(`${SERVER_URL}/orders`, formData, options)
         .then(responseData => {
             dispatch(getOrderById(data.transactionID));
+            window.location.href = `${DOMAIN_NAME}/order?id=${data.transactionID}`;
             dispatch(hideLoadingAnimation())
         })
         .catch(responseData => {
