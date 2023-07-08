@@ -53,6 +53,7 @@
     flex-direction: row;
     width: 100%;
     overflow-x: scroll;
+    scrollbar-width: none;
 
     .table {
       min-width: 200px;

@@ -285,7 +285,7 @@ class RightSideExchange extends React.Component {
                     <div className="col course">
                         <div className="col-wrap">
                             <span>{t('exchangerate')}</span>
-                            <strong>1 {this.state.sendExchangeData.name} - {this.props.exchangeRate.toString().split('.')[1]?.length > 9 ? this.props.exchangeRate.toFixed(9) : this.props.exchangeRate} {this.state.getExchangeData.name}</strong>
+                            <strong>1 {this.state.sendExchangeData.name} - {this.props.exchangeRate.toString().split('.')[1]?.length > 9 ? parseFloat(this.props.exchangeRate).toFixed(9) : this.props.exchangeRate} {this.state.getExchangeData.name}</strong>
                         </div>
                     </div>
                     <div className="col reserve">
