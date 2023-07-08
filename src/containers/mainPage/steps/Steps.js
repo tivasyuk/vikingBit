@@ -1,31 +1,34 @@
 import React from 'react';
 import './steps.scss';
 import image from "../../../img/main-page-app.png";
+import {withTranslation} from 'react-i18next';
+import {connect} from 'react-redux';
 
-const Steps = () => {
+const Steps = (props) => {
+    const { t } = props;
     return (
         <div className="main-page-steps">
             <div className="left">
                 <img src={image} alt=""/>
             </div>
             <div className="right">
-                <h2 className="title">How to make exchanges</h2>
+                <h2 className="title">{t('howMakeExch')}</h2>
                 <div className="right-steps">
                     <div className="item">
-                        <div className="item-info uppercase">Step 1</div>
-                        <p>Choose a cryptocurrency pair <br/> and an amount to exchange</p>
+                        <div className="item-info uppercase">{t('steps1')}</div>
+                        <p>{t('chooseCryptocurr')}<br/> {t('andamount')}</p>
                     </div>
                     <div className="item">
-                        <div className="item-info uppercase">Step 2</div>
-                        <p>Enter the recipient's wallet address</p>
+                        <div className="item-info uppercase">{t('steps2')}</div>
+                        <p>{t('entertherecipients')}</p>
                     </div>
                     <div className="item">
-                        <div className="item-info uppercase">Step 3</div>
-                        <p>Send tokens to continue the exchange</p>
+                        <div className="item-info uppercase">{t('steps3')}</div>
+                        <p>{t('sendtoken')}</p>
                     </div>
                     <div className="item">
-                        <div className="item-info uppercase">Step 4</div>
-                        <p>Get your chosen digital currency</p>
+                        <div className="item-info uppercase">{t('steps4')}</div>
+                        <p>{t('getyourcurrency')}</p>
                     </div>
                 </div>
             </div>
@@ -33,4 +36,4 @@ const Steps = () => {
     );
 }
 
-export default Steps;
+export default connect(null, null)(withTranslation()(Steps));
