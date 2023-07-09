@@ -1,5 +1,5 @@
 // const SERVER_URL = 'http://localhost:3003'
-const SERVER_URL = 'http://viking-bit.com:3003'
+const SERVER_URL = 'https://viking-bit.com:3003'
 // const DOMAIN_NAME = 'http://localhost:3000'
 const DOMAIN_NAME = 'https://viking-bit.com'
 
