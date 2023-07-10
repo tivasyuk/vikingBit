@@ -14,7 +14,6 @@ const Telegram = (props) => {
                     <p>{t('inthemodernworld')}<br/><br/>{t('theobviousadvantages')}</p></div>
                 <div className="left-bottom">
                     <a href="https://t.me/VikingBitBot" target="_blank" className="btn">
-                        {console.log('dsd')}
                         <span>{t('startchatbtn')}</span>
                     </a>
                 </div>
