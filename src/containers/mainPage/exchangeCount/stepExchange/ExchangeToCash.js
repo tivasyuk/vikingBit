@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import './stepExchange.scss';
 import { setScreenState } from '../../../../redux/modules/exchange/actions';
+import {withTranslation} from 'react-i18next'; 
 
 class ExchangeToCash extends React.Component {
     constructor(props) {
@@ -18,17 +19,18 @@ class ExchangeToCash extends React.Component {
     }
 
     render() {
+        const { t } = this.props
         return (<div className="main-exchange-wrapper bg-opacity s2">
-            <h1>Digital currency conversion service</h1>
+            <h1> {t('digitalcurrencyconvserv')} </h1>
             <div id="props" className="f-home-fields">
-                <p>Contact our manager in Telegram to exchange your money to cash</p>
+                <p> {t('exchangeTo')} </p>
                 <br className={"clear"}/>
             </div>
 
             <div className="change__block-footer">
-                <a className="btn btn-white" onClick={this.onClickReturnBack}>Return back</a>
+                <a className="btn btn-white" onClick={this.onClickReturnBack}> {t('returnbackbtn')} </a>
                 <a href="https://t.me/VikingBitBot" target="_blank" className="btn">
-                    <span>Contact our manager</span>
+                    <span> {t('contactourmng')} </span>
                 </a>
             </div>
         </div>);
@@ -47,4 +49,4 @@ export const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExchangeToCash);
+export default connect(mapStateToProps, mapDispatchToProps) (withTranslation() (ExchangeToCash));

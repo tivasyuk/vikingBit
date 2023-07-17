@@ -6,6 +6,7 @@ import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
 import {CRYPTO_WALLETS, DOMAIN_NAME, SERVER_URL} from "../../../../constants/Constants";
 import {selectAppConfig} from "../../../../redux/modules/state/selectors";
+import {withTranslation} from 'react-i18next'; 
 
 class ExchangeCardToCrypto extends React.Component {
     constructor(props) {
@@ -125,11 +126,12 @@ class ExchangeCardToCrypto extends React.Component {
     }
 
     render() {
+        const { t } = this.props
         return (<div className="main-exchange-wrapper bg-opacity s2 cardToCrypto">
-            <h1>Digital currency conversion service</h1>
+            <h1> {t('digitalcurrencyconvserv')} </h1>
             <div className={`f-home-fields step2 ${this.props.screenState.screenStep !== 2 && ' hideStep'}`}>
-                <h3>Step 2</h3>
-                <h4>Enter the recipient's wallet address</h4>
+                <h3> {t('exchByStep')} </h3>
+                <h4>{t('entrRecipintWallet')}</h4>
                 <div className="formFields">
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
@@ -150,7 +152,7 @@ class ExchangeCardToCrypto extends React.Component {
 
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label>Credit card number</label>
+                            <label> {t('creditCardNumber')} </label>
                             <div className="form-field">
                                 <input className="form-control f-input"
                                        placeholder='4111 1111 1111 1111'
@@ -166,7 +168,7 @@ class ExchangeCardToCrypto extends React.Component {
 
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label>Name on card</label>
+                            <label> {t('namecard')} </label>
                             <div className="form-field">
                                 <input className="form-control f-input"
                                        placeholder='John Smith'
@@ -181,26 +183,26 @@ class ExchangeCardToCrypto extends React.Component {
                 </div>
 
                 <div className="change__block-footer">
-                    <a className="btn btn-white" onClick={this.onClickReturnToStepOne}>Return back</a>
-                    <a className={`btn${(this.state.cardName.length > 0 && this.state.walletNumbers.length === 16) ? '' : ' disable'}`} onClick={this.onClickMoveToStepThree}>Continue</a>
+                    <a className="btn btn-white" onClick={this.onClickReturnToStepOne}> {t('returnbackbtn')}  </a>
+                    <a className={`btn${(this.state.cardName.length > 0 && this.state.walletNumbers.length === 16) ? '' : ' disable'}`} onClick={this.onClickMoveToStepThree}> {t('continue')} </a>
                 </div>
             </div>
 
             <div className={`f-home-fields step3 ${this.props.screenState.screenStep !== 3 && ' hideStep'}`}>
-                <h3>Step 3</h3>
-                <h4>Send tokens to continue the exchange</h4>
+                <h3> {t('exchByStep3')}</h3>
+                <h4> {t('sendtokenstocontinue')} </h4>
 
                 <div className="formFields">
                     <div className="col-md-6 ff-removable">
                         <div className="form-group send">
-                            <label>Wallet to send</label>
-                            <span>{this.props.exchangeValues.sendCurrency.name} wallet: </span> {/*TODO: show correct name*/}
+                            <label>{t('wallettosend')} </label>
+                            <span>{this.props.exchangeValues.sendCurrency.name} {t('towallett')} : </span> {/*TODO: show correct name*/}
                             <div className="withCopyBtn">
                                 <input value={this.props.wallets && this.props.wallets[CRYPTO_WALLETS[this.props.exchangeValues.sendCurrency.type]]} readOnly />
                                 {navigator.clipboard && <div className={`copyButton${this.state.copyWalletWaiting ? ' active' : ''}`} onClick={this.onClickCopyWallet}><span className="copyButtonIcon" /></div>}
                             </div>
                             <div className="withCopyBtn">
-                                <span>Sum:&nbsp;</span>{this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name}
+                                <span>{t('sum')} :&nbsp;</span>{this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name}
                                 {navigator.clipboard && <div className={`copyButton${this.state.copySumWaiting ? ' active' : ''}`} onClick={this.onClickCopySum}><span className="copyButtonIcon" /></div>}
                             </div>
                         </div>
@@ -227,7 +229,7 @@ class ExchangeCardToCrypto extends React.Component {
                         {
                             this.props.exchangeValues.sendCurrency.type === 'fiat' &&
                             <div className="col-md-6 ff-removable">
-                                <span>Attach your screenshot of payment: </span>
+                                <span> {t('attachurscreenofpay')} :</span>
                                 <input
                                     type='file'
                                     placeholder='Screenshot'
@@ -240,7 +242,7 @@ class ExchangeCardToCrypto extends React.Component {
                         {
                             this.props.exchangeValues.sendCurrency.type === 'crypto' &&
                             <div className="col-md-6 ff-removable">
-                                <span>Add your payment hash: </span>
+                                <span>{t('addurpayment')} </span>
                                 <input className="f-input"
                                        placeholder='Payment hash'
                                        onChange={e => { this.updatePaymentProof(e.target.value) }}
@@ -252,14 +254,14 @@ class ExchangeCardToCrypto extends React.Component {
                     </div>
                 </div>
 
-                <p>Press the button "Accept", you agree that you send {this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name} to get {this.props.exchangeValues.getAmount} {this.props.exchangeValues.getCurrency.name}.</p>
-                <p>You will get your money after moderating.</p>
+                <p> {t('pressbtnAccept')} {this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name} {t('toget')} {this.props.exchangeValues.getAmount} {this.props.exchangeValues.getCurrency.name}.</p>
+                <p>{t('uwillgetmoney')}</p>
 
                 <div className="change__block-footer">
-                    <a className="btn btn-white" onClick={this.onClickReturnToStepTwo}>Return back</a>
-                    <a className={`btn btn-primary${((this.props.exchangeValues.sendCurrency.type === 'fiat' && this.state.screenshot) || (this.props.exchangeValues.sendCurrency.type === 'crypto' && this.state.paymentProof)) ? '' : ' disable'}`} onClick={this.onClickAccept}>Accept</a>
+                    <a className="btn btn-white" onClick={this.onClickReturnToStepTwo}> {t('returnbackbtn')}</a>
+                    <a className={`btn btn-primary${((this.props.exchangeValues.sendCurrency.type === 'fiat' && this.state.screenshot) || (this.props.exchangeValues.sendCurrency.type === 'crypto' && this.state.paymentProof)) ? '' : ' disable'}`} onClick={this.onClickAccept}> {t('acceptBtn')} </a>
                     <div className="gotoPaymAgree">
-                        Press the button "Accept", you agree with <a href="/" target="_blank">exchange rules</a>
+                    {t('pressthebtn')} <a href="/" target="_blank"> {t('exchangerules')}</a>
                     </div>
                 </div>
 
@@ -289,4 +291,4 @@ export const mapDispatchToProps = (dispatch) => {
       };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExchangeCardToCrypto);
+export default connect(mapStateToProps, mapDispatchToProps) (withTranslation() (ExchangeCardToCrypto));
