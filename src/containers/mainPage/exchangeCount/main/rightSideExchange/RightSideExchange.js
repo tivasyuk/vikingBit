@@ -316,7 +316,7 @@ class RightSideExchange extends React.Component {
                         isChecked={this.state.checkAgree}
                         onClickHandler={this.onAgreeCheckboxClick}
                     />
-                    <a className={`btn${(!this.state.checkAgree || this.state.enterGetAmount < this.state.getExchangeData.minExchange) ? ' disable' : ''}`} id="showProps" onClick={this.onClickExchange}>Exchange</a>
+                    <a className={`btn${(!this.state.checkAgree || this.state.enterGetAmount < this.state.getExchangeData.minExchange) ? ' disable' : ''}`} id="showProps" onClick={this.onClickExchange}>{t('exchngbtn')}</a>
                 </div>
             </div>}
         </div>);

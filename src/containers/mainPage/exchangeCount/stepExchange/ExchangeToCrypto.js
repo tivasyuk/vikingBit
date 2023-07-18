@@ -7,6 +7,8 @@ import {selectExchangeValues, selectExchangeScreenState} from "../../../../redux
 import {putOrderExchangeData, setScreenState } from '../../../../redux/modules/exchange/actions';
 import {selectAppConfig} from "../../../../redux/modules/state/selectors";
 import {CRYPTO_NETWORKS, CRYPTO_WALLETS, DOMAIN_NAME, SERVER_URL} from "../../../../constants/Constants";
+import {withTranslation} from 'react-i18next'; 
+
 
 class ExchangeToCrypto extends React.Component {
     constructor(props) {
@@ -140,15 +142,16 @@ class ExchangeToCrypto extends React.Component {
     }
 
     render() {
+            const { t } = this.props
         return (<div className="main-exchange-wrapper bg-opacity s2 cardToCrypto">
-            <h1>Digital currency conversion service</h1>
+            <h1> {t('digitalcurrencyconvserv')} </h1>
             <div className={`f-home-fields step2 ${this.props.screenState.screenStep !== 2 && ' hideStep'}`}>
-                <h3>Step 2</h3>
-                <h4>Enter the recipient's wallet address</h4>
+                <h3> {t('exchByStep')} </h3>
+                <h4> {t('entrRecipintWallet')} </h4>
                 <div className="formFields">
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label>E-mail or Telegram</label>
+                            <label>E-mail / Telegram</label>
                             <div className="form-field">
                                 {this.props.isLoggedIn
                                     ? <p>{this.props.userData.email}</p>
@@ -179,7 +182,7 @@ class ExchangeToCrypto extends React.Component {
 
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label>Wallet for receiving</label>
+                            <label> {t('wallet4receiving')}</label>
                             <div className="form-field">
                                 <input className="form-control f-input"
                                        placeholder='For example: 0x7eB3fec4E5Ec111aDaCcA94E9483c2Cbc6fc9aA2'
@@ -194,7 +197,7 @@ class ExchangeToCrypto extends React.Component {
 
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label>Coupon</label>
+                            <label> {t('coupon')} </label>
                             <div className="form-field">
                                 <input className="form-control f-input"
                                        placeholder='Coupon Code (If available)'
@@ -209,26 +212,26 @@ class ExchangeToCrypto extends React.Component {
                 </div>
 
                 <div className="change__block-footer">
-                    <a className="btn btn-white" onClick={this.onClickReturnToStepOne}>Return back</a>
-                    <a className={`btn${(this.state.walletNumbers.length > 0) ? '' : ' disable'}`} onClick={this.onClickMoveToStepThree}>Continue</a>
+                    <a className="btn btn-white" onClick={this.onClickReturnToStepOne}> {t('returnbackbtn')} </a>
+                    <a className={`btn${(this.state.walletNumbers.length > 0) ? '' : ' disable'}`} onClick={this.onClickMoveToStepThree}>{t('continue')}</a>
                 </div>
             </div>
 
             <div className={`f-home-fields step3 ${this.props.screenState.screenStep !== 3 && ' hideStep'}`}>
-                <h3>Step 3</h3>
-                <h4>Send tokens to continue the exchange</h4>
+                <h3>{t('exchByStep3')}</h3>
+                <h4> {t('sendtokenstocontinue')} </h4>
 
                 <div className="formFields">
                     <div className="col-md-6 ff-removable">
                         <div className="form-group send">
-                            <label>Wallet to send</label>
-                            <span>{this.props.exchangeValues.sendCurrency.name} wallet: </span>
+                            <label> {t('wallettosend')} </label>
+                            <span>{this.props.exchangeValues.sendCurrency.name} {t('towallett')} : </span>
                             <div className="withCopyBtn">
                                 <input value={this.props.wallets && this.props.wallets[CRYPTO_WALLETS[this.props.exchangeValues.sendCurrency.type]]} readOnly />
                                 {navigator.clipboard && <div className={`copyButton${this.state.copyWalletWaiting ? ' active' : ''}`} onClick={this.onClickCopyWallet}><span className="copyButtonIcon" /></div>}
                             </div>
                             <div className="withCopyBtn">
-                                <span>Sum:&nbsp;</span>{this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name}
+                                <span> {t('sum')} :&nbsp;</span>{this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name}
                                 {navigator.clipboard && <div className={`copyButton${this.state.copySumWaiting ? ' active' : ''}`} onClick={this.onClickCopySum}><span className="copyButtonIcon" /></div>}
                             </div>
                         </div>
@@ -236,7 +239,7 @@ class ExchangeToCrypto extends React.Component {
 
                     <div className="col-md-6 ff-removable getCryptoSection">
                         <div className="form-group get">
-                                    <label>Your wallet</label>
+                                    <label> {t('yourwallet')} </label>
                             {/*        <p><span>Sum: </span>{this.props.exchangeValues.getAmount} {this.props.exchangeValues.getCurrency}</p>*/}
                             {/*        <p><span>Coupon: </span>{this.state.coupon || '-'}</p>*/}
                             <span className="cardWallet">{this.state.wallet}</span>
@@ -249,7 +252,7 @@ class ExchangeToCrypto extends React.Component {
                         {
                             this.props.exchangeValues.sendCurrency.type === 'fiat' &&
                             <div className="col-md-6 ff-removable">
-                                <span>Attach your screenshot of payment: </span>
+                                <span>{t('attachurscreenofpay')} : </span>
                                 <input
                                     type='file'
                                     placeholder='Screenshot'
@@ -262,7 +265,7 @@ class ExchangeToCrypto extends React.Component {
                         {
                             this.props.exchangeValues.sendCurrency.type === 'crypto' &&
                             <div className="col-md-6 ff-removable">
-                                <span>Add your payment hash: </span>
+                                <span> {t('addurpayment')} </span>
                                 <input className="f-input"
                                        placeholder='Payment hash'
                                        onChange={e => { this.updatePaymentProof(e.target.value) }}
@@ -274,14 +277,14 @@ class ExchangeToCrypto extends React.Component {
                     </div>
                 </div>
 
-                <p>Press the button "Accept", you agree that you send {this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name} to get {this.props.exchangeValues.getAmount} {this.props.exchangeValues.getCurrency.name}.</p>
-                <p>You will get your money after moderating.</p>
+                <p> {t('pressbtnAccept')}  {this.props.exchangeValues.sendAmount} {this.props.exchangeValues.sendCurrency.name} {t('toget')} {this.props.exchangeValues.getAmount} {this.props.exchangeValues.getCurrency.name}.</p>
+                <p> {t('uwillgetmoney')} </p>
 
                 <div className="change__block-footer">
-                    <a className="btn btn-white" onClick={this.onClickReturnToStepTwo}>Return back</a>
-                    <a className={`btn btn-primary${((this.props.exchangeValues.sendCurrency.type === 'fiat' && this.state.screenshot) || (this.props.exchangeValues.sendCurrency.type === 'crypto' && this.state.paymentProof)) ? '' : ' disable'}`} onClick={this.onClickAccept}>Accept</a>
+                    <a className="btn btn-white" onClick={this.onClickReturnToStepTwo}> {t('returnbackbtn')} </a>
+                    <a className={`btn btn-primary${((this.props.exchangeValues.sendCurrency.type === 'fiat' && this.state.screenshot) || (this.props.exchangeValues.sendCurrency.type === 'crypto' && this.state.paymentProof)) ? '' : ' disable'}`} onClick={this.onClickAccept}> {t('acceptBtn')} </a>
                     <div className="gotoPaymAgree">
-                        Press the button "Accept", you agree with <a href="/" target="_blank">exchange rules</a>
+                    {t('pressthebtn')}<a href="/" target="_blank"> {t('exchangerules')} </a>
                     </div>
                 </div>
 
@@ -311,4 +314,4 @@ export const mapDispatchToProps = (dispatch) => {
       };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExchangeToCrypto);
+export default connect(mapStateToProps, mapDispatchToProps) (withTranslation() (ExchangeToCrypto));
