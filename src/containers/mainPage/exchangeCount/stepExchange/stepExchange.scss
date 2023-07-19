@@ -2,6 +2,13 @@
   to {transform: rotate(360deg);}
 }
 
+#walletImg{
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 250px;
+  height: 250px;
+}
+
 .formFields {
   display: flex;
 }
