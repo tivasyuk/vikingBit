@@ -15,19 +15,19 @@ const Steps = (props) => {
                 <h2 className="title">{t('howMakeExch')}</h2>
                 <div className="right-steps">
                     <div className="item">
-                        <div className="item-info uppercase">{t('steps1')}</div>
-                        <p>{t('chooseCryptocurr')}<br/> {t('andamount')}</p>
+                        <div className="item-info uppercase">{t('stepOne')}</div>
+                        <p>{t('chooseCryptocurr')}<br/> {t('andAmount')}</p>
                     </div>
                     <div className="item">
-                        <div className="item-info uppercase">{t('steps2')}</div>
+                        <div className="item-info uppercase">{t('stepsTwo')}</div>
                         <p>{t('entertherecipients')}</p>
                     </div>
                     <div className="item">
-                        <div className="item-info uppercase">{t('steps3')}</div>
+                        <div className="item-info uppercase">{t('stepsThree')}</div>
                         <p>{t('sendtoken')}</p>
                     </div>
                     <div className="item">
-                        <div className="item-info uppercase">{t('steps4')}</div>
+                        <div className="item-info uppercase">{t('stepsFour')}</div>
                         <p>{t('getyourcurrency')}</p>
                     </div>
                 </div>

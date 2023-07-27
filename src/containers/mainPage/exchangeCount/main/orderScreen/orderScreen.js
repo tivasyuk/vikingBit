@@ -26,17 +26,17 @@ const OrderScreen = (props) => {
                 <div className="main-exchange-wrapper bg-opacity s2 cardToCrypto">
                     <div className={`f-home-fields step4`}>
                         <h3> {t('transactiondetails')}</h3>
-                        <div className="desc"><span className="desc-label">Transaction ID:</span> #<span>{props.orderData.transactionID}</span></div>
+                        <div className="desc"><span className="desc-label">{t('transactionId')} :</span> #<span>{props.orderData.transactionID}</span></div>
                         <div className="desc"><span className="desc-label">{t('status')} :</span> <span className={`status status-${props.orderData.status}`}>{statusText[props.orderData.status]}</span></div>
-                        <div className="desc"><span className="desc-label"> {t('createdon')}:</span> <span>{("" + (new Date(props.orderData.timestamp)).toLocaleString())}</span></div>
+                        <div className="desc"><span className="desc-label"> {t('createdOn')}:</span> <span>{("" + (new Date(props.orderData.timestamp)).toLocaleString())}</span></div>
                         <div className="desc"><span className="desc-label"> {t('transactionamount')} :</span> {props.orderData.fromSum?.value} {props.orderData.fromSum?.currency} &#8658; {props.orderData.toSum?.value} {props.orderData.toSum?.currency}</div>
-                        <div className="desc"><span className="desc-label"> {t('wAllet')} :</span> {props.orderData.wallet}</div>
+                        <div className="desc"><span className="desc-label"> {t('wallet')} :</span> {props.orderData.wallet}</div>
 
 
                         <div> {t('uwillgetmoney')} </div>
 
                         <div className="change__block-footer">
-                            <a className="btn" href='/'> {t('returntomainpage')} </a>
+                            <a className="btn" href='/'> {t('returnToMainPage')} </a>
                         </div>
 
                     </div>

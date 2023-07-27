@@ -28,9 +28,9 @@ class ExchangeToCash extends React.Component {
             </div>
 
             <div className="change__block-footer">
-                <a className="btn btn-white" onClick={this.onClickReturnBack}> {t('returnbackbtn')} </a>
+                <a className="btn btn-white" onClick={this.onClickReturnBack}> {t('returnBackBtn')} </a>
                 <a href="https://t.me/VikingBitBot" target="_blank" className="btn">
-                    <span> {t('contactourmng')} </span>
+                    <span> {t('contactOurMng')} </span>
                 </a>
             </div>
         </div>);

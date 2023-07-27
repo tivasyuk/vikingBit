@@ -168,7 +168,7 @@ class ExchangeCardToCrypto extends React.Component {
 
                     <div className="col-md-4 ff-removable">
                         <div className="form-group mb-4">
-                            <label> {t('namecard')} </label>
+                            <label> {t('nameCard')} </label>
                             <div className="form-field">
                                 <input className="form-control f-input"
                                        placeholder='John Smith'
@@ -183,13 +183,13 @@ class ExchangeCardToCrypto extends React.Component {
                 </div>
 
                 <div className="change__block-footer">
-                    <a className="btn btn-white" onClick={this.onClickReturnToStepOne}> {t('returnbackbtn')}  </a>
+                    <a className="btn btn-white" onClick={this.onClickReturnToStepOne}> {t('returnBackBtn')}  </a>
                     <a className={`btn${(this.state.cardName.length > 0 && this.state.walletNumbers.length === 16) ? '' : ' disable'}`} onClick={this.onClickMoveToStepThree}> {t('continue')} </a>
                 </div>
             </div>
 
             <div className={`f-home-fields step3 ${this.props.screenState.screenStep !== 3 && ' hideStep'}`}>
-                <h3> {t('exchByStep3')}</h3>
+                <h3> {t('exchByStepThree')}</h3>
                 <h4> {t('sendtokenstocontinue')} </h4>
 
                 <div className="formFields">
@@ -258,7 +258,7 @@ class ExchangeCardToCrypto extends React.Component {
                 <p>{t('uwillgetmoney')}</p>
 
                 <div className="change__block-footer">
-                    <a className="btn btn-white" onClick={this.onClickReturnToStepTwo}> {t('returnbackbtn')}</a>
+                    <a className="btn btn-white" onClick={this.onClickReturnToStepTwo}> {t('returnBackBtn')}</a>
                     <a className={`btn btn-primary${((this.props.exchangeValues.sendCurrency.type === 'fiat' && this.state.screenshot) || (this.props.exchangeValues.sendCurrency.type === 'crypto' && this.state.paymentProof)) ? '' : ' disable'}`} onClick={this.onClickAccept}> {t('acceptBtn')} </a>
                     <div className="gotoPaymAgree">
                     {t('pressthebtn')} <a href="/" target="_blank"> {t('exchangerules')}</a>
