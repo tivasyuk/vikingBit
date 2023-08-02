@@ -126,6 +126,7 @@ class ExchangeCardToCrypto extends React.Component {
     }
 
     render() {
+        console.log(this.props.exchangeValues.sendCurrency)
         const { t } = this.props
         return (<div className="main-exchange-wrapper bg-opacity s2 cardToCrypto">
             <h1> {t('digitalcurrencyconvserv')} </h1>
@@ -191,11 +192,13 @@ class ExchangeCardToCrypto extends React.Component {
             <div className={`f-home-fields step3 ${this.props.screenState.screenStep !== 3 && ' hideStep'}`}>
                 <h3> {t('exchByStepThree')}</h3>
                 <h4> {t('sendtokenstocontinue')} </h4>
-
                 <div className="formFields">
                     <div className="col-md-6 ff-removable">
                         <div className="form-group send">
                             <label>{t('wallettosend')} </label>
+                            {this.props.exchangeValues.sendCurrency.type === 'crypto' && <div className="formFields">
+                                <div id="walletImg" style={{backgroundImage: `url('${SERVER_URL}/wallets/${this.props.exchangeValues.sendCurrency.name.toUpperCase()}.jpg')`}}></div>
+                            </div>}
                             <span>{this.props.exchangeValues.sendCurrency.name} {t('towallett')} : </span> {/*TODO: show correct name*/}
                             <div className="withCopyBtn">
                                 <input value={this.props.wallets && this.props.wallets[CRYPTO_WALLETS[this.props.exchangeValues.sendCurrency.type]]} readOnly />
