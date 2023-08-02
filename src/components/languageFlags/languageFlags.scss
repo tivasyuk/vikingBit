@@ -9,8 +9,8 @@
   cursor: pointer;
 
   .flags-icon {
-    width: 17px;
-    margin-right: 5px;
+    width: 10px;
+    margin-right: 3px;
   }
 
   .flags-title {
@@ -40,5 +40,8 @@
 @media (max-width: 767.98px) {
   .flags-list {
     left: -30px;
+  }
+  .flags-icon {
+    display: none;
   }
 }

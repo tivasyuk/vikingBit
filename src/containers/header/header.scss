@@ -136,16 +136,6 @@ header {
   }
 }
 
-@media (max-width: 767.98px) {
-  header {
-    .top {
-      .menu {
-        width: 260px;
-      }
-    }
-  }
-}
-
 @media (max-width: 575.98px) {
   header {
     .top {
@@ -157,4 +147,22 @@ header {
       }
     }
   }
+    .top {
+      .menu {
+        li a {
+          font-size: 7px;
+          text-align: center
+        }
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      header {
+        .top {
+          .menu {
+            width: 260px;
+          }
+        }
+      }
+    }
 }
