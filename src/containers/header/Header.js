@@ -64,11 +64,11 @@ class Header extends React.Component {
                         <li className=""><a href='/reserves'>{t('currencyReserves')}</a></li>
                         {/* <li className=""><a href='/feedback'>Feedback</a></li> */}
                     </ul>
-                    <div className="top-account">
+                    {/* <div className="top-account">
                         {!this.props.isLoggedIn && <a className="btn popup-modal" onClick={this.onClickSignIn}>{t('signIn')}</a>}
                         {!this.props.isLoggedIn && <a className="top-register popup-modal" onClick={this.onClickRegistration}>{t('registration')}</a>}
                         {this.props.isLoggedIn && <a className="top-register" href='/user'>{this.props.userData.email}</a>}
-                    </div>
+                    </div> */}
                     <LanguageFlags/>
                 </div>
             </div>

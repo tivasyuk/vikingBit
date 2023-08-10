@@ -1,5 +1,4 @@
 .flags {
-  padding: 0 20px;
   position: relative;
 }
 
@@ -9,12 +8,13 @@
   cursor: pointer;
 
   .flags-icon {
-    width: 10px;
-    margin-right: 3px;
+    width: 18px;
+    margin-right: 7px;
   }
 
   .flags-title {
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 15px;
   }
 }
 
@@ -38,10 +38,9 @@
 }
 
 @media (max-width: 767.98px) {
-  .flags-list {
-    left: -30px;
-  }
-  .flags-icon {
+  .flags-title {
     display: none;
+    font-weight: 600;
+    font-size: 18px;
   }
 }
