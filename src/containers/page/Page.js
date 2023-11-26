@@ -25,7 +25,8 @@ import OrderScreen from '../mainPage/exchangeCount/main/orderScreen/orderScreen'
 import Preloader from "../preloader/Preloader";
 import ExchangeHistory from "../cabinetPage/ExchangeHistory";
 import CashTransfer from '../cashTransferPage/cashTransfer';
-import NonCashTransfer from '../nonCashTransferPage/cashTransfer';
+import NonCashTransfer from '../nonCashTransferPage/nonCashTransfer';
+import OtherTransfers from '../otherTransfersPage/otherTransfers';
 
 class Page extends React.Component {
     constructor(props) {
@@ -57,6 +58,7 @@ class Page extends React.Component {
                 <Route path="/order" element={<OrderScreen/>}/>
                 <Route path="/cashTransfers" element={<CashTransfer/>}/>
                 <Route path="/noncashTransfers" element={<NonCashTransfer/>}/>
+                <Route path="/other" element={<OtherTransfers/>}/>
                 <Route element={<Cabinet/>}/>
                 <Route element={<ExchangeHistory/>}/>
             </Routes>

@@ -11,9 +11,11 @@ const Telegram = (props) => {
             <div className="left">
                 <h2 className="title">{t('exchangecryptocurr')}</h2>
                 <div className="left-content">
-                    <p>{t('inthemodernworld')}<br/><br/>{t('theobviousadvantages')}</p></div>
+                    <p>{t('inthemodernworld')}<br/><br/>{t('theobviousadvantages')}</p>
+                    <p>{t('detailsToTelegram')} <a href='https://t.me/vikingbit888'><strong>t.me/vikingbit888</strong></a></p>
+                </div>
                 <div className="left-bottom">
-                    <a href="https://t.me/VikingBitBot" target="_blank" className="btn">
+                    <a href="https://t.me/VikingBitBot" className="btn">
                         <span>{t('startchatbtn')}</span>
                     </a>
                 </div>

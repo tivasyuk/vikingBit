@@ -50,10 +50,10 @@ class LeftSideExchange extends React.Component {
                     <p>{t("benefitsfrmcooper")}</p>
                 </div>
             </div>
-            <div className="main-left-bottom">
+            {/* <div className="main-left-bottom">
                 {!this.props.isLoggedIn && <a className="btn popup-modal" onClick={this.onClickSignIn}>{t("signIn")}</a>}
                 {!this.props.isLoggedIn && <a className="btn btn-white popup-modal" onClick={this.onClickRegistration}>{t("registration")}</a>}
-            </div>
+            </div> */}
         </div>);
     }
 }

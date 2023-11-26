@@ -8,6 +8,13 @@ import {selectIsLoggedIn, selectUserData} from "../../redux/modules/login/select
 import {withTranslation} from 'react-i18next';
 import LanguageFlags from "../../components/languageFlags/LanguageFlags";
 
+const PATHS_CONFIG = {
+    cashTransfers: '/cashTransfers',
+    noncashTransfers: '/noncashTransfers',
+    other: '/other',
+    exchange: '/'
+}
+
 class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -50,6 +57,7 @@ class Header extends React.Component {
     }
 
     render() {
+        const params = window.location;
         const { t } = this.props;
         return (<header className="header">
             <div className="container">
@@ -58,10 +66,10 @@ class Header extends React.Component {
                         <a href='/'><img src={ logo } alt="logo" /></a>
                     </div>
                     <ul className="menu">
-                        <li className="active"><a href='/'>{t('exchange')}</a></li>
-                        <li className><a href='/cashTransfers'>{t('cashTransfers')}</a></li>
-                        <li className><a href='/noncashTransfers'>{t('noncashTransfers')}</a></li>
-                        <li className=""><a href='/reserves'>{t('currencyReserves')}</a></li>
+                        <li className={PATHS_CONFIG.exchange === params.pathname ? 'active' : ''}><a href={PATHS_CONFIG.exchange}>{t('exchange')}</a></li>
+                        <li className={PATHS_CONFIG.cashTransfers === params.pathname ? 'active' : ''}><a href={PATHS_CONFIG.cashTransfers}>{t('cashTransfers')}</a></li>
+                        <li className={PATHS_CONFIG.noncashTransfers === params.pathname ? 'active' : ''}><a href={PATHS_CONFIG.noncashTransfers}>{t('noncashTransfers')}</a></li>
+                        <li className={PATHS_CONFIG.other === params.pathname ? 'active' : ''}><a href={PATHS_CONFIG.other}>{t('currencyReserves')}</a></li>
                         {/* <li className=""><a href='/feedback'>Feedback</a></li> */}
                     </ul>
                     {/* <div className="top-account">

@@ -35,10 +35,15 @@ footer {
       flex-wrap: wrap;
       width: 100%;
       justify-content: space-around;
+      align-items: center;
 
       .footerMenuBlock {
         margin-right: 25px;
-
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        justify-content: space-between;
+        align-items: space-between;
         a {
           display: block;
           font-weight: 600;
@@ -46,6 +51,14 @@ footer {
           line-height: 1.7;
           color: #858DA6;
           cursor: pointer;
+        }
+
+        .iconBlock {
+          display: inline;
+        }
+
+        p {
+          margin: 0;
         }
       }
     }
@@ -116,8 +129,19 @@ footer {
       }
     }
     .footerMenuBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      justify-content: space-between;
+      align-items: space-between;
       a {
         text-align: center;
+      }
+      p {
+        margin: 0;
+      }
+      .iconBlock {
+        display: inline;
       }
     }
   }
